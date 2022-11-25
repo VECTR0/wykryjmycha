@@ -1,6 +1,6 @@
 namespace WykryjMycha;
 
-partial class frmMain
+partial class MainWindow
 {
     /// <summary>
     ///  Required designer variable.
@@ -80,7 +80,7 @@ partial class frmMain
             this.lblMouseInfo.TabIndex = 2;
             this.lblMouseInfo.Text = "MSG X:Y";
             // 
-            // frmMain
+            // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -89,7 +89,7 @@ partial class frmMain
             this.Controls.Add(this.btnStop);
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.txtConsole);
-            this.Name = "frmMain";
+            this.Name = "MainWindow";
             this.Text = "WykryjMycha";
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
