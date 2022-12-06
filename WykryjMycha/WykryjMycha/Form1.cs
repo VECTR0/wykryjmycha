@@ -20,7 +20,7 @@ public partial class MainWindow : System.Windows.Forms.Form
     {
         dc.eventHandler += (s, e) =>
         {
-            lblMouseInfo.Text = String.Format("{0} {1,4}:{2,4} {3,3}:{4,3} {5,6} {6,6}", e.message, e.x, e.y, e.dx, e.dy, e.angle, e.deltaTime);
+            lblMouseInfo.Text = String.Format("{0} {1,4}:{2,4} {3,3}:{4,3} {5,6} {6,6} {7}", e.message, e.x, e.y, e.dx, e.dy, e.angle, e.deltaTime, e.direction);
         };
         Log = "initialised module";
     }

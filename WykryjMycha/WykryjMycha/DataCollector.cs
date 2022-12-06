@@ -47,6 +47,7 @@ namespace WykryjMycha
             };
             args.deltaTime = args.time - _oldTime;
             args.angle = Math.Atan2(args.dy, args.dx) * 180.0 / Math.PI;
+            args.direction = GetDirection(args.angle);
 
             _oldX = e.Point.x;
             _oldY = e.Point.y;
@@ -57,6 +58,42 @@ namespace WykryjMycha
         public void Dispose()
         {
             _eventHookFactory.Dispose();
+        }
+
+        private MouseDirection GetDirection(double angle)
+        {
+            if (angle <= 22.5 && angle >= -22.5) 
+            {
+                return MouseDirection.Right;
+            }
+            else if (angle > 22.5 && angle < 67.5)
+            {
+                return MouseDirection.DownRight;
+            }
+            else if (angle >= 67.5 && angle <= 112.5) 
+            {
+                return MouseDirection.Down;
+            }
+            else if (angle > 112.5 && angle < 157.5)
+            {
+                return MouseDirection.DownLeft;
+            }
+            else if (angle >= -157.5 && angle <= -112.5)
+            {
+                return MouseDirection.UpLeft;
+            }
+            else if (angle >= -112.5 && angle <= -67.5)
+            {
+                return MouseDirection.Up;
+            }
+            else if (angle > -67.5 && angle < -22.5)
+            {
+                return MouseDirection.UpRight;
+            }
+            else
+            {
+                return MouseDirection.Left;
+            }
         }
     }
 }

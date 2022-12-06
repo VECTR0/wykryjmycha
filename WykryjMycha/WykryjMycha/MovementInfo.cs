@@ -14,5 +14,6 @@ namespace WykryjMycha
         internal int x, y;
         internal int dx, dy;
         internal MouseMessages message;
+        internal MouseDirection direction;
     }
 }
