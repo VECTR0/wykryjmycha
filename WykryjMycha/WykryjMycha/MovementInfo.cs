@@ -10,5 +10,6 @@ namespace WykryjMycha
         internal int dx, dy;
         internal MouseMessages message;
         internal MouseDirection direction;
+        internal string patternName;
     }
 }
