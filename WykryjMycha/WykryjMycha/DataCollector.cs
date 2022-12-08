@@ -1,19 +1,15 @@
 ﻿using EventHook;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection.Metadata;
-using System.Security.Cryptography.Xml;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace WykryjMycha
 {
     internal class DataCollector : IDisposable
     {
+        private const int TAKE_EVERY_X_SAMPLE = 10;
+
         internal event EventHandler<MovementInfo>? eventHandler;
         private EventHookFactory _eventHookFactory;
         private MouseWatcher _mouseWatcher;
+        private int _currentSample;
         private int _oldX, _oldY;
         private long _oldTime;
 
@@ -36,6 +32,10 @@ namespace WykryjMycha
 
         private void OnMouseInput(object? sender, EventHook.MouseEventArgs e)
         {
+            if (++_currentSample != TAKE_EVERY_X_SAMPLE) return;
+
+            _currentSample = 0;
+
             MovementInfo args = new MovementInfo()
             {
                 x = e.Point.x,
