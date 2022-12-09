@@ -5,33 +5,25 @@ namespace WykryjMycha
     internal class DataCollector : IDisposable
     {
         private const int TAKE_EVERY_X_SAMPLE = 100;
-        private const int DIRECTIONS_BUFFER_SIZE = 10;
 
-        private MainWindow _logger;
         internal event EventHandler<MovementInfo>? eventHandler;
         private EventHookFactory _eventHookFactory;
         private MouseWatcher _mouseWatcher;
-        private GesturePattern[] _patterns;
 
         private int _currentSample;
         private int _oldX, _oldY;
         private long _oldTime;
-        private List<MouseDirection> _collectedDirections;
 
-        internal DataCollector(GesturePattern[] patterns, MainWindow logger)
+        internal DataCollector()
         {
             _eventHookFactory = new EventHookFactory();
             _mouseWatcher = _eventHookFactory.GetMouseWatcher();
             _mouseWatcher.OnMouseInput += OnMouseInput;
-            _collectedDirections = new List<MouseDirection>();
-            _patterns = patterns;
-            _logger = logger;
         }
 
         internal void Start()
         {
             _mouseWatcher.Start();
-            _collectedDirections.Clear();
         }
 
         internal void Stop()
@@ -41,7 +33,7 @@ namespace WykryjMycha
 
         private void OnMouseInput(object? sender, EventHook.MouseEventArgs e)
         {
-            if (++_currentSample != TAKE_EVERY_X_SAMPLE) return;
+            if (++_currentSample != TAKE_EVERY_X_SAMPLE && Math.Abs(DateTime.Now.Millisecond - _oldTime) < 100) return;
 
             _currentSample = 0;
 
@@ -58,38 +50,6 @@ namespace WykryjMycha
             args.angle = Math.Atan2(args.dy, args.dx) * 180.0 / Math.PI;
             args.direction = GetDirection(args.angle);
             args.patternName = String.Empty;
-
-            if (_collectedDirections.Count == 0 || args.direction != _collectedDirections[^1])
-            {
-                _collectedDirections.Add(args.direction);
-
-                if (_collectedDirections.Count > DIRECTIONS_BUFFER_SIZE)
-                    _collectedDirections.RemoveAt(0);
-            }
-
-            foreach (var pattern in _patterns)
-            {
-                if (_collectedDirections.Count < pattern.directions.Length) continue;
-
-                int bufferIndex = 0;
-                foreach (var direction in _collectedDirections)
-                {
-                    if (direction == pattern.directions[bufferIndex])
-                    {
-                        if (++bufferIndex == pattern.directions.Length)
-                        {
-                            _logger.Log = pattern.name;
-                            args.patternName = pattern.name;
-                            _collectedDirections.Clear();
-                            break;
-                        }
-                    }
-                    else
-                    {
-                        bufferIndex = 0;
-                    }
-                }
-            }
 
             _oldX = e.Point.x;
             _oldY = e.Point.y;
