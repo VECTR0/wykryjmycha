@@ -4,6 +4,7 @@ public partial class MainWindow : System.Windows.Forms.Form
 {
     private DataCollector _collector;
     private PatternDetector _detector;
+    private DebugWindow _debugWindow;
     private readonly GesturePattern[] patterns =
     {
         new GesturePattern {
@@ -42,7 +43,8 @@ public partial class MainWindow : System.Windows.Forms.Form
 
         _collector = new DataCollector();
         _detector = new PatternDetector(patterns, this);
-
+        _debugWindow = new DebugWindow();
+        _debugWindow.Show();
         InitializeComponent();
     }
 
