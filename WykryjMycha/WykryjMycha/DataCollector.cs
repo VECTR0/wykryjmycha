@@ -1,4 +1,5 @@
 ﻿using EventHook;
+using EventHook.Hooks;
 
 namespace WykryjMycha
 {
@@ -13,6 +14,8 @@ namespace WykryjMycha
         private int _currentSample;
         private int _oldX, _oldY;
         private long _oldTime;
+        private MouseDirection _oldDirection;
+        private MouseMessages _oldMessage;
 
         internal DataCollector()
         {
@@ -33,10 +36,6 @@ namespace WykryjMycha
 
         private void OnMouseInput(object? sender, EventHook.MouseEventArgs e)
         {
-            if (++_currentSample != TAKE_EVERY_X_SAMPLE && Math.Abs(DateTime.Now.Millisecond - _oldTime) < 100) return;
-
-            _currentSample = 0;
-
             MovementInfo args = new MovementInfo()
             {
                 x = e.Point.x,
@@ -51,9 +50,18 @@ namespace WykryjMycha
             args.direction = GetDirection(args.angle);
             args.patternName = String.Empty;
 
+            if (++_currentSample != TAKE_EVERY_X_SAMPLE && Math.Abs(DateTime.Now.Millisecond - _oldTime) < 100 && _oldMessage == args.message)
+            {
+                return;
+            }
+
+            _currentSample = 0;
+
             _oldX = e.Point.x;
             _oldY = e.Point.y;
             _oldTime = args.time;
+            _oldDirection = args.direction;
+            _oldMessage = args.message;
             eventHandler?.Invoke(sender, args);
         }
 
