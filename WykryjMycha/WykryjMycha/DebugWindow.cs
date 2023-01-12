@@ -15,7 +15,7 @@ namespace WykryjMycha
     public partial class DebugWindow : Form
     {
         private bool _mouseDown = false;
-        private List<Vector2> _points;
+        private List<Vector2> ?_points;
 
 
         public DebugWindow()
@@ -27,9 +27,18 @@ namespace WykryjMycha
         private void DrawPoint(int x, int y)
         {
             using Graphics g = Graphics.FromImage(picTest.Image);
-            _points.Add(new Vector2(x, y));
-            System.Drawing.Point z = new System.Drawing.Point();
+            _points?.Add(new Vector2(x, y));
             g.DrawRectangle(Pens.Black, x, y, 1, 1);
+            picTest.Invalidate();
+        }
+
+        private void DrawPoints(List<Vector2> points)
+        {
+            using Graphics g = Graphics.FromImage(picTest.Image);
+            points.ForEach(p => {
+                g.DrawEllipse(Pens.Red, p.X-4, p.Y-4, 8, 8);
+                g.DrawEllipse(Pens.Red, p.X-3, p.Y-3, 6, 6);
+            });
             picTest.Invalidate();
         }
 
@@ -44,10 +53,7 @@ namespace WykryjMycha
             picTest.Image = new Bitmap(picTest.Width, picTest.Height);
         }
 
-        private void picTest_Paint(object sender, PaintEventArgs e)
-        {
-            e.Graphics.DrawRectangle(Pens.Red, 10, 10, 2, 2);
-        }
+        private void picTest_Paint(object sender, PaintEventArgs e) { }
 
         private void picTest_MouseDown(object sender, MouseEventArgs e)
         {
