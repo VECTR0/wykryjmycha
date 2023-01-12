@@ -1,9 +1,11 @@
-﻿using System;
+﻿using EventHook.Hooks;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -13,6 +15,8 @@ namespace WykryjMycha
     public partial class DebugWindow : Form
     {
         private bool _mouseDown = false;
+        private List<Vector2> _points;
+
 
         public DebugWindow()
         {
@@ -20,14 +24,19 @@ namespace WykryjMycha
             InitializeComponent();
         }
 
+        private void DrawPoint(int x, int y)
+        {
+            using Graphics g = Graphics.FromImage(picTest.Image);
+            _points.Add(new Vector2(x, y));
+            System.Drawing.Point z = new System.Drawing.Point();
+            g.DrawRectangle(Pens.Black, x, y, 1, 1);
+            picTest.Invalidate();
+        }
+
         private void picTest_MouseMove(object sender, MouseEventArgs e)
         {
-            if (_mouseDown)
-            {
-                using Graphics g = Graphics.FromImage(picTest.Image);
-                g.DrawRectangle(Pens.Black, e.X, e.Y, 1, 1);
-            }
-            picTest.Invalidate();
+            if (e.X < 0 || e.Y < 0 || e.X > picTest.Width || e.Y > picTest.Height) _mouseDown = false;
+            if (_mouseDown) DrawPoint(e.X, e.Y);
         }
 
         private void DebugWindow_Load(object sender, EventArgs e)
@@ -46,6 +55,8 @@ namespace WykryjMycha
             {
                 _mouseDown = true;
                 picTest.Image = new Bitmap(picTest.Width, picTest.Height);
+                _points = new List<Vector2>();
+                DrawPoint(e.X, e.Y);
             }
         }
 
@@ -65,6 +76,7 @@ namespace WykryjMycha
         private void picTest_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
+            MessageBox.Show(_points.Count.ToString());
         }
     }
 }

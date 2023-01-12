@@ -37,7 +37,7 @@
             this.picTest.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picTest.Location = new System.Drawing.Point(12, 12);
             this.picTest.Name = "picTest";
-            this.picTest.Size = new System.Drawing.Size(200, 200);
+            this.picTest.Size = new System.Drawing.Size(300, 300);
             this.picTest.TabIndex = 1;
             this.picTest.TabStop = false;
             this.picTest.Paint += new System.Windows.Forms.PaintEventHandler(this.picTest_Paint);
@@ -51,7 +51,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(226, 222);
+            this.ClientSize = new System.Drawing.Size(324, 326);
             this.Controls.Add(this.picTest);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.MaximizeBox = false;
