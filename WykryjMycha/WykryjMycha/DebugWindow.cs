@@ -14,9 +14,10 @@ namespace WykryjMycha
 {
     public partial class DebugWindow : Form
     {
+        internal MainWindow mainFormInstance;
         private bool _mouseDown = false;
-        private List<Vector2> ?_points;
-
+        private List<Vector2>? _points;
+        private List<Vector2>? _characteristicPoints;
 
         public DebugWindow()
         {
@@ -35,9 +36,10 @@ namespace WykryjMycha
         private void DrawPoints(List<Vector2> points)
         {
             using Graphics g = Graphics.FromImage(picTest.Image);
-            points.ForEach(p => {
-                g.DrawEllipse(Pens.Red, p.X-4, p.Y-4, 8, 8);
-                g.DrawEllipse(Pens.Red, p.X-3, p.Y-3, 6, 6);
+            points.ForEach(p =>
+            {
+                g.DrawEllipse(Pens.Red, p.X - 4, p.Y - 4, 8, 8);
+                g.DrawEllipse(Pens.Red, p.X - 3, p.Y - 3, 6, 6);
             });
             picTest.Invalidate();
         }
@@ -82,7 +84,22 @@ namespace WykryjMycha
         private void picTest_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
-            DrawPoints(CharacteristicPointsFinder.GetCharacteristicPoints(_points!));
+            _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
+            DrawPoints(_characteristicPoints!);
+            mainFormInstance.Log = mainFormInstance.matcher.MatchPattern(_characteristicPoints!) ?? "No match";
+        }
+
+        private void btnAddPattern_Click(object sender, EventArgs e)
+        {
+            if (txtPatternName.Text.Length == 0)
+            {
+                MessageBox.Show("Pattern name too short");
+                return;
+            }
+            var newPatternName = txtPatternName.Text;
+            mainFormInstance.matcher.AddPattern(new Pattern() { name = newPatternName, points = _characteristicPoints! }); // TODO: add preprocesing and characteristic points extraction
+            txtPatternName.Text = "";
+            mainFormInstance.Log = $"Added pattern '{newPatternName}' to known patterns";
         }
     }
 }

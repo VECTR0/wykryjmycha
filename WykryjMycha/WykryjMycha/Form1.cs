@@ -1,7 +1,10 @@
+using System.Text.RegularExpressions;
+
 namespace WykryjMycha;
 
 public partial class MainWindow : System.Windows.Forms.Form
 {
+    public PatternMatcher matcher;
     private DataCollector _collector;
     private PatternDetector _detector;
     private DebugWindow _debugWindow;
@@ -41,9 +44,11 @@ public partial class MainWindow : System.Windows.Forms.Form
         CheckForIllegalCrossThreadCalls = false;
         DoubleBuffered = true;
 
+        matcher = new PatternMatcher();
         _collector = new DataCollector();
         _detector = new PatternDetector(patterns, this);
         _debugWindow = new DebugWindow();
+        _debugWindow.mainFormInstance = this;
         _debugWindow.Show();
         InitializeComponent();
     }

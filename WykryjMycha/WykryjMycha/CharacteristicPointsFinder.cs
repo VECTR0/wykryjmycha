@@ -7,8 +7,10 @@ namespace WykryjMycha
         private const float MIN_DISTANCE = 10f;
         private const float ANGLE_LIMIT_DEG = 40f;
 
-        internal static List<Vector2> GetCharacteristicPoints(List<Vector2> input)
+        internal static List<Vector2>? GetCharacteristicPoints(List<Vector2> input, float minDistance = MIN_DISTANCE, float angleLimitDeg = ANGLE_LIMIT_DEG)
         {
+            if (input == null) return null;
+
             Vector2 lastCharacteristicPoint = input[0];
             List<Vector2> result = new List<Vector2> { lastCharacteristicPoint };
             
@@ -17,7 +19,7 @@ namespace WykryjMycha
                 Vector2 a = lastCharacteristicPoint - input[i];
                 Vector2 b = input[i + 5] - input[i];
 
-                if (Vector2.Distance(lastCharacteristicPoint, input[i]) >= MIN_DISTANCE && CalculateAngle(a, b) >= ANGLE_LIMIT_DEG)
+                if (Vector2.Distance(lastCharacteristicPoint, input[i]) >= minDistance && CalculateAngle(a, b) >= angleLimitDeg)
                 {
                     lastCharacteristicPoint = input[i];
                     result.Add(lastCharacteristicPoint);
