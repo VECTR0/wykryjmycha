@@ -8,6 +8,7 @@ public partial class MainWindow : System.Windows.Forms.Form
     private DataCollector _collector;
     private PatternDetector _detector;
     private DebugWindow _debugWindow;
+    private PatternEditor _editor;
     private readonly GesturePattern[] patterns =
     {
         new GesturePattern {
@@ -49,6 +50,8 @@ public partial class MainWindow : System.Windows.Forms.Form
         _detector = new PatternDetector(patterns, this);
         _debugWindow = new DebugWindow(this);
         _debugWindow.Show();
+        _editor = new PatternEditor(this);
+        _editor.Show();
         InitializeComponent();
     }
 

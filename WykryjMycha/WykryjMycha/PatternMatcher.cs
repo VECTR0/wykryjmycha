@@ -11,6 +11,12 @@ namespace WykryjMycha
         {
             _patterns.Add(pattern);
         }
+        
+        public void DeletePattern(int index)
+        {
+            if (_patterns.Count == 0 || index < 0 || index >= _patterns.Count) return;
+            _patterns.RemoveAt(index);
+        }
 
         public string? MatchPattern(List<Vector2> points)
         {
