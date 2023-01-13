@@ -14,13 +14,14 @@ namespace WykryjMycha
 {
     public partial class DebugWindow : Form
     {
-        internal MainWindow mainFormInstance;
+        internal readonly MainWindow mainFormInstance;
         private bool _mouseDown = false;
         private List<Vector2>? _points;
         private List<Vector2>? _characteristicPoints;
 
-        public DebugWindow()
+        public DebugWindow(MainWindow mainFormInstance)
         {
+            this.mainFormInstance = mainFormInstance;
             DoubleBuffered = true;
             InitializeComponent();
         }
@@ -33,13 +34,22 @@ namespace WykryjMycha
             picTest.Invalidate();
         }
 
-        private void DrawPoints(List<Vector2> points)
+        private void DrawPoints(List<Vector2> points, Brush brush, float size = 3)
         {
             using Graphics g = Graphics.FromImage(picTest.Image);
             points.ForEach(p =>
             {
-                g.DrawEllipse(Pens.Red, p.X - 4, p.Y - 4, 8, 8);
-                g.DrawEllipse(Pens.Red, p.X - 3, p.Y - 3, 6, 6);
+                g.FillEllipse(brush, p.X - size / 2, (float)(p.Y - size / 2), size * 2, size * 2);
+            });
+            picTest.Invalidate();
+        }
+
+        private void DrawCircles(List<Vector2> points, Pen pen, float size = 3)
+        {
+            using Graphics g = Graphics.FromImage(picTest.Image);
+            points.ForEach(p =>
+            {
+                g.DrawEllipse(pen, p.X - size / 2, (float)(p.Y - size / 2), size * 2, size * 2);
             });
             picTest.Invalidate();
         }
@@ -52,7 +62,7 @@ namespace WykryjMycha
 
         private void DebugWindow_Load(object sender, EventArgs e)
         {
-            picTest.Image = new Bitmap(picTest.Width, picTest.Height);
+            ClearDrawingBoard();
         }
 
         private void picTest_Paint(object sender, PaintEventArgs e) { }
@@ -62,7 +72,7 @@ namespace WykryjMycha
             if (e.Button == MouseButtons.Left)
             {
                 _mouseDown = true;
-                picTest.Image = new Bitmap(picTest.Width, picTest.Height);
+                ClearDrawingBoard();
                 _points = new List<Vector2>();
                 DrawPoint(e.X, e.Y);
             }
@@ -77,15 +87,26 @@ namespace WykryjMycha
         {
             if (e.Button == MouseButtons.Right)
             {
-                picTest.Image = new Bitmap(picTest.Width, picTest.Height);
+                ClearDrawingBoard();
             }
         }
 
         private void picTest_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
+            if (_points == null) return;
+            var bbox = PatternMatcher.GetBoundingBox(_points);
+            var bboxSize = (bbox.Item2 - bbox.Item1);
+            if (Math.Max(bboxSize.X, bboxSize.Y) < 75)
+            {
+                mainFormInstance.Log = $"Stroke too small, area: {bboxSize}";
+                return;
+            }
+            _points = PatternMatcher.NormalizePoints(_points);
+            ClearDrawingBoard();
+            DrawPoints(_points, Brushes.Black, 1.5f);
             _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
-            DrawPoints(_characteristicPoints!);
+            DrawCircles(_characteristicPoints!, Pens.Red, 6);
             mainFormInstance.Log = mainFormInstance.matcher.MatchPattern(_characteristicPoints!) ?? "No match";
         }
 
@@ -100,6 +121,12 @@ namespace WykryjMycha
             mainFormInstance.matcher.AddPattern(new Pattern() { name = newPatternName, points = _characteristicPoints! }); // TODO: add preprocesing and characteristic points extraction
             txtPatternName.Text = "";
             mainFormInstance.Log = $"Added pattern '{newPatternName}' to known patterns";
+        }
+        private void ClearDrawingBoard()
+        {
+            var oldImage = picTest.Image;
+            picTest.Image = new Bitmap(picTest.Width, picTest.Height);
+            oldImage?.Dispose();
         }
     }
 }

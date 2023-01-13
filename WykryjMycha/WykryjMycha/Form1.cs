@@ -47,8 +47,7 @@ public partial class MainWindow : System.Windows.Forms.Form
         matcher = new PatternMatcher();
         _collector = new DataCollector();
         _detector = new PatternDetector(patterns, this);
-        _debugWindow = new DebugWindow();
-        _debugWindow.mainFormInstance = this;
+        _debugWindow = new DebugWindow(this);
         _debugWindow.Show();
         InitializeComponent();
     }
