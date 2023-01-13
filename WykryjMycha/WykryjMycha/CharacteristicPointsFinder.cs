@@ -18,6 +18,8 @@ namespace WykryjMycha
             {
                 Vector2 a = lastCharacteristicPoint - input[i];
                 Vector2 b = input[i + 5] - input[i];
+                // in case we went back at our previous position - for Atan2 to work properly
+                if (b == Vector2.Zero) b = input[i + 4] - input[i];
 
                 if (Vector2.Distance(lastCharacteristicPoint, input[i]) >= minDistance && CalculateAngle(a, b) >= angleLimitDeg)
                 {
