@@ -18,6 +18,11 @@ namespace WykryjMycha
             _patterns.RemoveAt(index);
         }
 
+        public List<Pattern> GetPatterns()
+        {
+            return _patterns;
+        }
+
         public string? MatchPattern(List<Vector2> points)
         {
             var possiblePatterns = new List<Tuple<string, float>>();

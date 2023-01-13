@@ -5,10 +5,10 @@ namespace WykryjMycha;
 public partial class MainWindow : System.Windows.Forms.Form
 {
     public PatternMatcher matcher;
+    public PatternEditor editor;
     private DataCollector _collector;
     private PatternDetector _detector;
     private DebugWindow _debugWindow;
-    private PatternEditor _editor;
     private readonly GesturePattern[] patterns =
     {
         new GesturePattern {
@@ -50,8 +50,8 @@ public partial class MainWindow : System.Windows.Forms.Form
         _detector = new PatternDetector(patterns, this);
         _debugWindow = new DebugWindow(this);
         _debugWindow.Show();
-        _editor = new PatternEditor(this);
-        _editor.Show();
+        editor = new PatternEditor(this);
+        editor.Show();
         InitializeComponent();
     }
 

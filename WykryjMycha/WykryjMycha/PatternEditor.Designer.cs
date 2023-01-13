@@ -48,12 +48,6 @@
             // 
             this.lstPatterns.FormattingEnabled = true;
             this.lstPatterns.ItemHeight = 15;
-            this.lstPatterns.Items.AddRange(new object[] {
-            "a",
-            "b",
-            "c",
-            "d",
-            "e"});
             this.lstPatterns.Location = new System.Drawing.Point(318, 12);
             this.lstPatterns.Name = "lstPatterns";
             this.lstPatterns.Size = new System.Drawing.Size(156, 274);
@@ -89,6 +83,7 @@
             this.Controls.Add(this.btnSavePattern);
             this.Controls.Add(this.lstPatterns);
             this.Controls.Add(this.picPattern);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.Name = "PatternEditor";
             this.Text = "PatternEditor";
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();

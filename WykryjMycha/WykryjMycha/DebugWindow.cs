@@ -121,7 +121,9 @@ namespace WykryjMycha
             mainFormInstance.matcher.AddPattern(new Pattern() { name = newPatternName, points = _characteristicPoints! }); // TODO: add preprocesing and characteristic points extraction
             txtPatternName.Text = "";
             mainFormInstance.Log = $"Added pattern '{newPatternName}' to known patterns";
+            mainFormInstance.editor.UpdatePatternsList();
         }
+
         private void ClearDrawingBoard()
         {
             var oldImage = picTest.Image;

@@ -27,7 +27,9 @@ namespace WykryjMycha
 
         private void btnDeletePattern_Click(object sender, EventArgs e)
         {
-           
+            int index = lstPatterns.SelectedIndex;
+            lstPatterns.Items.RemoveAt(lstPatterns.SelectedIndex);
+            mainFormInstance.matcher.DeletePattern(index);
         }
 
         private void btnSavePattern_Click(object sender, EventArgs e)
@@ -35,12 +37,41 @@ namespace WykryjMycha
 
         }
 
+        public void UpdatePatternsList()
+        {
+            lstPatterns.Items.Clear();
+            foreach (var pattern in mainFormInstance.matcher.GetPatterns())
+            {
+                lstPatterns.Items.Add(pattern.name);
+            }
+            ShowSelectedPattern();
+        }
+
         private void ShowSelectedPattern()
         {
             ClearDrawingBoard();
             if (lstPatterns.SelectedIndex == -1) return;
+            DrawPattern(mainFormInstance.matcher.GetPatterns()[lstPatterns.SelectedIndex]);
         }
 
+        private void DrawPattern(Pattern pattern)
+        {
+            using Graphics g = Graphics.FromImage(picPattern.Image);
+            float size = 10f;
+            for(int i = 0; i < pattern.points.Count - 1; i++)
+            {
+                var current = pattern.points[i];
+                var next = pattern.points[i+1];
+                g.DrawLine(Pens.Red, current.X, current.Y, next.X, next.Y);
+            }
+            for (int i = 0; i < pattern.points.Count; i++)
+            {
+                var p = pattern.points[i];
+                Brush brush = i == 0 ? Brushes.Orange : Brushes.Red;
+                g.FillEllipse(brush, p.X - size / 2, p.Y - size / 2f, size, size);
+            }
+            picPattern.Invalidate();
+        }
         private void ClearDrawingBoard()
         {
             var oldImage = picPattern.Image;
