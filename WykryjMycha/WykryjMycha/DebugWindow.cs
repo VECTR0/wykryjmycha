@@ -82,7 +82,7 @@ namespace WykryjMycha
         private void picTest_MouseUp(object sender, MouseEventArgs e)
         {
             _mouseDown = false;
-            MessageBox.Show(_points.Count.ToString());
+            DrawPoints(CharacteristicPointsFinder.GetCharacteristicPoints(_points!));
         }
     }
 }
