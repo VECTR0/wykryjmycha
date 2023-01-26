@@ -27,6 +27,7 @@ namespace WykryjMycha
 
         public string? MatchPattern(List<Vector2> points)
         {
+            points = new List<Vector2>(points);
             var possiblePatterns = new List<Tuple<string, float>>();
             foreach (Pattern pattern in _patterns)
             {
