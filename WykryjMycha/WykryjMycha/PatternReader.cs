@@ -16,7 +16,12 @@ namespace WykryjMycha
 
         public PatternReader(string filepath)
         {
-            jsonContent = File.ReadAllText(@"./src.json");
+            if(filepath == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            jsonContent = File.ReadAllText(filepath);
         }
 
         private List<double> convertStringToCoordsList(string coordinatesList)
@@ -71,11 +76,5 @@ namespace WykryjMycha
 
             return angles;
         }
-    }
-
-    public class JSONPattern
-    {
-        public string name { get; set; }
-        public string coordList { get; set; }
     }
 }
