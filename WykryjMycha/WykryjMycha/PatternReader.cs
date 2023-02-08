@@ -7,74 +7,32 @@ using System.IO;
 using System.Text.Json;
 using System.Reflection.Metadata;
 using System.Globalization;
+using System.Numerics;
 
 namespace WykryjMycha
 {
     public class PatternReader
     {
+        public string filename { get; set; }
+        public List<Vector2> points { get; set; }
+        public List<Step> steps { get; set; }
+
         private string jsonContent;
+        private string patternName;
 
-        public PatternReader(string filepath)
+        public PatternReader(string filename)
         {
-            if(filepath == null)
-            {
-                throw new ArgumentNullException();
-            }
+            this.filename = filename;
 
-            jsonContent = File.ReadAllText(filepath);
-        }
+            jsonContent = File.ReadAllText(filename);
 
-        private List<double> convertStringToCoordsList(string coordinatesList)
-        {
-            List<double> coords = new List<double>();
-            String[] coordinates = coordinatesList.Split(',');
+            Console.WriteLine(jsonContent);
 
-            for (int i = 0; i < coordinates.Length; i++)
-            {
-                double currentCoord = Double.Parse(coordinates[i], CultureInfo.InvariantCulture);
-                coords.Add(currentCoord);
-            }
-            return coords;
-        }
+            var jpattern = JsonSerializer.Deserialize<Pattern>(jsonContent);
 
-        private List<double> coordsToAngles (List<double> coords)
-        {
-            List<double> angles = new List<double>();
-
-            double newX = Convert.ToDouble(coords[0]);
-            double newY = Convert.ToDouble(coords[1]);
-
-            double oldX;
-            double oldY;
-
-            for (int i = 2; i < coords.Count; i += 2)
-            {
-                oldX = newX;
-                oldY = newY;
-
-                newX = Convert.ToDouble(coords[i]);
-                newY = Convert.ToDouble(coords[i + 1]);
-
-                double dx = newX - oldX;
-                double dy = newY - oldY;
-
-                double angle = Math.Atan2(dy, dx) * 180.0 / Math.PI;
-
-                angles.Add(angle);
-            }
-
-            return angles;
-        }
-
-        public List<double> parseToAngles()
-        {
-            var jpattern = JsonSerializer.Deserialize<JSONPattern>(jsonContent);
-
-            List<double> coordinates = convertStringToCoordsList(jpattern.coordList);
-
-            List<double> angles = coordsToAngles(coordinates);
-
-            return angles;
+            this.patternName = jpattern.name;
+            this.points = jpattern.points;
+            this.steps = jpattern.steps;
         }
     }
 }
