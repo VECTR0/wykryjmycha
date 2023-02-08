@@ -1,5 +1,4 @@
-﻿using System.Data;
-using System.Numerics;
+﻿using System.Numerics;
 
 namespace WykryjMycha
 {
@@ -31,11 +30,20 @@ namespace WykryjMycha
             var possiblePatterns = new List<Tuple<string, float>>();
             foreach (Pattern pattern in _patterns)
             {
-                var simmilarity = PatternsSimmilarity(points, pattern.points);
-                if (simmilarity != null) possiblePatterns.Add(new Tuple<string, float>(pattern.name, (float)simmilarity));
+                
+                var patternPointsCopy = new List<Vector2>(pattern.points);
+                //var simmilarity = PatternsSimmilarity(points, patternPointsCopy);
+                var simmilarity = NewPatternsSimmilarityMethod(points, patternPointsCopy);
+                if (simmilarity != null)
+                {
+                    possiblePatterns.Add(new Tuple<string, float>(pattern.name, (float)simmilarity));
+                    System.Diagnostics.Debug.WriteLine($"Added {pattern.name} {simmilarity}");
+                }
             }
-            possiblePatterns.Sort();
-            possiblePatterns.Reverse();
+            possiblePatterns.Sort(delegate (Tuple<string, float> x, Tuple<string, float> y)
+            {
+                return x.Item2.CompareTo(y.Item2);
+            });
             if (possiblePatterns.Count == 0) return null;
             else return possiblePatterns[0].Item1;
         }
@@ -145,6 +153,81 @@ namespace WykryjMycha
             RotatePoints(points, new Vector2(150,150), deltaAngle);
             float absDeltaAngle = (float)(Math.Abs(deltaAngle) > Math.PI ? Math.Abs(deltaAngle) - Math.PI : Math.Abs(deltaAngle));
             return absDeltaAngle;
+        }
+
+        public static int NearestIndex(Vector2 point, List<Vector2> other, int range = 10, int startingIndex = 0, int countToCheck = 3)
+        {
+            var index = -1;
+            var smallestDistance = 99999.0;
+            for(int i = startingIndex; i < other.Count; i++)
+            {
+                var distance = (other[i] - point).Length();
+                if (distance < smallestDistance && distance < range)
+                {
+                    smallestDistance = distance;
+                    index = i;
+                }
+            }
+            
+            return index;
+        }
+
+        public static void MergeCheck(List<Vector2> toMerge, List<Vector2> reference, int startingIndex)
+        {
+            for (int i = startingIndex; i < toMerge.Count && i < reference.Count; i++)
+            {
+                if (i > 0)
+                {
+                    var distanceToPrevious = Vector2.Distance(toMerge[i], reference[i - 1]);
+                    var distanceToCurrent = Vector2.Distance(toMerge[i], reference[i]);
+                    if (i > 0 && distanceToPrevious < distanceToCurrent && distanceToPrevious < 20) // TODO: add constant
+                    {
+                        var removed = toMerge[i];
+                        toMerge.RemoveAt(i);
+                        toMerge[i - 1] = (toMerge[i - 1] + removed) / 2;
+                        i--;
+                    }
+                    else return;
+                }
+            }
+        }
+
+        public static void TranslatePoints(List<Vector2> points, Vector2 delta)
+        {
+            for(int i = 0; i < points.Count; i++)
+            {
+                points[i] += delta;
+            }
+        }
+
+        public static float? NewPatternsSimmilarityMethod(List<Vector2> points, List<Vector2> pattern)
+        {
+            var initialAlignRotation = AlignPoints(points, pattern);
+            if (initialAlignRotation > 40 / 180f * 3.14f) return null;
+            float maxTranslationDistance = 0;
+            float maxRotationAngle = 0;
+            for (int i = 0; i < points.Count - 1; i++) // TODO: check last points
+            {
+                MergeCheck(points, pattern, i);
+                MergeCheck(pattern, points, i);
+                if (i > points.Count || i > pattern.Count) return null;
+                float distance = Vector2.Distance(points[i], pattern[i]);
+                maxTranslationDistance = Math.Max(maxTranslationDistance, distance);
+                TranslatePoints(points, pattern[i] - points[i]);
+                MergeCheck(points, pattern, i + 1);
+                MergeCheck(pattern, points, i + 1);
+                if (i + 1 >= points.Count || i + 1 >= pattern.Count) return null;
+                var current = points[i + 1] - points[i];
+                var target = pattern[i + 1] - points[i];
+                float angle = (float)Math.Atan2(current.Y, current.X);
+                float targetAngle = (float)Math.Atan2(target.Y, target.X);
+                float deltaAngle = targetAngle - angle;
+                float absDeltaAngle = (float)(Math.Abs(deltaAngle) > Math.PI ? Math.Abs(deltaAngle) - Math.PI : Math.Abs(deltaAngle));
+                maxRotationAngle = Math.Max(maxRotationAngle, absDeltaAngle);
+                RotatePoints(points, points[i], deltaAngle);
+            }
+            if(points.Count != pattern.Count) return null;
+            return maxRotationAngle;
         }
     }
 }
