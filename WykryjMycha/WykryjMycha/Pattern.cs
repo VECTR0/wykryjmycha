@@ -7,9 +7,17 @@ using System.Threading.Tasks;
 
 namespace WykryjMycha
 {
+    public class Step
+    {
+        public string name;
+        public List<Vector2> points;
+        public List<Vector2> pattern;
+    }
+
     public class Pattern
     {
         public string name;
         public List<Vector2> points;
+        public List<Step> steps;
     }
 }

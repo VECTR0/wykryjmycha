@@ -32,7 +32,11 @@
             this.lstPatterns = new System.Windows.Forms.ListBox();
             this.btnSavePattern = new System.Windows.Forms.Button();
             this.btnDeletePattern = new System.Windows.Forms.Button();
+            this.picSteps = new System.Windows.Forms.PictureBox();
+            this.trbSteps = new System.Windows.Forms.TrackBar();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSteps)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).BeginInit();
             this.SuspendLayout();
             // 
             // picPattern
@@ -74,11 +78,31 @@
             this.btnDeletePattern.UseVisualStyleBackColor = true;
             this.btnDeletePattern.Click += new System.EventHandler(this.btnDeletePattern_Click);
             // 
+            // picSteps
+            // 
+            this.picSteps.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picSteps.Location = new System.Drawing.Point(480, 12);
+            this.picSteps.Name = "picSteps";
+            this.picSteps.Size = new System.Drawing.Size(300, 300);
+            this.picSteps.TabIndex = 6;
+            this.picSteps.TabStop = false;
+            // 
+            // trbSteps
+            // 
+            this.trbSteps.Location = new System.Drawing.Point(786, 12);
+            this.trbSteps.Name = "trbSteps";
+            this.trbSteps.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trbSteps.Size = new System.Drawing.Size(45, 300);
+            this.trbSteps.TabIndex = 7;
+            this.trbSteps.Scroll += new System.EventHandler(this.trbSteps_Scroll);
+            // 
             // PatternEditor
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(486, 325);
+            this.ClientSize = new System.Drawing.Size(831, 325);
+            this.Controls.Add(this.trbSteps);
+            this.Controls.Add(this.picSteps);
             this.Controls.Add(this.btnDeletePattern);
             this.Controls.Add(this.btnSavePattern);
             this.Controls.Add(this.lstPatterns);
@@ -87,7 +111,10 @@
             this.Name = "PatternEditor";
             this.Text = "PatternEditor";
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSteps)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).EndInit();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -97,5 +124,7 @@
         private ListBox lstPatterns;
         private Button btnSavePattern;
         private Button btnDeletePattern;
+        private PictureBox picSteps;
+        private TrackBar trbSteps;
     }
 }
