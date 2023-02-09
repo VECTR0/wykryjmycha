@@ -44,6 +44,16 @@ namespace WykryjMycha
             picTest.Invalidate();
         }
 
+        private void DrawLines(List<Vector2> points, Pen pen)
+        {
+            using Graphics g = Graphics.FromImage(picTest.Image);
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                g.DrawLine(pen, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
+            }
+            picTest.Invalidate();
+        }
+
         private void DrawCircles(List<Vector2> points, Pen pen, float size = 3)
         {
             using Graphics g = Graphics.FromImage(picTest.Image);
