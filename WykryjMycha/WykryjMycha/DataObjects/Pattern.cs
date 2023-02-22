@@ -14,7 +14,7 @@ namespace WykryjMycha
         public List<Vector2> pattern;
     }
 
-    public class Pattern
+    internal class Pattern
     {
         public string name;
         public List<Vector2> points;

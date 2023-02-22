@@ -1,4 +1,4 @@
-namespace WykryjMycha;
+namespace WykryjMycha
 
 partial class MainWindow
 {
@@ -90,7 +90,7 @@ partial class MainWindow
             this.Controls.Add(this.btnStart);
             this.Controls.Add(this.txtConsole);
             this.Name = "MainWindow";
-            this.Text = "WykryjMycha";
+            this.Text = "WykryjMycha
             this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();

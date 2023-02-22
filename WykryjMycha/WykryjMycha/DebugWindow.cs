@@ -26,53 +26,19 @@ namespace WykryjMycha
             InitializeComponent();
         }
 
-        private void DrawPoint(int x, int y)
-        {
-            using Graphics g = Graphics.FromImage(picTest.Image);
-            _points?.Add(new Vector2(x, y));
-            g.DrawRectangle(Pens.Black, x, y, 1, 1);
-            picTest.Invalidate();
-        }
-
-        private void DrawPoints(List<Vector2> points, Brush brush, float size = 3)
-        {
-            using Graphics g = Graphics.FromImage(picTest.Image);
-            points.ForEach(p =>
-            {
-                g.FillEllipse(brush, p.X - size / 2, (float)(p.Y - size / 2), size * 2, size * 2);
-            });
-            picTest.Invalidate();
-        }
-
-        private void DrawLines(List<Vector2> points, Pen pen)
-        {
-            using Graphics g = Graphics.FromImage(picTest.Image);
-            for (int i = 0; i < points.Count - 1; i++)
-            {
-                g.DrawLine(pen, points[i].X, points[i].Y, points[i + 1].X, points[i + 1].Y);
-            }
-            picTest.Invalidate();
-        }
-
-        private void DrawCircles(List<Vector2> points, Pen pen, float size = 3)
-        {
-            using Graphics g = Graphics.FromImage(picTest.Image);
-            points.ForEach(p =>
-            {
-                g.DrawEllipse(pen, p.X - size / 2, (float)(p.Y - size / 2), size * 2, size * 2);
-            });
-            picTest.Invalidate();
-        }
-
         private void picTest_MouseMove(object sender, MouseEventArgs e)
         {
             if (e.X < 0 || e.Y < 0 || e.X > picTest.Width || e.Y > picTest.Height) _mouseDown = false;
-            if (_mouseDown) DrawPoint(e.X, e.Y);
+            if (_mouseDown)
+            {
+                _points?.Add(new Vector2(e.X, e.Y));
+                DrawUtils.DrawPoint(e.X, e.Y, picTest);
+            }
         }
 
         private void DebugWindow_Load(object sender, EventArgs e)
         {
-            ClearDrawingBoard();
+            DrawUtils.ClearPictureBox(picTest);
         }
 
         private void picTest_Paint(object sender, PaintEventArgs e) { }
@@ -82,9 +48,10 @@ namespace WykryjMycha
             if (e.Button == MouseButtons.Left)
             {
                 _mouseDown = true;
-                ClearDrawingBoard();
+                DrawUtils.ClearPictureBox(picTest);
                 _points = new List<Vector2>();
-                DrawPoint(e.X, e.Y);
+                _points?.Add(new Vector2(e.X, e.Y));
+                DrawUtils.DrawPoint(e.X, e.Y, picTest);
             }
         }
 
@@ -97,7 +64,7 @@ namespace WykryjMycha
         {
             if (e.Button == MouseButtons.Right)
             {
-                ClearDrawingBoard();
+                DrawUtils.ClearPictureBox(picTest);
             }
         }
 
@@ -105,18 +72,18 @@ namespace WykryjMycha
         {
             _mouseDown = false;
             if (_points == null) return;
-            var bbox = PatternMatcher.GetBoundingBox(_points);
+            var bbox = MathUtils.GetBoundingBox(_points);
             var bboxSize = (bbox.Item2 - bbox.Item1);
             if (Math.Max(bboxSize.X, bboxSize.Y) < 75)
             {
                 mainFormInstance.Log = $"Stroke too small, area: {bboxSize}";
                 return;
             }
-            _points = PatternMatcher.NormalizePoints(_points);
-            ClearDrawingBoard();
-            DrawPoints(_points, Brushes.Black, 1.5f);
+            _points = MathUtils.NormalizePoints(_points);
+            DrawUtils.ClearPictureBox(picTest);
+            DrawUtils.DrawPoints(_points, Brushes.Black, picTest, 1.5f);
             _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
-            DrawCircles(_characteristicPoints!, Pens.Red, 6);
+            DrawUtils.DrawCircles(_characteristicPoints!, Pens.Red, picTest, 6);
             mainFormInstance.Log = mainFormInstance.matcher.MatchPattern(_characteristicPoints!) ?? "No match";
         }
 
@@ -132,13 +99,6 @@ namespace WykryjMycha
             txtPatternName.Text = "";
             mainFormInstance.Log = $"Added pattern '{newPatternName}' to known patterns";
             mainFormInstance.editor.UpdatePatternsList();
-        }
-
-        private void ClearDrawingBoard()
-        {
-            var oldImage = picTest.Image;
-            picTest.Image = new Bitmap(picTest.Width, picTest.Height);
-            oldImage?.Dispose();
         }
     }
 }

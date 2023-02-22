@@ -38,13 +38,17 @@ public partial class MainWindow : System.Windows.Forms.Form
         }
     };
 
-    public string Log { get { return txtConsole.Text; } set { txtConsole.AppendText(DateTime.Now.ToString("HH:mm:ss > ") + value + Environment.NewLine); } }
+    public TextBox GetConsoleTextBox()
+    {
+        return txtConsole;
+    }
 
     public MainWindow()
     {
         CheckForIllegalCrossThreadCalls = false;
         DoubleBuffered = true;
 
+        Logger._mainFormInstance = this;
         matcher = new PatternMatcher();
         _collector = new DataCollector();
         _detector = new PatternDetector(patterns, this);

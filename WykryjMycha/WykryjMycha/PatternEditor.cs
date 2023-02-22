@@ -51,34 +51,11 @@ namespace WykryjMycha
 
         private void ShowSelectedPattern()
         {
-            ClearPictureBox(picPattern);
+            DrawUtils.ClearPictureBox(picPattern);
             if (lstPatterns.SelectedIndex == -1) return;
             DrawPattern(mainFormInstance.matcher.GetPatterns()[lstPatterns.SelectedIndex].points, picPattern);
         }
 
-        private void DrawPattern(List<Vector2> points, PictureBox pic, float size = 10f)
-        {
-            using Graphics g = Graphics.FromImage(pic.Image);
-            for (int i = 0; i < points.Count - 1; i++)
-            {
-                var current = points[i];
-                var next = points[i + 1];
-                g.DrawLine(Pens.Red, current.X, current.Y, next.X, next.Y);
-            }
-            for (int i = 0; i < points.Count; i++)
-            {
-                var p = points[i];
-                Brush brush = i == 0 ? Brushes.Orange : Brushes.Red;
-                g.FillEllipse(brush, p.X - size / 2, p.Y - size / 2f, size, size);
-            }
-            pic.Invalidate();
-        }
-        private void ClearPictureBox(PictureBox pic)
-        {
-            var oldImage = pic.Image;
-            pic.Image = new Bitmap(pic.Width, pic.Height);
-            oldImage?.Dispose();
-        }
 
         private void trbSteps_Scroll(object sender, EventArgs e)
         {
@@ -97,8 +74,8 @@ namespace WykryjMycha
 
         private void RenderSteps(Pattern pattern, int step)
         {
-            ClearPictureBox(picSteps);
-            DrawPattern(pattern.steps[step].pattern, picSteps, 5);
+            DrawUtils.ClearPictureBox(picSteps);
+            DrawUtils.DrawPattern(pattern.steps[step].pattern, picSteps, 5);
 
             if (pattern.steps == null) return;
             using Graphics g = Graphics.FromImage(picSteps.Image);
