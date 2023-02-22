@@ -8,10 +8,27 @@ namespace WykryjMycha
         private const float MAX_ALLOWED_ROTATION = 30f;
         private const float MAX_MERGE_DISTANCE = 30f;
 
-        private readonly List<Pattern> _patterns = new List<Pattern>();
+        private readonly List<Pattern> _patterns = PatternMatcher.GetPatternList();
+
+        private static List<Pattern> GetPatternList()
+        {
+            List<Pattern> list = new List<Pattern>();
+
+            foreach (string file in Directory.EnumerateFiles("patterns/", "*.json"))
+            {
+                PatternReader patternReader = new PatternReader(file);
+
+                list.Add(new Pattern() { name = patternReader.patternName, points = patternReader.points });
+            }
+
+            return list;
+        }
+
         public void AddPattern(Pattern pattern)
         {
             _patterns.Add(pattern);
+
+            PatternWriter.write(pattern.points, pattern.name);
         }
 
         public void DeletePattern(int index)

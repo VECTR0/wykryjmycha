@@ -13,12 +13,13 @@ namespace WykryjMycha
 {
     public class PatternReader
     {
-        public string filename { get; set; }
-        public List<Vector2> points { get; set; }
-        public List<Step> steps { get; set; }
-
+        private string filename;
         private string jsonContent;
-        private string patternName;
+        private List<float> coords;
+
+        public List<Vector2> points { get; set; }
+        public string patternName { get; set; }
+
 
         public PatternReader(string filename)
         {
@@ -28,11 +29,23 @@ namespace WykryjMycha
 
             Console.WriteLine(jsonContent);
 
-            var jpattern = JsonSerializer.Deserialize<Pattern>(jsonContent);
+            var jpattern = JsonSerializer.Deserialize<JSONPattern>(jsonContent);
 
             this.patternName = jpattern.name;
-            this.points = jpattern.points;
-            this.steps = jpattern.steps;
+            this.coords = jpattern.coords;
+            this.points = toVector2List(jpattern.coords);
+        }
+
+        private List<Vector2> toVector2List(List<float> coords)
+        {
+            List<Vector2> points = new List<Vector2>();
+
+            for (int i = 0; i < coords.Count; i += 2)
+            {
+                points.Add(new Vector2(coords[i], coords[i + 1]));
+            }
+
+            return points;
         }
     }
 }

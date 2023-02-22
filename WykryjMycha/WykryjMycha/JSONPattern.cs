@@ -12,8 +12,7 @@ namespace WykryjMycha
 {
     public class JSONPattern
     {
-        //TODO: zamiana na Pattern
         public string name { get; set; }
-        public string coordList { get; set; }
+        public List<float> coords { get; set; }
     }
 }
