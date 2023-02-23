@@ -39,9 +39,9 @@
             this.trbSteps = new System.Windows.Forms.TrackBar();
             this.picSteps = new System.Windows.Forms.PictureBox();
             this.tpPatterns = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnDeletePattern = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picPattern = new System.Windows.Forms.PictureBox();
             this.lstEditorPatterns = new System.Windows.Forms.ListBox();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
@@ -54,7 +54,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).BeginInit();
             this.tpPatterns.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
             this.tpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
@@ -183,9 +183,9 @@
             // 
             // tpPatterns
             // 
-            this.tpPatterns.Controls.Add(this.button4);
+            this.tpPatterns.Controls.Add(this.btnDeletePattern);
             this.tpPatterns.Controls.Add(this.Save);
-            this.tpPatterns.Controls.Add(this.pictureBox1);
+            this.tpPatterns.Controls.Add(this.picPattern);
             this.tpPatterns.Controls.Add(this.lstEditorPatterns);
             this.tpPatterns.Location = new System.Drawing.Point(4, 24);
             this.tpPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -196,15 +196,16 @@
             this.tpPatterns.Text = "Patterns Editor";
             this.tpPatterns.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnDeletePattern
             // 
-            this.button4.Location = new System.Drawing.Point(532, 9);
-            this.button4.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(88, 27);
-            this.button4.TabIndex = 13;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnDeletePattern.Location = new System.Drawing.Point(532, 9);
+            this.btnDeletePattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnDeletePattern.Name = "btnDeletePattern";
+            this.btnDeletePattern.Size = new System.Drawing.Size(88, 27);
+            this.btnDeletePattern.TabIndex = 13;
+            this.btnDeletePattern.Text = "Delete";
+            this.btnDeletePattern.UseVisualStyleBackColor = true;
+            this.btnDeletePattern.Click += new System.EventHandler(this.btnDeletePattern_Click);
             // 
             // Save
             // 
@@ -216,14 +217,15 @@
             this.Save.Text = "button3";
             this.Save.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // picPattern
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(175, 9);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(350, 346);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
+            this.picPattern.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picPattern.Location = new System.Drawing.Point(175, 9);
+            this.picPattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.picPattern.Name = "picPattern";
+            this.picPattern.Size = new System.Drawing.Size(350, 346);
+            this.picPattern.TabIndex = 10;
+            this.picPattern.TabStop = false;
             // 
             // lstEditorPatterns
             // 
@@ -234,6 +236,7 @@
             this.lstEditorPatterns.Name = "lstEditorPatterns";
             this.lstEditorPatterns.Size = new System.Drawing.Size(160, 349);
             this.lstEditorPatterns.TabIndex = 9;
+            this.lstEditorPatterns.SelectedIndexChanged += new System.EventHandler(this.lstEditorPatterns_SelectedIndexChanged);
             // 
             // tpSettings
             // 
@@ -291,7 +294,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).EndInit();
             this.tpPatterns.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
             this.tpSettings.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
@@ -315,9 +318,9 @@
         private System.Windows.Forms.ListBox lstStepPatterns;
         private System.Windows.Forms.TrackBar trbSteps;
         private System.Windows.Forms.PictureBox picSteps;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnDeletePattern;
         private System.Windows.Forms.Button Save;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picPattern;
         private System.Windows.Forms.ListBox lstEditorPatterns;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
