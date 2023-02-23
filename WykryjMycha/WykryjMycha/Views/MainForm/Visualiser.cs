@@ -15,9 +15,7 @@ namespace WykryjMycha
         {
             ClearStepPatternsList();
             foreach (var pattern in patterns)
-            {
                 lstStepPatterns.Items.Add(pattern.name);
-            }
             ClearPicSteps();
             if (lstStepPatterns.SelectedIndex == -1) return;
             DrawUtils.DrawPattern(patterns[lstStepPatterns.SelectedIndex].points, picSteps);
@@ -48,6 +46,15 @@ namespace WykryjMycha
                 g.FillEllipse(brush, p.X - size / 2, p.Y - size / 2f, size, size);
             }
             picSteps.Invalidate();
+        }
+
+        internal void SetupTrbSteps(Pattern pattern)
+        {
+            if (pattern.steps == null) return;
+            trbSteps.Maximum = pattern.steps.Count - 1;
+            trbSteps.Minimum = 0;
+            trbSteps.Value = 0;
+            RenderSteps(pattern, trbSteps.Value);
         }
 
         private void trbSteps_Scroll(object sender, EventArgs e)
