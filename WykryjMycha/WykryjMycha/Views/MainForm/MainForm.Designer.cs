@@ -35,14 +35,14 @@
             this.picDrawing = new System.Windows.Forms.PictureBox();
             this.txtNewPatternName = new System.Windows.Forms.TextBox();
             this.tpVisualisation = new System.Windows.Forms.TabPage();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.trackBar1 = new System.Windows.Forms.TrackBar();
-            this.pictureBox3 = new System.Windows.Forms.PictureBox();
+            this.lstStepPatterns = new System.Windows.Forms.ListBox();
+            this.trbSteps = new System.Windows.Forms.TrackBar();
+            this.picSteps = new System.Windows.Forms.PictureBox();
             this.tpPatterns = new System.Windows.Forms.TabPage();
             this.button4 = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.listBox2 = new System.Windows.Forms.ListBox();
+            this.lstEditorPatterns = new System.Windows.Forms.ListBox();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
             this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
@@ -51,8 +51,8 @@
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
             this.tpVisualisation.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSteps)).BeginInit();
             this.tpPatterns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.tpSettings.SuspendLayout();
@@ -115,6 +115,7 @@
             // 
             // picDrawing
             // 
+            this.picDrawing.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.picDrawing.Location = new System.Drawing.Point(7, 7);
             this.picDrawing.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.picDrawing.Name = "picDrawing";
@@ -138,9 +139,9 @@
             // 
             // tpVisualisation
             // 
-            this.tpVisualisation.Controls.Add(this.listBox1);
-            this.tpVisualisation.Controls.Add(this.trackBar1);
-            this.tpVisualisation.Controls.Add(this.pictureBox3);
+            this.tpVisualisation.Controls.Add(this.lstStepPatterns);
+            this.tpVisualisation.Controls.Add(this.trbSteps);
+            this.tpVisualisation.Controls.Add(this.picSteps);
             this.tpVisualisation.Location = new System.Drawing.Point(4, 24);
             this.tpVisualisation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tpVisualisation.Name = "tpVisualisation";
@@ -149,40 +150,43 @@
             this.tpVisualisation.Text = "Algorithm Visualisation";
             this.tpVisualisation.UseVisualStyleBackColor = true;
             // 
-            // listBox1
+            // lstStepPatterns
             // 
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 15;
-            this.listBox1.Location = new System.Drawing.Point(4, 3);
-            this.listBox1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(160, 349);
-            this.listBox1.TabIndex = 8;
+            this.lstStepPatterns.FormattingEnabled = true;
+            this.lstStepPatterns.ItemHeight = 15;
+            this.lstStepPatterns.Location = new System.Drawing.Point(4, 3);
+            this.lstStepPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.lstStepPatterns.Name = "lstStepPatterns";
+            this.lstStepPatterns.Size = new System.Drawing.Size(160, 349);
+            this.lstStepPatterns.TabIndex = 8;
+            this.lstStepPatterns.SelectedIndexChanged += new System.EventHandler(this.lstStepPatterns_SelectedIndexChanged);
             // 
-            // trackBar1
+            // trbSteps
             // 
-            this.trackBar1.Location = new System.Drawing.Point(528, 3);
-            this.trackBar1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.trackBar1.Name = "trackBar1";
-            this.trackBar1.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trackBar1.Size = new System.Drawing.Size(45, 350);
-            this.trackBar1.TabIndex = 7;
+            this.trbSteps.Location = new System.Drawing.Point(528, 3);
+            this.trbSteps.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.trbSteps.Name = "trbSteps";
+            this.trbSteps.Orientation = System.Windows.Forms.Orientation.Vertical;
+            this.trbSteps.Size = new System.Drawing.Size(45, 350);
+            this.trbSteps.TabIndex = 7;
+            this.trbSteps.Scroll += new System.EventHandler(this.trbSteps_Scroll);
             // 
-            // pictureBox3
+            // picSteps
             // 
-            this.pictureBox3.Location = new System.Drawing.Point(172, 3);
-            this.pictureBox3.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.pictureBox3.Name = "pictureBox3";
-            this.pictureBox3.Size = new System.Drawing.Size(350, 346);
-            this.pictureBox3.TabIndex = 6;
-            this.pictureBox3.TabStop = false;
+            this.picSteps.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picSteps.Location = new System.Drawing.Point(172, 3);
+            this.picSteps.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.picSteps.Name = "picSteps";
+            this.picSteps.Size = new System.Drawing.Size(350, 346);
+            this.picSteps.TabIndex = 6;
+            this.picSteps.TabStop = false;
             // 
             // tpPatterns
             // 
             this.tpPatterns.Controls.Add(this.button4);
             this.tpPatterns.Controls.Add(this.Save);
             this.tpPatterns.Controls.Add(this.pictureBox1);
-            this.tpPatterns.Controls.Add(this.listBox2);
+            this.tpPatterns.Controls.Add(this.lstEditorPatterns);
             this.tpPatterns.Location = new System.Drawing.Point(4, 24);
             this.tpPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tpPatterns.Name = "tpPatterns";
@@ -221,15 +225,15 @@
             this.pictureBox1.TabIndex = 10;
             this.pictureBox1.TabStop = false;
             // 
-            // listBox2
+            // lstEditorPatterns
             // 
-            this.listBox2.FormattingEnabled = true;
-            this.listBox2.ItemHeight = 15;
-            this.listBox2.Location = new System.Drawing.Point(7, 7);
-            this.listBox2.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.listBox2.Name = "listBox2";
-            this.listBox2.Size = new System.Drawing.Size(160, 349);
-            this.listBox2.TabIndex = 9;
+            this.lstEditorPatterns.FormattingEnabled = true;
+            this.lstEditorPatterns.ItemHeight = 15;
+            this.lstEditorPatterns.Location = new System.Drawing.Point(7, 7);
+            this.lstEditorPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.lstEditorPatterns.Name = "lstEditorPatterns";
+            this.lstEditorPatterns.Size = new System.Drawing.Size(160, 349);
+            this.lstEditorPatterns.TabIndex = 9;
             // 
             // tpSettings
             // 
@@ -284,8 +288,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).EndInit();
             this.tpVisualisation.ResumeLayout(false);
             this.tpVisualisation.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.trackBar1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picSteps)).EndInit();
             this.tpPatterns.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.tpSettings.ResumeLayout(false);
@@ -308,13 +312,13 @@
         private System.Windows.Forms.Button btnAddPattern;
         private System.Windows.Forms.TabPage tpSettings;
         private System.Windows.Forms.TabPage tpVisualisation;
-        private System.Windows.Forms.ListBox listBox1;
-        private System.Windows.Forms.TrackBar trackBar1;
-        private System.Windows.Forms.PictureBox pictureBox3;
+        private System.Windows.Forms.ListBox lstStepPatterns;
+        private System.Windows.Forms.TrackBar trbSteps;
+        private System.Windows.Forms.PictureBox picSteps;
         private System.Windows.Forms.Button button4;
         private System.Windows.Forms.Button Save;
         private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.ListBox listBox2;
+        private System.Windows.Forms.ListBox lstEditorPatterns;
         private System.Windows.Forms.NumericUpDown numericUpDown1;
         private System.Windows.Forms.NumericUpDown numericUpDown3;
         private System.Windows.Forms.NumericUpDown numericUpDown2;

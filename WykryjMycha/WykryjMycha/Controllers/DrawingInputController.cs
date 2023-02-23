@@ -11,10 +11,16 @@ namespace WykryjMycha
     {
         private bool _mouseDown = false;
         private List<Vector2> _points;
-        
-        internal DrawingInputController(PatternDatabase patternDatabase, ...)
+        private PatternDatabase _patternDatabase;
+        private PatternMatcher _patternMatcher;
+        private CharacteristicPointsFinder _characteristicPointsFinder;
+
+        internal DrawingInputController(PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder)
         {
             _points = new List<Vector2>();
+            _patternDatabase = patternDatabase;
+            _patternMatcher = patternMatcher;
+            _characteristicPointsFinder = characteristicPointsFinder;
         }
 
         internal void HandleDrawingMouseMove(int x, int y, PictureBox pic)
@@ -59,9 +65,9 @@ namespace WykryjMycha
             _points = MathUtils.NormalizePoints(_points);
             DrawUtils.ClearPictureBox(pic);
             DrawUtils.DrawPoints(_points, Brushes.Black, pic, 1.5f);
-            //var _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
-            //DrawUtils.DrawCircles(_characteristicPoints!, Pens.Red, picDrawing, 6);
-            //Logger.Log = mainFormInstance.matcher.MatchPattern(_characteristicPoints!) ?? "No match";
+            var _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
+            DrawUtils.DrawCircles(_characteristicPoints!, Pens.Red, pic, 6);
+            Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase) ?? "No match";
         }
 
         internal void AddNewPattern(TextBox txt)
@@ -72,7 +78,7 @@ namespace WykryjMycha
                 return;
             }
             var newPatternName = txt.Text;
-            PatternDatabase.AddPattern(new Pattern() { name = newPatternName, points = _points });
+            _patternDatabase.AddPattern(new Pattern() { name = newPatternName, points = _points });
             Logger.Log = $"Added pattern '{newPatternName}' to known patterns";
             mainFormInstance.editor.UpdatePatternsList();
             txt.Text = "";
