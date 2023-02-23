@@ -13,21 +13,11 @@
     </ItemGroup>
 
     <ItemGroup>
-      <Compile Update="Views\MainForm\Drawing.cs">
-        <SubType>Form</SubType>
-      </Compile>
-      <Compile Update="Views\MainForm\MainForm.cs">
-        <SubType>Form</SubType>
-      </Compile>
-      <Compile Update="Views\MainForm\PatternEditor.cs">
-        <SubType>Form</SubType>
-      </Compile>
-      <Compile Update="Views\MainForm\Settings.cs">
-        <SubType>Form</SubType>
-      </Compile>
-      <Compile Update="Views\MainForm\Visualiser.cs">
-        <SubType>Form</SubType>
-      </Compile>
+      <Compile Update="Views\MainForm\Drawing.cs" />
+      <Compile Update="Views\MainForm\MainForm.cs" />
+      <Compile Update="Views\MainForm\PatternEditor.cs" />
+      <Compile Update="Views\MainForm\Settings.cs" />
+      <Compile Update="Views\MainForm\Visualiser.cs" />
     </ItemGroup>
 
 </Project>

@@ -8,7 +8,7 @@ namespace WykryjMycha
 {
     static class Logger // TODO: singleton
     {
-        internal static MainWindow _mainFormInstance;
+        internal static MainForm _mainFormInstance;
 
         public static string Log { get { return _mainFormInstance?.GetConsoleTextBox().Text; } set { _mainFormInstance?.GetConsoleTextBox().AppendText(DateTime.Now.ToString("HH:mm:ss > ") + value + Environment.NewLine); } }
     }
