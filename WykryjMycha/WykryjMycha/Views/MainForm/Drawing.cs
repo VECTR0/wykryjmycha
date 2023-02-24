@@ -10,7 +10,43 @@ namespace WykryjMycha
     partial class MainForm
     {
         private DrawingInputController _drawingInputController;
-        
+
+        internal void ResetDrawingTimer()
+        {
+            tmrDrawing.Stop();
+            tmrDrawing.Start();
+        }
+
+        internal void StartDrawingTimer()
+        {
+            tmrDrawing.Start();
+        }
+        internal void StopDrawingTimer()
+        {
+            tmrDrawing.Stop();
+        }
+
+        private void tmrDrawing_Tick(object sender, EventArgs e)
+        {
+            _drawingInputController.FinishedStroke();
+            tmrDrawing.Stop();
+        }
+
+        internal void ClearDrawingBoard()
+        {
+            DrawUtils.ClearPictureBox(picDrawing);
+        }
+
+        internal void RenderDrawingStroke(List<Vector2> points)
+        {
+            DrawUtils.DrawPoints(points, Brushes.Black, picDrawing, 1.5f);
+        }
+
+        internal void RenderStrokeCharacteristicPoints(List<Vector2> characteristicPoints)
+        {
+            DrawUtils.DrawCircles(characteristicPoints, Pens.Red, picDrawing, 6);
+        }
+
         private void picDrawing_MouseMove(object sender, MouseEventArgs e)
         {
             _drawingInputController.HandleDrawingMouseMove(e.X, e.Y, picDrawing);

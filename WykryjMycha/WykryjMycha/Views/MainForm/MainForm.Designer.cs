@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.txtConsole = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpDrawing = new System.Windows.Forms.TabPage();
@@ -58,6 +59,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
+            this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -415,6 +417,11 @@
             this.maxSearchDistance.TabIndex = 0;
             this.maxSearchDistance.ValueChanged += new System.EventHandler(this.maxSearchDistance_ValueChanged);
             // 
+            // tmrDrawing
+            // 
+            this.tmrDrawing.Interval = 1000;
+            this.tmrDrawing.Tick += new System.EventHandler(this.tmrDrawing_Tick);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -480,6 +487,7 @@
         private NumericUpDown maxAllowedRotation;
         private Label label2;
         private Label label1;
+        private System.Windows.Forms.Timer tmrDrawing;
     }
 }
 

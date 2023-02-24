@@ -4,24 +4,71 @@ using System.Linq;
 using System.Numerics;
 using System.Text;
 using System.Threading.Tasks;
+using System.Timers;
 
 namespace WykryjMycha
 {
     internal class DrawingInputController
     {
+        internal MainForm drawingView;
         private bool _mouseDown = false;
         private List<Vector2> _points, _characteristicPoints;
         private bool _pointsValid = false;
         private PatternDatabase _patternDatabase;
         private PatternMatcher _patternMatcher;
         private CharacteristicPointsFinder _characteristicPointsFinder;
+        private bool _strokesStarted = false;
 
-        internal DrawingInputController(PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder)
+        internal DrawingInputController(MainForm instance, PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder)
         {
+            drawingView = instance;
             _points = new List<Vector2>();
             _patternDatabase = patternDatabase;
             _patternMatcher = patternMatcher;
             _characteristicPointsFinder = characteristicPointsFinder;
+            drawingView.ClearDrawingBoard();
+        }
+
+        internal void FinishedStroke()
+        {
+            _strokesStarted = false;
+            _pointsValid = true;
+            ProcessDrawnPattern(_points);
+
+            _points = MathUtils.NormalizePoints(_points);
+            drawingView.ClearDrawingBoard();
+            drawingView.RenderDrawingStroke(_points);
+            _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
+            drawingView.RenderStrokeCharacteristicPoints(_characteristicPoints);
+            Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase) ?? "No match";
+        }
+
+        private void ResetTimer(System.Timers.Timer timer)
+        {
+            timer.Stop();
+            timer.Start();
+        }
+
+        internal void HandleDrawingMouseDown(MouseEventArgs e, PictureBox pic)
+        {
+            if (e.Button == MouseButtons.Left)
+            {
+                _mouseDown = true;
+                if (_strokesStarted)
+                {
+                    drawingView.StopDrawingTimer();
+                }
+                else
+                {
+                    _strokesStarted = true;
+                    DrawUtils.ClearPictureBox(pic);
+                    _points = new List<Vector2>();
+                }
+                _mouseDown = true;
+
+                _points?.Add(new Vector2(e.X, e.Y));
+                DrawUtils.DrawPoint(e.X, e.Y, pic);
+            }
         }
 
         internal void HandleDrawingMouseMove(int x, int y, PictureBox pic)
@@ -34,17 +81,15 @@ namespace WykryjMycha
             }
         }
 
-        internal void HandleDrawingMouseDown(MouseEventArgs e, PictureBox pic)
+        internal void HandleDrawingMouseUp(MouseEventArgs e, PictureBox pic)
         {
             if (e.Button == MouseButtons.Left)
             {
-                _mouseDown = true;
-                DrawUtils.ClearPictureBox(pic);
-                _points = new List<Vector2>();
-                _points?.Add(new Vector2(e.X, e.Y));
-                DrawUtils.DrawPoint(e.X, e.Y, pic);
+                _mouseDown = false;
+                drawingView.StartDrawingTimer();
             }
         }
+
         internal void HandleDrawingMouseLeave()
         {
             _mouseDown = false;
@@ -52,24 +97,12 @@ namespace WykryjMycha
 
         internal void HandleDrawingMouseClick(MouseEventArgs e, PictureBox pic)
         {
-            if (e.Button == MouseButtons.Right)
+            if (!_mouseDown && e.Button == MouseButtons.Right)
             {
                 DrawUtils.ClearPictureBox(pic);
+                drawingView.StopDrawingTimer();
+                _strokesStarted = false;
             }
-        }
-
-        internal void HandleDrawingMouseUp(MouseEventArgs e, PictureBox pic)
-        {
-            _mouseDown = false;
-            _pointsValid = true;
-            ProcessDrawnPattern(_points);
-
-            _points = MathUtils.NormalizePoints(_points);
-            DrawUtils.ClearPictureBox(pic);
-            DrawUtils.DrawPoints(_points, Brushes.Black, pic, 1.5f);
-            _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
-            DrawUtils.DrawCircles(_characteristicPoints!, Pens.Red, pic, 6);
-            Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase) ?? "No match";
         }
 
         internal void AddNewPattern(TextBox txt)
