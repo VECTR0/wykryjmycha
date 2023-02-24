@@ -17,6 +17,12 @@ namespace WykryjMycha
             this.visualiserView = visualiserView;
             _patternDatabase = patternDatabase;
             visualiserView.SetStepPatterns(_patternDatabase.GetPatterns());
+            _patternDatabase.changed += UpdateStepPatterns;
+        }
+
+        private void UpdateStepPatterns(object? sender, EventArgs e)
+        {
+            visualiserView.SetStepPatterns(_patternDatabase.GetPatterns());
         }
 
         internal void HandleStepsScroll(int value)

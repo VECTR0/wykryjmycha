@@ -17,6 +17,12 @@ namespace WykryjMycha
             this.editorView = editorView;
             _patternDatabase = patternDatabase;
             editorView.SetEditorPatterns(_patternDatabase.GetPatterns());
+            _patternDatabase.changed += UpdateEditorPatterns;
+        }
+
+        private void UpdateEditorPatterns(object? sender, EventArgs e)
+        {
+            editorView.SetEditorPatterns(_patternDatabase.GetPatterns());
         }
 
         internal void HandleEditorPatternSelected(int index)
