@@ -26,6 +26,7 @@ namespace WykryjMycha
         internal void RenderSteps(Pattern pattern, int step)
         {
             DrawUtils.ClearPictureBox(picSteps);
+            if (pattern.steps == null || pattern.steps[step] == null) return;
             DrawUtils.DrawPattern(pattern.steps[step].pattern, picSteps, 5);
 
             if (pattern.steps == null) return;

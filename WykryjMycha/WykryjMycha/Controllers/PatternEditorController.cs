@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -23,13 +24,16 @@ namespace WykryjMycha
 
         private void UpdateEditorPatterns(object? sender, EventArgs e)
         {
+            _selectedEditorPattern = -1;
             editorView.SetEditorPatterns(_patternDatabase.GetPatterns());
         }
 
         internal void HandleEditorPatternSelected(int index)
         {
             _selectedEditorPattern = index;
-            editorView.RenderPattern(_patternDatabase.GetPatterns()[_selectedEditorPattern]);
+            if (index < 0) return;
+            var pattern = _patternDatabase.GetPatterns()[_selectedEditorPattern];
+            editorView.RenderPattern(pattern);
         }
 
         internal void DeletePattern()
@@ -68,6 +72,9 @@ namespace WykryjMycha
         internal void HandleEditorMouseUp(int x, int y)
         {
             _selectedEditorPoint = -1;
+            var pattern = _patternDatabase.GetPatterns()[_selectedEditorPattern];
+            pattern.points = MathUtils.NormalizePoints(pattern.points);
+            editorView.RenderPattern(_patternDatabase.GetPatterns()[_selectedEditorPattern]);
         }
     }
 }
