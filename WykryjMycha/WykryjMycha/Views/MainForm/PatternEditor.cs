@@ -13,7 +13,7 @@ namespace WykryjMycha
         internal void RenderPattern(Pattern pattern)
         {
             DrawUtils.ClearPictureBox(picPattern);
-            DrawUtils.DrawPattern(pattern, picPattern);
+            DrawUtils.DrawPattern(pattern.points, picPattern);
         }
 
         internal void ClearEditorPatternsList() => lstEditorPatterns.Items.Clear();
@@ -24,7 +24,7 @@ namespace WykryjMycha
             foreach (var pattern in patterns)
                 lstEditorPatterns.Items.Add(pattern.name);
             if (lstEditorPatterns.SelectedIndex == -1) return;
-            RenderPattern(patterns[lstEditorPatterns.SelectedIndex].points, picPattern);
+            RenderPattern(patterns[lstEditorPatterns.SelectedIndex]);
         }
 
         private void lstEditorPatterns_SelectedIndexChanged(object sender, EventArgs e)

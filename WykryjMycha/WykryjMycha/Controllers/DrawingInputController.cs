@@ -80,7 +80,7 @@ namespace WykryjMycha
             var newPatternName = txt.Text;
             _patternDatabase.AddPattern(new Pattern() { name = newPatternName, points = _points });
             Logger.Log = $"Added pattern '{newPatternName}' to known patterns";
-            mainFormInstance.editor.UpdatePatternsList();
+            //mainFormInstance.editor.UpdatePatternsList();
             txt.Text = "";
         }
 

@@ -24,8 +24,11 @@ namespace WykryjMycha
             CharacteristicPointsFinder characteristicPointsFinder = new CharacteristicPointsFinder();   
 
             _drawingInputController = new DrawingInputController(patternDatabase, patternMatcher, characteristicPointsFinder);
+            _visualiserController = new VisualiserController(this, patternDatabase);
+            _patternEditorController = new PatternEditorController(this, patternDatabase);
+
         }
 
-        public TextBox GetConsoleTextBox() => txtNewPatternName;
+        public TextBox GetConsoleTextBox() => txtConsole;
     }
 }

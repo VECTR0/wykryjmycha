@@ -34,7 +34,7 @@ namespace WykryjMycha
 
             Console.WriteLine(jsonString);
 
-            File.WriteAllText(filepath, jsonString);
+            //File.WriteAllText(filepath, jsonString); TODO
         }
     }
 }
