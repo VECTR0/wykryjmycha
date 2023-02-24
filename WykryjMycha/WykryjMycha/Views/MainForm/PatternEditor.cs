@@ -36,5 +36,21 @@ namespace WykryjMycha
         {
             _patternEditorController.DeletePattern();
         }
+
+        private void picPattern_MouseDown(object sender, MouseEventArgs e)
+        {
+            _patternEditorController.HandleEditorMouseDown(e.X, e.Y);
+        }
+
+        private void picPattern_MouseMove(object sender, MouseEventArgs e)
+        {
+
+            _patternEditorController.HandleEditorMouseMove(e.X, e.Y);
+        }
+
+        private void picPattern_MouseUp(object sender, MouseEventArgs e)
+        {
+            _patternEditorController.HandleEditorMouseUp(e.X, e.Y);
+        }
     }
 }
