@@ -30,11 +30,18 @@ namespace WykryjMycha
             };
 
             string jsonString = JsonSerializer.Serialize(jsonPattern);
+
+            if (!Directory.Exists("patterns"))
+            {
+                Directory.CreateDirectory("patterns");
+            }
+
             string filepath = "patterns/" + patternName + ".json";
+
 
             Console.WriteLine(jsonString);
 
-            //File.WriteAllText(filepath, jsonString); TODO
+            File.WriteAllText(filepath, jsonString);
         }
     }
 }

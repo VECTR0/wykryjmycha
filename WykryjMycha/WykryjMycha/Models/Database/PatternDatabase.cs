@@ -42,7 +42,10 @@ namespace WykryjMycha
 
                     list.Add(new Pattern() { name = patternReader.patternName, points = patternReader.points });
                 }
-            }catch(Exception ex) { }
+            }catch(Exception ex) 
+            {
+                
+            }
 
             return list;
         }
