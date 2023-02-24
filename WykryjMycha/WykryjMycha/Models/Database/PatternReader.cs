@@ -1,17 +1,15 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
-using System.Text.Json;
-using System.Reflection.Metadata;
-using System.Globalization;
+using System.Linq;
 using System.Numerics;
+using System.Text;
+using System.Text.Json;
+using System.Threading.Tasks;
 
 namespace WykryjMycha
 {
-    public class PatternReader
+    internal class PatternReader
     {
         private string filename;
         private string jsonContent;
@@ -19,7 +17,6 @@ namespace WykryjMycha
 
         public List<Vector2> points { get; set; }
         public string patternName { get; set; }
-
 
         public PatternReader(string filename)
         {
@@ -33,10 +30,10 @@ namespace WykryjMycha
 
             this.patternName = jpattern.name;
             this.coords = jpattern.coords;
-            this.points = toVector2List(jpattern.coords);
+            this.points = ToVector2List(jpattern.coords);
         }
 
-        private List<Vector2> toVector2List(List<float> coords)
+        private List<Vector2> ToVector2List(List<float> coords)
         {
             List<Vector2> points = new List<Vector2>();
 

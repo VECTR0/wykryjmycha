@@ -1,15 +1,16 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Numerics;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace WykryjMycha
 {
-    internal static class CharacteristicPointsFinder
+    internal class CharacteristicPointsFinder
     {
-        private const float MIN_DISTANCE = 10f;
-        private const float ANGLE_LIMIT_DEG = 40f;
-        private const float REFERENCE_POINT_MIN_DISTANCE = 4f;
 
-        internal static List<Vector2>? GetCharacteristicPoints(List<Vector2> input, float minDistance = MIN_DISTANCE, float angleLimitDeg = ANGLE_LIMIT_DEG)
+        internal static List<Vector2>? GetCharacteristicPoints(List<Vector2> input, float minDistance = Settings.DefaultMinCharacteriticPointsDistance, float angleLimitDeg = Settings.DefaultCharacteriticPointsAngleLimitDegrees)
         {
             if (input == null) return null;
 
@@ -20,7 +21,7 @@ namespace WykryjMycha
             {
                 int nextIdx = i + 1;
                 bool reachedTheEnd = false;
-                while (Vector2.Distance(input[i], input[nextIdx]) < REFERENCE_POINT_MIN_DISTANCE)
+                while (Vector2.Distance(input[i], input[nextIdx]) < Settings.referencePointMinDistance)
                 {
                     if (++nextIdx >= input.Count - 1)
                     {
@@ -81,7 +82,7 @@ namespace WykryjMycha
 
             for (int i = startIdx; i < endIdx - 1; i++)
             {
-                float dist = PatternMatcher.DistanceFromLine(points[i], points[startIdx], points[endIdx]);
+                float dist = MathUtils.DistanceFromLine(points[i], points[startIdx], points[endIdx]);
                 if (dist > distMax)
                 {
                     index = i;

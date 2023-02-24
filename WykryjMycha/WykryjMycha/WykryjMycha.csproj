@@ -12,4 +12,12 @@
       <PackageReference Include="EventHook" Version="1.4.113" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Compile Update="Views\MainForm\Drawing.cs" />
+      <Compile Update="Views\MainForm\MainForm.cs" />
+      <Compile Update="Views\MainForm\PatternEditor.cs" />
+      <Compile Update="Views\MainForm\Settings.cs" />
+      <Compile Update="Views\MainForm\Visualiser.cs" />
+    </ItemGroup>
+
 </Project>

@@ -1,19 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.IO;
 using System.Text.Json;
-using System.Reflection.Metadata;
-using System.Globalization;
 using System.Numerics;
 
 namespace WykryjMycha
 {
-    public class PatternWriter
+    internal class PatternWriter
     {
-        public static void write(List<Vector2> points, string patternName)
+        public static void Write(List<Vector2> points, string patternName)
         {
             if (points == null || patternName == null)
             {
@@ -39,7 +34,7 @@ namespace WykryjMycha
 
             Console.WriteLine(jsonString);
 
-            File.WriteAllText(filepath, jsonString);
+            //File.WriteAllText(filepath, jsonString); TODO
         }
     }
 }
