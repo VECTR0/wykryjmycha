@@ -8,12 +8,13 @@ namespace WykryjMycha
 {
     internal class PatternDatabase
     {
+        internal event EventHandler changed;
         private readonly List<Pattern> _patterns = PatternDatabase.GetPatternList();
 
         public void AddPattern(Pattern pattern)
         {
             _patterns.Add(pattern);
-
+            changed?.Invoke(this, EventArgs.Empty);
             PatternWriter.Write(pattern.points, pattern.name);
         }
 
@@ -21,6 +22,7 @@ namespace WykryjMycha
         {
             if (_patterns.Count == 0 || index < 0 || index >= _patterns.Count) return;
             _patterns.RemoveAt(index);
+            changed?.Invoke(this, EventArgs.Empty);
         }
 
         public List<Pattern> GetPatterns()

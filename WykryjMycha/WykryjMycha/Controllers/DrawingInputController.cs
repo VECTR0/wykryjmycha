@@ -10,7 +10,8 @@ namespace WykryjMycha
     internal class DrawingInputController
     {
         private bool _mouseDown = false;
-        private List<Vector2> _points;
+        private List<Vector2> _points, _characteristicPoints;
+        private bool _pointsValid = false;
         private PatternDatabase _patternDatabase;
         private PatternMatcher _patternMatcher;
         private CharacteristicPointsFinder _characteristicPointsFinder;
@@ -60,27 +61,32 @@ namespace WykryjMycha
         internal void HandleDrawingMouseUp(MouseEventArgs e, PictureBox pic)
         {
             _mouseDown = false;
+            _pointsValid = true;
             ProcessDrawnPattern(_points);
 
             _points = MathUtils.NormalizePoints(_points);
             DrawUtils.ClearPictureBox(pic);
             DrawUtils.DrawPoints(_points, Brushes.Black, pic, 1.5f);
-            var _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
+            _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
             DrawUtils.DrawCircles(_characteristicPoints!, Pens.Red, pic, 6);
             Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase) ?? "No match";
         }
 
         internal void AddNewPattern(TextBox txt)
         {
+            if (!_pointsValid)
+            {
+                MessageBox.Show("Stroke invalid");
+                return;
+            }
             if (txt.Text.Length == 0)
             {
                 MessageBox.Show("Pattern name too short");
                 return;
             }
             var newPatternName = txt.Text;
-            _patternDatabase.AddPattern(new Pattern() { name = newPatternName, points = _points });
+            _patternDatabase.AddPattern(new Pattern() { name = newPatternName, points = _characteristicPoints });
             Logger.Log = $"Added pattern '{newPatternName}' to known patterns";
-            //mainFormInstance.editor.UpdatePatternsList();
             txt.Text = "";
         }
 
@@ -92,6 +98,7 @@ namespace WykryjMycha
             if (Math.Max(bboxSize.X, bboxSize.Y) < 75)
             {
                 Logger.Log = $"Stroke too small, area: {bboxSize}";
+                _pointsValid = false;
                 return;
             }
         }
