@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     internal static class Settings
     {
@@ -27,8 +21,8 @@ namespace WykryjMycha
         internal const float DefaultCharacteriticPointsAngleLimitDegrees = 40f;
         internal const float DefaultReferencePointMinDistance = 4f;
 
-        internal const float minCharacteriticPointsDistance = DefaultMinCharacteriticPointsDistance;
-        internal const float characteriticPointsAngleLimitDegrees = DefaultCharacteriticPointsAngleLimitDegrees;
-        internal const float referencePointMinDistance = DefaultReferencePointMinDistance;
+        internal static float minCharacteriticPointsDistance = DefaultMinCharacteriticPointsDistance;
+        internal static float characteriticPointsAngleLimitDegrees = DefaultCharacteriticPointsAngleLimitDegrees;
+        internal static float referencePointMinDistance = DefaultReferencePointMinDistance;
     }
 }
