@@ -11,6 +11,7 @@ namespace WykryjMycha
     {
         private bool _mouseDown = false;
         private List<Vector2> _points, _characteristicPoints;
+        private bool _pointsValid = false;
         private PatternDatabase _patternDatabase;
         private PatternMatcher _patternMatcher;
         private CharacteristicPointsFinder _characteristicPointsFinder;
@@ -60,6 +61,7 @@ namespace WykryjMycha
         internal void HandleDrawingMouseUp(MouseEventArgs e, PictureBox pic)
         {
             _mouseDown = false;
+            _pointsValid = true;
             ProcessDrawnPattern(_points);
 
             _points = MathUtils.NormalizePoints(_points);
@@ -72,6 +74,11 @@ namespace WykryjMycha
 
         internal void AddNewPattern(TextBox txt)
         {
+            if (!_pointsValid)
+            {
+                MessageBox.Show("Stroke invalid");
+                return;
+            }
             if (txt.Text.Length == 0)
             {
                 MessageBox.Show("Pattern name too short");
@@ -91,6 +98,7 @@ namespace WykryjMycha
             if (Math.Max(bboxSize.X, bboxSize.Y) < 75)
             {
                 Logger.Log = $"Stroke too small, area: {bboxSize}";
+                _pointsValid = false;
                 return;
             }
         }
