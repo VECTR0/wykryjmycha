@@ -28,6 +28,10 @@ namespace WykryjMycha
             {
                 return x.Item2.CompareTo(y.Item2);
             });
+            Logger.Log = "Possible matches:";
+            foreach (var possiblePattern in possiblePatterns) {
+                Logger.Log = $"{possiblePattern.Item1}: {possiblePattern.Item2}";
+            }
             if (possiblePatterns.Count == 0) return null;
             else return possiblePatterns[0].Item1;
         }
