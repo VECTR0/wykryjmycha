@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txtConsole = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpDrawing = new System.Windows.Forms.TabPage();
             this.btnAddPattern = new System.Windows.Forms.Button();
@@ -39,25 +39,25 @@
             this.trbSteps = new System.Windows.Forms.TrackBar();
             this.picSteps = new System.Windows.Forms.PictureBox();
             this.tpPatterns = new System.Windows.Forms.TabPage();
-            this.button4 = new System.Windows.Forms.Button();
+            this.btnDeletePattern = new System.Windows.Forms.Button();
             this.Save = new System.Windows.Forms.Button();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picPattern = new System.Windows.Forms.PictureBox();
             this.lstEditorPatterns = new System.Windows.Forms.ListBox();
             this.tpSettings = new System.Windows.Forms.TabPage();
-            this.lblAngleRefPointMinDist = new System.Windows.Forms.Label();
-            this.angleRefPointMinDist = new System.Windows.Forms.NumericUpDown();
-            this.lblAngleLimitDegree = new System.Windows.Forms.Label();
-            this.angleLimitDegree = new System.Windows.Forms.NumericUpDown();
-            this.label7 = new System.Windows.Forms.Label();
-            this.lblMinDistance = new System.Windows.Forms.Label();
-            this.minDistance = new System.Windows.Forms.NumericUpDown();
-            this.lblMaxMergeDistance = new System.Windows.Forms.Label();
-            this.maxMergeDistance = new System.Windows.Forms.NumericUpDown();
-            this.lblMaxAllowedRotation = new System.Windows.Forms.Label();
-            this.maxAllowedRotation = new System.Windows.Forms.NumericUpDown();
-            this.label1 = new System.Windows.Forms.Label();
-            this.lblMaxSearchDistance = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
+            this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.maxAllowedRotation = new System.Windows.Forms.NumericUpDown();
+            this.label4 = new System.Windows.Forms.Label();
+            this.minDistance = new System.Windows.Forms.NumericUpDown();
+            this.label5 = new System.Windows.Forms.Label();
+            this.maxMergeDistance = new System.Windows.Forms.NumericUpDown();
+            this.label6 = new System.Windows.Forms.Label();
+            this.angleRefPointMinDist = new System.Windows.Forms.NumericUpDown();
+            this.label7 = new System.Windows.Forms.Label();
+            this.angleLimitDegree = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -65,27 +65,29 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).BeginInit();
             this.tpPatterns.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
             this.tpSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).BeginInit();
             this.SuspendLayout();
             // 
-            // textBox1
+            // txtConsole
             // 
-            this.textBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            this.txtConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.textBox1.Location = new System.Drawing.Point(16, 581);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(918, 165);
-            this.textBox1.TabIndex = 0;
+            this.txtConsole.Location = new System.Drawing.Point(16, 581);
+            this.txtConsole.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.txtConsole.Multiline = true;
+            this.txtConsole.Name = "txtConsole";
+            this.txtConsole.ReadOnly = true;
+            this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.txtConsole.Size = new System.Drawing.Size(918, 165);
+            this.txtConsole.TabIndex = 0;
             // 
             // tabControl1
             // 
@@ -197,9 +199,9 @@
             // 
             // tpPatterns
             // 
-            this.tpPatterns.Controls.Add(this.button4);
+            this.tpPatterns.Controls.Add(this.btnDeletePattern);
             this.tpPatterns.Controls.Add(this.Save);
-            this.tpPatterns.Controls.Add(this.pictureBox1);
+            this.tpPatterns.Controls.Add(this.picPattern);
             this.tpPatterns.Controls.Add(this.lstEditorPatterns);
             this.tpPatterns.Location = new System.Drawing.Point(4, 29);
             this.tpPatterns.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -210,15 +212,16 @@
             this.tpPatterns.Text = "Patterns Editor";
             this.tpPatterns.UseVisualStyleBackColor = true;
             // 
-            // button4
+            // btnDeletePattern
             // 
-            this.button4.Location = new System.Drawing.Point(608, 12);
-            this.button4.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.button4.Name = "button4";
-            this.button4.Size = new System.Drawing.Size(101, 36);
-            this.button4.TabIndex = 13;
-            this.button4.Text = "button4";
-            this.button4.UseVisualStyleBackColor = true;
+            this.btnDeletePattern.Location = new System.Drawing.Point(608, 12);
+            this.btnDeletePattern.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.btnDeletePattern.Name = "btnDeletePattern";
+            this.btnDeletePattern.Size = new System.Drawing.Size(101, 36);
+            this.btnDeletePattern.TabIndex = 13;
+            this.btnDeletePattern.Text = "Delete";
+            this.btnDeletePattern.UseVisualStyleBackColor = true;
+            this.btnDeletePattern.Click += new System.EventHandler(this.btnDeletePattern_Click);
             // 
             // Save
             // 
@@ -230,14 +233,15 @@
             this.Save.Text = "button3";
             this.Save.UseVisualStyleBackColor = true;
             // 
-            // pictureBox1
+            // picPattern
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(200, 12);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(400, 461);
-            this.pictureBox1.TabIndex = 10;
-            this.pictureBox1.TabStop = false;
+            this.picPattern.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picPattern.Location = new System.Drawing.Point(200, 12);
+            this.picPattern.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.picPattern.Name = "picPattern";
+            this.picPattern.Size = new System.Drawing.Size(400, 461);
+            this.picPattern.TabIndex = 10;
+            this.picPattern.TabStop = false;
             // 
             // lstEditorPatterns
             // 
@@ -248,22 +252,23 @@
             this.lstEditorPatterns.Name = "lstEditorPatterns";
             this.lstEditorPatterns.Size = new System.Drawing.Size(182, 464);
             this.lstEditorPatterns.TabIndex = 9;
+            this.lstEditorPatterns.SelectedIndexChanged += new System.EventHandler(this.lstEditorPatterns_SelectedIndexChanged);
             // 
             // tpSettings
             // 
-            this.tpSettings.Controls.Add(this.lblAngleRefPointMinDist);
+            this.tpSettings.Controls.Add(this.label8);
+            this.tpSettings.Controls.Add(this.label6);
             this.tpSettings.Controls.Add(this.angleRefPointMinDist);
-            this.tpSettings.Controls.Add(this.lblAngleLimitDegree);
-            this.tpSettings.Controls.Add(this.angleLimitDegree);
             this.tpSettings.Controls.Add(this.label7);
-            this.tpSettings.Controls.Add(this.lblMinDistance);
+            this.tpSettings.Controls.Add(this.angleLimitDegree);
+            this.tpSettings.Controls.Add(this.label4);
             this.tpSettings.Controls.Add(this.minDistance);
-            this.tpSettings.Controls.Add(this.lblMaxMergeDistance);
+            this.tpSettings.Controls.Add(this.label5);
             this.tpSettings.Controls.Add(this.maxMergeDistance);
-            this.tpSettings.Controls.Add(this.lblMaxAllowedRotation);
+            this.tpSettings.Controls.Add(this.label3);
             this.tpSettings.Controls.Add(this.maxAllowedRotation);
+            this.tpSettings.Controls.Add(this.label2);
             this.tpSettings.Controls.Add(this.label1);
-            this.tpSettings.Controls.Add(this.lblMaxSearchDistance);
             this.tpSettings.Controls.Add(this.maxSearchDistance);
             this.tpSettings.Location = new System.Drawing.Point(4, 29);
             this.tpSettings.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
@@ -273,139 +278,139 @@
             this.tpSettings.Text = "Settings";
             this.tpSettings.UseVisualStyleBackColor = true;
             // 
-            // lblAngleRefPointMinDist
+            // maxSearchDistance
             // 
-            this.lblAngleRefPointMinDist.AutoSize = true;
-            this.lblAngleRefPointMinDist.Location = new System.Drawing.Point(106, 263);
-            this.lblAngleRefPointMinDist.Name = "lblAngleRefPointMinDist";
-            this.lblAngleRefPointMinDist.Size = new System.Drawing.Size(239, 20);
-            this.lblAngleRefPointMinDist.TabIndex = 20;
-            this.lblAngleRefPointMinDist.Text = "angle reference point min distance";
-            // 
-            // angleRefPointMinDist
-            // 
-            this.angleRefPointMinDist.DecimalPlaces = 2;
-            this.angleRefPointMinDist.Location = new System.Drawing.Point(18, 261);
-            this.angleRefPointMinDist.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.angleRefPointMinDist.Name = "angleRefPointMinDist";
-            this.angleRefPointMinDist.Size = new System.Drawing.Size(80, 27);
-            this.angleRefPointMinDist.TabIndex = 19;
-            this.angleRefPointMinDist.ValueChanged += new System.EventHandler(this.angleRefPointMinDist_ValueChanged);
-            // 
-            // lblAngleLimitDegree
-            // 
-            this.lblAngleLimitDegree.AutoSize = true;
-            this.lblAngleLimitDegree.Location = new System.Drawing.Point(106, 228);
-            this.lblAngleLimitDegree.Name = "lblAngleLimitDegree";
-            this.lblAngleLimitDegree.Size = new System.Drawing.Size(131, 20);
-            this.lblAngleLimitDegree.TabIndex = 18;
-            this.lblAngleLimitDegree.Text = "angle limit degree";
-            // 
-            // angleLimitDegree
-            // 
-            this.angleLimitDegree.DecimalPlaces = 2;
-            this.angleLimitDegree.Location = new System.Drawing.Point(18, 226);
-            this.angleLimitDegree.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.angleLimitDegree.Name = "angleLimitDegree";
-            this.angleLimitDegree.Size = new System.Drawing.Size(80, 27);
-            this.angleLimitDegree.TabIndex = 17;
-            this.angleLimitDegree.ValueChanged += new System.EventHandler(this.angleLimitDegree_ValueChanged);
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label7.Location = new System.Drawing.Point(18, 165);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(200, 20);
-            this.label7.TabIndex = 16;
-            this.label7.Text = "Characteristic Points Finder";
-            // 
-            // lblMinDistance
-            // 
-            this.lblMinDistance.AutoSize = true;
-            this.lblMinDistance.Location = new System.Drawing.Point(106, 193);
-            this.lblMinDistance.Name = "lblMinDistance";
-            this.lblMinDistance.Size = new System.Drawing.Size(93, 20);
-            this.lblMinDistance.TabIndex = 15;
-            this.lblMinDistance.Text = "min distance";
-            // 
-            // minDistance
-            // 
-            this.minDistance.DecimalPlaces = 2;
-            this.minDistance.Location = new System.Drawing.Point(18, 191);
-            this.minDistance.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.minDistance.Name = "minDistance";
-            this.minDistance.Size = new System.Drawing.Size(80, 27);
-            this.minDistance.TabIndex = 14;
-            this.minDistance.ValueChanged += new System.EventHandler(this.minDistance_ValueChanged);
-            // 
-            // lblMaxMergeDistance
-            // 
-            this.lblMaxMergeDistance.AutoSize = true;
-            this.lblMaxMergeDistance.Location = new System.Drawing.Point(106, 118);
-            this.lblMaxMergeDistance.Name = "lblMaxMergeDistance";
-            this.lblMaxMergeDistance.Size = new System.Drawing.Size(143, 20);
-            this.lblMaxMergeDistance.TabIndex = 13;
-            this.lblMaxMergeDistance.Text = "max merge distance";
-            // 
-            // maxMergeDistance
-            // 
-            this.maxMergeDistance.DecimalPlaces = 2;
-            this.maxMergeDistance.Location = new System.Drawing.Point(18, 116);
-            this.maxMergeDistance.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.maxMergeDistance.Name = "maxMergeDistance";
-            this.maxMergeDistance.Size = new System.Drawing.Size(80, 27);
-            this.maxMergeDistance.TabIndex = 12;
-            this.maxMergeDistance.ValueChanged += new System.EventHandler(this.maxMergeDistance_ValueChanged);
-            // 
-            // lblMaxAllowedRotation
-            // 
-            this.lblMaxAllowedRotation.AutoSize = true;
-            this.lblMaxAllowedRotation.Location = new System.Drawing.Point(106, 83);
-            this.lblMaxAllowedRotation.Name = "lblMaxAllowedRotation";
-            this.lblMaxAllowedRotation.Size = new System.Drawing.Size(151, 20);
-            this.lblMaxAllowedRotation.TabIndex = 11;
-            this.lblMaxAllowedRotation.Text = "max allowed rotation";
-            // 
-            // maxAllowedRotation
-            // 
-            this.maxAllowedRotation.DecimalPlaces = 2;
-            this.maxAllowedRotation.Location = new System.Drawing.Point(18, 81);
-            this.maxAllowedRotation.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.maxAllowedRotation.Name = "maxAllowedRotation";
-            this.maxAllowedRotation.Size = new System.Drawing.Size(80, 27);
-            this.maxAllowedRotation.TabIndex = 10;
-            this.maxAllowedRotation.ValueChanged += new System.EventHandler(this.maxAllowedRotation_ValueChanged);
+            this.maxSearchDistance.DecimalPlaces = 2;
+            this.maxSearchDistance.Location = new System.Drawing.Point(31, 44);
+            this.maxSearchDistance.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.maxSearchDistance.Name = "maxSearchDistance";
+            this.maxSearchDistance.Size = new System.Drawing.Size(75, 27);
+            this.maxSearchDistance.TabIndex = 0;
+            this.maxSearchDistance.ValueChanged += new System.EventHandler(this.maxSearchDistance_ValueChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label1.Location = new System.Drawing.Point(18, 20);
+            this.label1.Location = new System.Drawing.Point(114, 46);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(123, 20);
-            this.label1.TabIndex = 9;
-            this.label1.Text = "Pattern Matcher";
+            this.label1.Size = new System.Drawing.Size(142, 20);
+            this.label1.TabIndex = 1;
+            this.label1.Text = "max search distance";
             // 
-            // lblMaxSearchDistance
+            // label2
             // 
-            this.lblMaxSearchDistance.AutoSize = true;
-            this.lblMaxSearchDistance.Location = new System.Drawing.Point(106, 48);
-            this.lblMaxSearchDistance.Name = "lblMaxSearchDistance";
-            this.lblMaxSearchDistance.Size = new System.Drawing.Size(142, 20);
-            this.lblMaxSearchDistance.TabIndex = 8;
-            this.lblMaxSearchDistance.Text = "max search distance";
+            this.label2.AutoSize = true;
+            this.label2.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label2.Location = new System.Drawing.Point(31, 20);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(123, 20);
+            this.label2.TabIndex = 2;
+            this.label2.Text = "Pattern Matcher";
             // 
-            // maxSearchDistance
+            // label3
             // 
-            this.maxSearchDistance.DecimalPlaces = 2;
-            this.maxSearchDistance.Location = new System.Drawing.Point(18, 46);
-            this.maxSearchDistance.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
-            this.maxSearchDistance.Name = "maxSearchDistance";
-            this.maxSearchDistance.Size = new System.Drawing.Size(80, 27);
-            this.maxSearchDistance.TabIndex = 7;
-            this.maxSearchDistance.ValueChanged += new System.EventHandler(this.maxSearchDistance_ValueChanged);
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(114, 81);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(151, 20);
+            this.label3.TabIndex = 4;
+            this.label3.Text = "max allowed rotation";
+            // 
+            // maxAllowedRotation
+            // 
+            this.maxAllowedRotation.DecimalPlaces = 2;
+            this.maxAllowedRotation.Location = new System.Drawing.Point(31, 79);
+            this.maxAllowedRotation.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.maxAllowedRotation.Name = "maxAllowedRotation";
+            this.maxAllowedRotation.Size = new System.Drawing.Size(75, 27);
+            this.maxAllowedRotation.TabIndex = 3;
+            this.maxAllowedRotation.ValueChanged += new System.EventHandler(this.maxAllowedRotation_ValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(114, 190);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(93, 20);
+            this.label4.TabIndex = 8;
+            this.label4.Text = "min distance";
+            // 
+            // minDistance
+            // 
+            this.minDistance.DecimalPlaces = 2;
+            this.minDistance.Location = new System.Drawing.Point(31, 188);
+            this.minDistance.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.minDistance.Name = "minDistance";
+            this.minDistance.Size = new System.Drawing.Size(75, 27);
+            this.minDistance.TabIndex = 7;
+            this.minDistance.ValueChanged += new System.EventHandler(this.minDistance_ValueChanged);
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(114, 116);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(143, 20);
+            this.label5.TabIndex = 6;
+            this.label5.Text = "max merge distance";
+            // 
+            // maxMergeDistance
+            // 
+            this.maxMergeDistance.DecimalPlaces = 2;
+            this.maxMergeDistance.Location = new System.Drawing.Point(31, 114);
+            this.maxMergeDistance.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.maxMergeDistance.Name = "maxMergeDistance";
+            this.maxMergeDistance.Size = new System.Drawing.Size(75, 27);
+            this.maxMergeDistance.TabIndex = 5;
+            this.maxMergeDistance.ValueChanged += new System.EventHandler(this.maxMergeDistance_ValueChanged);
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Location = new System.Drawing.Point(114, 260);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(239, 20);
+            this.label6.TabIndex = 12;
+            this.label6.Text = "angle reference point min distance";
+            // 
+            // angleRefPointMinDist
+            // 
+            this.angleRefPointMinDist.DecimalPlaces = 2;
+            this.angleRefPointMinDist.Location = new System.Drawing.Point(31, 258);
+            this.angleRefPointMinDist.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.angleRefPointMinDist.Name = "angleRefPointMinDist";
+            this.angleRefPointMinDist.Size = new System.Drawing.Size(75, 27);
+            this.angleRefPointMinDist.TabIndex = 11;
+            this.angleRefPointMinDist.ValueChanged += new System.EventHandler(this.angleRefPointMinDist_ValueChanged);
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(114, 225);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(133, 20);
+            this.label7.TabIndex = 10;
+            this.label7.Text = "angle lmit degrees";
+            // 
+            // angleLimitDegree
+            // 
+            this.angleLimitDegree.DecimalPlaces = 2;
+            this.angleLimitDegree.Location = new System.Drawing.Point(31, 223);
+            this.angleLimitDegree.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
+            this.angleLimitDegree.Name = "angleLimitDegree";
+            this.angleLimitDegree.Size = new System.Drawing.Size(75, 27);
+            this.angleLimitDegree.TabIndex = 9;
+            this.angleLimitDegree.ValueChanged += new System.EventHandler(this.angleLimitDegree_ValueChanged);
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label8.Location = new System.Drawing.Point(31, 164);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(200, 20);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Characteristic Points Finder";
             // 
             // MainForm
             // 
@@ -413,7 +418,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(951, 768);
             this.Controls.Add(this.tabControl1);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.txtConsole);
             this.Margin = new System.Windows.Forms.Padding(5, 4, 5, 4);
             this.Name = "MainForm";
             this.Text = "Form1";
@@ -426,15 +431,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).EndInit();
             this.tpPatterns.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -442,7 +447,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txtConsole;
         private System.Windows.Forms.TabControl tabControl1;
         private System.Windows.Forms.TabPage tpDrawing;
         private System.Windows.Forms.TabPage tpPatterns;
@@ -454,24 +459,24 @@
         private System.Windows.Forms.ListBox lstStepPatterns;
         private System.Windows.Forms.TrackBar trbSteps;
         private System.Windows.Forms.PictureBox picSteps;
-        private System.Windows.Forms.Button button4;
+        private System.Windows.Forms.Button btnDeletePattern;
         private System.Windows.Forms.Button Save;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picPattern;
         private System.Windows.Forms.ListBox lstEditorPatterns;
-        private Label lblAngleRefPointMinDist;
+        private System.Windows.Forms.NumericUpDown maxSearchDistance;
+        private Label label8;
+        private Label label6;
         private NumericUpDown angleRefPointMinDist;
-        private Label lblAngleLimitDegree;
-        private NumericUpDown angleLimitDegree;
         private Label label7;
-        private Label lblMinDistance;
+        private NumericUpDown angleLimitDegree;
+        private Label label4;
         private NumericUpDown minDistance;
-        private Label lblMaxMergeDistance;
+        private Label label5;
         private NumericUpDown maxMergeDistance;
-        private Label lblMaxAllowedRotation;
+        private Label label3;
         private NumericUpDown maxAllowedRotation;
+        private Label label2;
         private Label label1;
-        private Label lblMaxSearchDistance;
-        private NumericUpDown maxSearchDistance;
     }
 }
 

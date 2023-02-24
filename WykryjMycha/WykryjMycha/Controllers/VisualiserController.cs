@@ -16,24 +16,7 @@ namespace WykryjMycha
         {
             this.visualiserView = visualiserView;
             _patternDatabase = patternDatabase;
-        }
-
-        public void UpdatePatternsList()
-        {
-            visualiserView.ClearStepPatternsList();
-            foreach (var pattern in _patternDatabase.GetPatterns())
-            {
-                 visualiserView.AddStepPattern(pattern.name);
-            }
-            ShowSelectedPattern();
-        }
-
-        private void SetupStepsViewer(Pattern pattern, TrackBar trb)
-        {
-            if (pattern.steps == null) return;
-            trb.Maximum = pattern.steps.Count - 1;
-            trb.Minimum = 0;
-            RenderSteps(pattern, trb.Value);
+            visualiserView.SetStepPatterns(_patternDatabase.GetPatterns());
         }
 
         internal void HandleStepsScroll(int value)
@@ -46,6 +29,8 @@ namespace WykryjMycha
         internal void HandleStepPatternSelected(int index)
         {
             _selectedStepPattern = index;
+            if (_selectedStepPattern >= 0)
+                visualiserView.SetupTrbSteps(_patternDatabase.GetPatterns()[_selectedStepPattern]);
         }
     }
 }

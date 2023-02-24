@@ -32,12 +32,15 @@ namespace WykryjMycha
         {
             List<Pattern> list = new List<Pattern>();
 
-            foreach (string file in Directory.EnumerateFiles("patterns/", "*.json"))
+            try
             {
-                PatternReader patternReader = new PatternReader(file);
+                foreach (string file in Directory.EnumerateFiles("patterns/", "*.json"))
+                {
+                    PatternReader patternReader = new PatternReader(file);
 
-                list.Add(new Pattern() { name = patternReader.patternName, points = patternReader.points });
-            }
+                    list.Add(new Pattern() { name = patternReader.patternName, points = patternReader.points });
+                }
+            }catch(Exception ex) { }
 
             return list;
         }

@@ -2,9 +2,7 @@
 {
     internal class SettingsController
     {
-        internal SettingsController(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation
-            , NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance
-            , NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance)
+        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance)
         {
             maxSearchDistance.Value = (decimal)Settings.DefaultMaxSearchDistance;
             maxAllowedRotation.Value = (decimal)Settings.maxAllowedRotation;

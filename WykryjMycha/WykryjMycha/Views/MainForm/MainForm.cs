@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     public partial class MainForm : Form
     {
@@ -24,9 +13,12 @@ namespace WykryjMycha
             CharacteristicPointsFinder characteristicPointsFinder = new CharacteristicPointsFinder();   
 
             _drawingInputController = new DrawingInputController(patternDatabase, patternMatcher, characteristicPointsFinder);
+            _visualiserController = new VisualiserController(this, patternDatabase);
+            _patternEditorController = new PatternEditorController(this, patternDatabase);
             _settingsController = new SettingsController();
+            _settingsController.Initialize(maxSearchDistance, maxAllowedRotation, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist);
         }
 
-        public TextBox GetConsoleTextBox() => txtNewPatternName;
+        public TextBox GetConsoleTextBox() => txtConsole;
     }
 }
