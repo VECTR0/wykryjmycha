@@ -60,6 +60,9 @@
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
+            this.lblProgramSettings = new System.Windows.Forms.Label();
+            this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
+            this.label9 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -75,6 +78,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).BeginInit();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -261,6 +265,9 @@
             // 
             // tpSettings
             // 
+            this.tpSettings.Controls.Add(this.label9);
+            this.tpSettings.Controls.Add(this.numDrawingTimeout);
+            this.tpSettings.Controls.Add(this.lblProgramSettings);
             this.tpSettings.Controls.Add(this.label8);
             this.tpSettings.Controls.Add(this.label6);
             this.tpSettings.Controls.Add(this.angleRefPointMinDist);
@@ -422,6 +429,53 @@
             this.tmrDrawing.Interval = 1000;
             this.tmrDrawing.Tick += new System.EventHandler(this.tmrDrawing_Tick);
             // 
+            // lblProgramSettings
+            // 
+            this.lblProgramSettings.AutoSize = true;
+            this.lblProgramSettings.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblProgramSettings.Location = new System.Drawing.Point(26, 232);
+            this.lblProgramSettings.Name = "lblProgramSettings";
+            this.lblProgramSettings.Size = new System.Drawing.Size(104, 15);
+            this.lblProgramSettings.TabIndex = 14;
+            this.lblProgramSettings.Text = "Program Settings";
+            // 
+            // numDrawingTimeout
+            // 
+            this.numDrawingTimeout.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.Location = new System.Drawing.Point(29, 250);
+            this.numDrawingTimeout.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.Name = "numDrawingTimeout";
+            this.numDrawingTimeout.Size = new System.Drawing.Size(64, 23);
+            this.numDrawingTimeout.TabIndex = 15;
+            this.numDrawingTimeout.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.ValueChanged += new System.EventHandler(this.numDrawingTimeout_ValueChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(100, 252);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(144, 15);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "timeout for input drawing";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -450,6 +504,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -488,6 +543,9 @@
         private Label label2;
         private Label label1;
         private System.Windows.Forms.Timer tmrDrawing;
+        private NumericUpDown numDrawingTimeout;
+        private Label lblProgramSettings;
+        private Label label9;
     }
 }
 

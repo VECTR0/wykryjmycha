@@ -17,8 +17,9 @@ namespace WykryjMycha
             tmrDrawing.Start();
         }
 
-        internal void StartDrawingTimer()
+        internal void StartDrawingTimer(int interval)
         {
+            tmrDrawing.Interval = interval;
             tmrDrawing.Start();
         }
         internal void StopDrawingTimer()

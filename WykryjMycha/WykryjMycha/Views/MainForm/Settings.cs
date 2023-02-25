@@ -4,7 +4,6 @@
     {
         private SettingsController _settingsController;
 
-
         private void maxSearchDistance_ValueChanged(object sender, EventArgs e)
         {
             _settingsController.SetMaxSearchDistance(maxSearchDistance.Value);
@@ -33,6 +32,11 @@
         private void angleRefPointMinDist_ValueChanged(object sender, EventArgs e)
         {
             _settingsController.SetAngleReferencePointMinimalDistance(angleRefPointMinDist.Value);
+        }
+
+        private void numDrawingTimeout_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsController.SetDrawingTimeout((int)numDrawingTimeout.Value);
         }
     }
 }

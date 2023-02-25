@@ -24,5 +24,10 @@
         internal static float minCharacteriticPointsDistance = DefaultMinCharacteriticPointsDistance;
         internal static float characteriticPointsAngleLimitDegrees = DefaultCharacteriticPointsAngleLimitDegrees;
         internal static float referencePointMinDistance = DefaultReferencePointMinDistance;
+
+        // Program Settings
+        //   Drawing
+        internal const int DefaultDrawingTimeout = 1000;
+        internal static int drawingTimeout = DefaultDrawingTimeout;
     }
 }

@@ -2,7 +2,7 @@
 {
     internal class SettingsController
     {
-        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance)
+        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout)
         {
             maxSearchDistance.Value = (decimal)Settings.DefaultMaxSearchDistance;
             maxAllowedRotation.Value = (decimal)Settings.maxAllowedRotation;
@@ -10,6 +10,7 @@
             minCharacteriticPointsDistance.Value = (decimal)Settings.DefaultMinCharacteriticPointsDistance;
             characteriticPointsAngleLimitDegrees.Value = (decimal)Settings.DefaultCharacteriticPointsAngleLimitDegrees;
             referencePointMinDistance.Value = (decimal)Settings.DefaultReferencePointMinDistance;
+            numDrawingTimeout.Value = Settings.DefaultDrawingTimeout;
         }
 
         internal void SetMaxSearchDistance(decimal value)
@@ -40,6 +41,11 @@
         internal void SetAngleReferencePointMinimalDistance(decimal value)
         {
             Settings.referencePointMinDistance = (float)value;
+        }
+
+        internal void SetDrawingTimeout(int value)
+        {
+            Settings.drawingTimeout = value;
         }
     }
 }

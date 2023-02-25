@@ -43,12 +43,6 @@ namespace WykryjMycha
             Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase) ?? "No match";
         }
 
-        private void ResetTimer(System.Timers.Timer timer)
-        {
-            timer.Stop();
-            timer.Start();
-        }
-
         internal void HandleDrawingMouseDown(MouseEventArgs e, PictureBox pic)
         {
             if (e.Button == MouseButtons.Left)
@@ -86,7 +80,7 @@ namespace WykryjMycha
             if (e.Button == MouseButtons.Left)
             {
                 _mouseDown = false;
-                drawingView.StartDrawingTimer();
+                drawingView.StartDrawingTimer(Settings.drawingTimeout);
             }
         }
 
