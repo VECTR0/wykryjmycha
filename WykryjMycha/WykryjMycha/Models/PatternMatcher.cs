@@ -10,14 +10,14 @@ namespace WykryjMycha
 {
     internal class PatternMatcher
     {
-        public string? MatchPattern(List<Vector2> points, PatternDatabase database)
+        public string? MatchPattern(List<Vector2> points, PatternDatabase database, Settings settings)
         {
             var possiblePatterns = new List<Tuple<string, float>>();
             foreach (Pattern pattern in database.GetPatterns())
             {
                 var pointsCopy = new List<Vector2>(points);
                 var patternPointsCopy = new List<Vector2>(pattern.points);
-                var simmilarity = PatternsSimmilarity(pointsCopy, patternPointsCopy, pattern);
+                var simmilarity = PatternsSimmilarity(pointsCopy, patternPointsCopy, pattern, settings);
                 if (simmilarity != null)
                 {
                     possiblePatterns.Add(new Tuple<string, float>(pattern.name, (float)simmilarity));
@@ -64,7 +64,7 @@ namespace WykryjMycha
             return index;
         }
 
-        public static void MergeCheck(List<Vector2> toMerge, List<Vector2> reference, int startingIndex)
+        public static void MergeCheck(List<Vector2> toMerge, List<Vector2> reference, int startingIndex, Settings settings)
         {
             for (int i = startingIndex; i < toMerge.Count && i < reference.Count; i++)
             {
@@ -72,7 +72,7 @@ namespace WykryjMycha
                 {
                     var distanceToPrevious = Vector2.Distance(toMerge[i], reference[i - 1]);
                     var distanceToCurrent = Vector2.Distance(toMerge[i], reference[i]);
-                    if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPrevious < Settings.maxMergeDistance)
+                    if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPrevious < settings.maxMergeDistance)
                     {
                         var removed = toMerge[i];
                         toMerge.RemoveAt(i);
@@ -87,7 +87,7 @@ namespace WykryjMycha
             }
         }
 
-        public static float? PatternsSimmilarity(List<Vector2> points, List<Vector2> pattern, Pattern patternObject)
+        public static float? PatternsSimmilarity(List<Vector2> points, List<Vector2> pattern, Pattern patternObject, Settings settings)
         {
             patternObject.steps = new List<Step>()
             {
@@ -109,8 +109,8 @@ namespace WykryjMycha
             float maxRotationAngle = 0;
             for (int i = 0; i < points.Count - 1; i++) // TODO: check last points
             {
-                MergeCheck(points, pattern, i);
-                MergeCheck(pattern, points, i);
+                MergeCheck(points, pattern, i, settings);
+                MergeCheck(pattern, points, i, settings);
                 patternObject.steps.Add(new Step()
                 {
                     name = $"{i} Merge",
@@ -127,8 +127,8 @@ namespace WykryjMycha
                     points = new List<Vector2>(points),
                     pattern = new List<Vector2>(pattern),
                 });
-                MergeCheck(points, pattern, i + 1);
-                MergeCheck(pattern, points, i + 1);
+                MergeCheck(points, pattern, i + 1, settings);
+                MergeCheck(pattern, points, i + 1, settings);
                 patternObject.steps.Add(new Step()
                 {
                     name = $"{i + 1} Merge",

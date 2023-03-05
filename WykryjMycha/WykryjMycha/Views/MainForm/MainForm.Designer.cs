@@ -45,6 +45,9 @@
             this.picPattern = new System.Windows.Forms.PictureBox();
             this.lstEditorPatterns = new System.Windows.Forms.ListBox();
             this.tpSettings = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
+            this.lblProgramSettings = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.angleRefPointMinDist = new System.Windows.Forms.NumericUpDown();
@@ -60,9 +63,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
-            this.lblProgramSettings = new System.Windows.Forms.Label();
-            this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
-            this.label9 = new System.Windows.Forms.Label();
+            this.tpTests = new System.Windows.Forms.TabPage();
+            this.btnPurgeInputs = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -72,13 +74,14 @@
             this.tpPatterns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
             this.tpSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).BeginInit();
+            this.tpTests.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -102,6 +105,7 @@
             this.tabControl1.Controls.Add(this.tpDrawing);
             this.tabControl1.Controls.Add(this.tpVisualisation);
             this.tabControl1.Controls.Add(this.tpPatterns);
+            this.tabControl1.Controls.Add(this.tpTests);
             this.tabControl1.Controls.Add(this.tpSettings);
             this.tabControl1.Location = new System.Drawing.Point(14, 14);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -290,6 +294,53 @@
             this.tpSettings.Text = "Settings";
             this.tpSettings.UseVisualStyleBackColor = true;
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(100, 252);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(144, 15);
+            this.label9.TabIndex = 16;
+            this.label9.Text = "timeout for input drawing";
+            // 
+            // numDrawingTimeout
+            // 
+            this.numDrawingTimeout.Increment = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.Location = new System.Drawing.Point(29, 250);
+            this.numDrawingTimeout.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.Minimum = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.Name = "numDrawingTimeout";
+            this.numDrawingTimeout.Size = new System.Drawing.Size(64, 23);
+            this.numDrawingTimeout.TabIndex = 15;
+            this.numDrawingTimeout.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            this.numDrawingTimeout.ValueChanged += new System.EventHandler(this.numDrawingTimeout_ValueChanged);
+            // 
+            // lblProgramSettings
+            // 
+            this.lblProgramSettings.AutoSize = true;
+            this.lblProgramSettings.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblProgramSettings.Location = new System.Drawing.Point(26, 232);
+            this.lblProgramSettings.Name = "lblProgramSettings";
+            this.lblProgramSettings.Size = new System.Drawing.Size(104, 15);
+            this.lblProgramSettings.TabIndex = 14;
+            this.lblProgramSettings.Text = "Program Settings";
+            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -429,52 +480,24 @@
             this.tmrDrawing.Interval = 1000;
             this.tmrDrawing.Tick += new System.EventHandler(this.tmrDrawing_Tick);
             // 
-            // lblProgramSettings
+            // tpTests
             // 
-            this.lblProgramSettings.AutoSize = true;
-            this.lblProgramSettings.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.lblProgramSettings.Location = new System.Drawing.Point(26, 232);
-            this.lblProgramSettings.Name = "lblProgramSettings";
-            this.lblProgramSettings.Size = new System.Drawing.Size(104, 15);
-            this.lblProgramSettings.TabIndex = 14;
-            this.lblProgramSettings.Text = "Program Settings";
+            this.tpTests.Controls.Add(this.btnPurgeInputs);
+            this.tpTests.Location = new System.Drawing.Point(4, 24);
+            this.tpTests.Name = "tpTests";
+            this.tpTests.Size = new System.Drawing.Size(802, 387);
+            this.tpTests.TabIndex = 4;
+            this.tpTests.Text = "Testing";
+            this.tpTests.UseVisualStyleBackColor = true;
             // 
-            // numDrawingTimeout
+            // btnPurgeInputs
             // 
-            this.numDrawingTimeout.Increment = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numDrawingTimeout.Location = new System.Drawing.Point(29, 250);
-            this.numDrawingTimeout.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.numDrawingTimeout.Minimum = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numDrawingTimeout.Name = "numDrawingTimeout";
-            this.numDrawingTimeout.Size = new System.Drawing.Size(64, 23);
-            this.numDrawingTimeout.TabIndex = 15;
-            this.numDrawingTimeout.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            this.numDrawingTimeout.ValueChanged += new System.EventHandler(this.numDrawingTimeout_ValueChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(100, 252);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(144, 15);
-            this.label9.TabIndex = 16;
-            this.label9.Text = "timeout for input drawing";
+            this.btnPurgeInputs.Location = new System.Drawing.Point(3, 3);
+            this.btnPurgeInputs.Name = "btnPurgeInputs";
+            this.btnPurgeInputs.Size = new System.Drawing.Size(75, 23);
+            this.btnPurgeInputs.TabIndex = 0;
+            this.btnPurgeInputs.Text = "Purge IN";
+            this.btnPurgeInputs.UseVisualStyleBackColor = true;
             // 
             // MainForm
             // 
@@ -498,13 +521,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).EndInit();
+            this.tpTests.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -546,6 +570,8 @@
         private NumericUpDown numDrawingTimeout;
         private Label lblProgramSettings;
         private Label label9;
+        private TabPage tpTests;
+        private Button btnPurgeInputs;
     }
 }
 

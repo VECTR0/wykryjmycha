@@ -10,7 +10,7 @@ namespace WykryjMycha
     internal class CharacteristicPointsFinder
     {
 
-        internal static List<Vector2>? GetCharacteristicPoints(List<Vector2> input, float minDistance = Settings.DefaultMinCharacteriticPointsDistance, float angleLimitDeg = Settings.DefaultCharacteriticPointsAngleLimitDegrees)
+        internal static List<Vector2>? GetCharacteristicPoints(List<Vector2> input, Settings settings, float minDistance = Settings.DefaultMinCharacteriticPointsDistance, float angleLimitDeg = Settings.DefaultCharacteriticPointsAngleLimitDegrees)
         {
             if (input == null) return null;
 
@@ -21,7 +21,7 @@ namespace WykryjMycha
             {
                 int nextIdx = i + 1;
                 bool reachedTheEnd = false;
-                while (Vector2.Distance(input[i], input[nextIdx]) < Settings.referencePointMinDistance)
+                while (Vector2.Distance(input[i], input[nextIdx]) < settings.referencePointMinDistance)
                 {
                     if (++nextIdx >= input.Count - 1)
                     {

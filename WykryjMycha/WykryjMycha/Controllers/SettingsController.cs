@@ -2,10 +2,19 @@
 {
     internal class SettingsController
     {
+        internal MainForm settingsView;
+        private Settings _settings;
+
+        internal SettingsController(MainForm instance, Settings settings)
+        {
+            this.settingsView = instance;
+            this._settings = settings;
+        }
+
         internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout)
         {
             maxSearchDistance.Value = (decimal)Settings.DefaultMaxSearchDistance;
-            maxAllowedRotation.Value = (decimal)Settings.maxAllowedRotation;
+            maxAllowedRotation.Value = (decimal)Settings.DefaultMaxAllowedRotation;
             maxMergeDistance.Value = (decimal)Settings.DefaultMaxMergeDistance;
             minCharacteriticPointsDistance.Value = (decimal)Settings.DefaultMinCharacteriticPointsDistance;
             characteriticPointsAngleLimitDegrees.Value = (decimal)Settings.DefaultCharacteriticPointsAngleLimitDegrees;
@@ -15,37 +24,37 @@
 
         internal void SetMaxSearchDistance(decimal value)
         {
-            Settings.maxSearchDistance = (float)value;
+            _settings.maxSearchDistance = (float)value;
         }
 
         internal void SetMaxAllowedRotation(decimal value)
         {
-            Settings.maxAllowedRotation = (float)value;
+            _settings.maxAllowedRotation = (float)value;
         }
 
         internal void SetMaxMergeDistance(decimal value)
         {
-            Settings.maxMergeDistance = (float)value;
+            _settings.maxMergeDistance = (float)value;
         }
 
         internal void SetMinDistance(decimal value)
         {
-            Settings.minCharacteriticPointsDistance = (float)value;
+            _settings.minCharacteriticPointsDistance = (float)value;
         }
 
         internal void SetAngleLimitDegree(decimal value)
         {
-            Settings.characteriticPointsAngleLimitDegrees = (float)value;
+            _settings.characteriticPointsAngleLimitDegrees = (float)value;
         }
 
         internal void SetAngleReferencePointMinimalDistance(decimal value)
         {
-            Settings.referencePointMinDistance = (float)value;
+            _settings.referencePointMinDistance = (float)value;
         }
 
         internal void SetDrawingTimeout(int value)
         {
-            Settings.drawingTimeout = value;
+            _settings.drawingTimeout = value;
         }
     }
 }

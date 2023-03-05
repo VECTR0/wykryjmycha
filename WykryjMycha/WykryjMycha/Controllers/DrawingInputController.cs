@@ -17,15 +17,17 @@ namespace WykryjMycha
         private PatternDatabase _patternDatabase;
         private PatternMatcher _patternMatcher;
         private CharacteristicPointsFinder _characteristicPointsFinder;
+        private Settings _settings;
         private bool _strokesStarted = false;
 
-        internal DrawingInputController(MainForm instance, PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder)
+        internal DrawingInputController(MainForm instance, PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder, Settings settings)
         {
             drawingView = instance;
             _points = new List<Vector2>();
             _patternDatabase = patternDatabase;
             _patternMatcher = patternMatcher;
             _characteristicPointsFinder = characteristicPointsFinder;
+            _settings = settings;
             drawingView.ClearDrawingBoard();
         }
 
@@ -38,9 +40,9 @@ namespace WykryjMycha
             _points = MathUtils.NormalizePoints(_points);
             drawingView.ClearDrawingBoard();
             drawingView.RenderDrawingStroke(_points);
-            _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!);
+            _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!, _settings);
             drawingView.RenderStrokeCharacteristicPoints(_characteristicPoints);
-            Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase) ?? "No match";
+            Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase, _settings) ?? "No match";
         }
 
         internal void HandleDrawingMouseDown(MouseEventArgs e, PictureBox pic)
@@ -80,7 +82,7 @@ namespace WykryjMycha
             if (e.Button == MouseButtons.Left)
             {
                 _mouseDown = false;
-                drawingView.StartDrawingTimer(Settings.drawingTimeout);
+                drawingView.StartDrawingTimer(_settings.drawingTimeout);
             }
         }
 
