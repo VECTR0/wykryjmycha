@@ -32,6 +32,7 @@
             this.txtConsole = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpDrawing = new System.Windows.Forms.TabPage();
+            this.btnAddStroke = new System.Windows.Forms.Button();
             this.btnAddPattern = new System.Windows.Forms.Button();
             this.picDrawing = new System.Windows.Forms.PictureBox();
             this.txtNewPatternName = new System.Windows.Forms.TextBox();
@@ -44,6 +45,12 @@
             this.Save = new System.Windows.Forms.Button();
             this.picPattern = new System.Windows.Forms.PictureBox();
             this.lstEditorPatterns = new System.Windows.Forms.ListBox();
+            this.tpTests = new System.Windows.Forms.TabPage();
+            this.picStroke = new System.Windows.Forms.PictureBox();
+            this.lstStrokes = new System.Windows.Forms.ListBox();
+            this.btnRunTests = new System.Windows.Forms.Button();
+            this.lblStrokesCount = new System.Windows.Forms.Label();
+            this.btnPurgeInputs = new System.Windows.Forms.Button();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
@@ -63,8 +70,6 @@
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
-            this.tpTests = new System.Windows.Forms.TabPage();
-            this.btnPurgeInputs = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -73,6 +78,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).BeginInit();
             this.tpPatterns.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
+            this.tpTests.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picStroke)).BeginInit();
             this.tpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).BeginInit();
@@ -81,7 +88,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
-            this.tpTests.SuspendLayout();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -116,6 +122,7 @@
             // 
             // tpDrawing
             // 
+            this.tpDrawing.Controls.Add(this.btnAddStroke);
             this.tpDrawing.Controls.Add(this.btnAddPattern);
             this.tpDrawing.Controls.Add(this.picDrawing);
             this.tpDrawing.Controls.Add(this.txtNewPatternName);
@@ -128,12 +135,22 @@
             this.tpDrawing.Text = "Drawing";
             this.tpDrawing.UseVisualStyleBackColor = true;
             // 
+            // btnAddStroke
+            // 
+            this.btnAddStroke.Location = new System.Drawing.Point(275, 357);
+            this.btnAddStroke.Name = "btnAddStroke";
+            this.btnAddStroke.Size = new System.Drawing.Size(82, 23);
+            this.btnAddStroke.TabIndex = 5;
+            this.btnAddStroke.Text = "Add Stroke";
+            this.btnAddStroke.UseVisualStyleBackColor = true;
+            this.btnAddStroke.Click += new System.EventHandler(this.btnAddStroke_Click);
+            // 
             // btnAddPattern
             // 
-            this.btnAddPattern.Location = new System.Drawing.Point(270, 354);
+            this.btnAddPattern.Location = new System.Drawing.Point(187, 357);
             this.btnAddPattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAddPattern.Name = "btnAddPattern";
-            this.btnAddPattern.Size = new System.Drawing.Size(88, 27);
+            this.btnAddPattern.Size = new System.Drawing.Size(82, 23);
             this.btnAddPattern.TabIndex = 4;
             this.btnAddPattern.Text = "Add Pattern";
             this.btnAddPattern.UseVisualStyleBackColor = true;
@@ -160,7 +177,7 @@
             this.txtNewPatternName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtNewPatternName.Name = "txtNewPatternName";
             this.txtNewPatternName.PlaceholderText = "New Pattern Name";
-            this.txtNewPatternName.Size = new System.Drawing.Size(255, 23);
+            this.txtNewPatternName.Size = new System.Drawing.Size(172, 23);
             this.txtNewPatternName.TabIndex = 3;
             // 
             // tpVisualisation
@@ -266,6 +283,69 @@
             this.lstEditorPatterns.Size = new System.Drawing.Size(160, 349);
             this.lstEditorPatterns.TabIndex = 9;
             this.lstEditorPatterns.SelectedIndexChanged += new System.EventHandler(this.lstEditorPatterns_SelectedIndexChanged);
+            // 
+            // tpTests
+            // 
+            this.tpTests.Controls.Add(this.picStroke);
+            this.tpTests.Controls.Add(this.lstStrokes);
+            this.tpTests.Controls.Add(this.btnRunTests);
+            this.tpTests.Controls.Add(this.lblStrokesCount);
+            this.tpTests.Controls.Add(this.btnPurgeInputs);
+            this.tpTests.Location = new System.Drawing.Point(4, 24);
+            this.tpTests.Name = "tpTests";
+            this.tpTests.Size = new System.Drawing.Size(802, 387);
+            this.tpTests.TabIndex = 4;
+            this.tpTests.Text = "Testing";
+            this.tpTests.UseVisualStyleBackColor = true;
+            // 
+            // picStroke
+            // 
+            this.picStroke.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.picStroke.Location = new System.Drawing.Point(176, 6);
+            this.picStroke.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.picStroke.Name = "picStroke";
+            this.picStroke.Size = new System.Drawing.Size(350, 346);
+            this.picStroke.TabIndex = 12;
+            this.picStroke.TabStop = false;
+            // 
+            // lstStrokes
+            // 
+            this.lstStrokes.FormattingEnabled = true;
+            this.lstStrokes.ItemHeight = 15;
+            this.lstStrokes.Location = new System.Drawing.Point(8, 6);
+            this.lstStrokes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.lstStrokes.Name = "lstStrokes";
+            this.lstStrokes.Size = new System.Drawing.Size(160, 349);
+            this.lstStrokes.TabIndex = 11;
+            this.lstStrokes.SelectedIndexChanged += new System.EventHandler(this.lstStrokes_SelectedIndexChanged);
+            // 
+            // btnRunTests
+            // 
+            this.btnRunTests.Location = new System.Drawing.Point(451, 354);
+            this.btnRunTests.Name = "btnRunTests";
+            this.btnRunTests.Size = new System.Drawing.Size(75, 23);
+            this.btnRunTests.TabIndex = 2;
+            this.btnRunTests.Text = "Run Tests";
+            this.btnRunTests.UseVisualStyleBackColor = true;
+            this.btnRunTests.Click += new System.EventHandler(this.btnRunTests_Click);
+            // 
+            // lblStrokesCount
+            // 
+            this.lblStrokesCount.AutoSize = true;
+            this.lblStrokesCount.Location = new System.Drawing.Point(8, 362);
+            this.lblStrokesCount.Name = "lblStrokesCount";
+            this.lblStrokesCount.Size = new System.Drawing.Size(94, 15);
+            this.lblStrokesCount.TabIndex = 1;
+            this.lblStrokesCount.Text = "Strokes Count: X";
+            // 
+            // btnPurgeInputs
+            // 
+            this.btnPurgeInputs.Location = new System.Drawing.Point(724, 6);
+            this.btnPurgeInputs.Name = "btnPurgeInputs";
+            this.btnPurgeInputs.Size = new System.Drawing.Size(75, 23);
+            this.btnPurgeInputs.TabIndex = 0;
+            this.btnPurgeInputs.Text = "Purge IN";
+            this.btnPurgeInputs.UseVisualStyleBackColor = true;
             // 
             // tpSettings
             // 
@@ -480,25 +560,6 @@
             this.tmrDrawing.Interval = 1000;
             this.tmrDrawing.Tick += new System.EventHandler(this.tmrDrawing_Tick);
             // 
-            // tpTests
-            // 
-            this.tpTests.Controls.Add(this.btnPurgeInputs);
-            this.tpTests.Location = new System.Drawing.Point(4, 24);
-            this.tpTests.Name = "tpTests";
-            this.tpTests.Size = new System.Drawing.Size(802, 387);
-            this.tpTests.TabIndex = 4;
-            this.tpTests.Text = "Testing";
-            this.tpTests.UseVisualStyleBackColor = true;
-            // 
-            // btnPurgeInputs
-            // 
-            this.btnPurgeInputs.Location = new System.Drawing.Point(3, 3);
-            this.btnPurgeInputs.Name = "btnPurgeInputs";
-            this.btnPurgeInputs.Size = new System.Drawing.Size(75, 23);
-            this.btnPurgeInputs.TabIndex = 0;
-            this.btnPurgeInputs.Text = "Purge IN";
-            this.btnPurgeInputs.UseVisualStyleBackColor = true;
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -519,6 +580,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).EndInit();
             this.tpPatterns.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
+            this.tpTests.ResumeLayout(false);
+            this.tpTests.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picStroke)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).EndInit();
@@ -528,7 +592,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
-            this.tpTests.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -572,6 +635,11 @@
         private Label label9;
         private TabPage tpTests;
         private Button btnPurgeInputs;
+        private Button btnAddStroke;
+        private Label lblStrokesCount;
+        private Button btnRunTests;
+        private PictureBox picStroke;
+        private ListBox lstStrokes;
     }
 }
 

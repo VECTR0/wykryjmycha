@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WykryjMycha
 {
@@ -12,15 +14,16 @@ namespace WykryjMycha
     {
         internal MainForm drawingView;
         private bool _mouseDown = false;
-        private List<Vector2> _points, _characteristicPoints;
+        private List<Vector2> _points, _characteristicPoints, _rawPoints;
         private bool _pointsValid = false;
         private PatternDatabase _patternDatabase;
         private PatternMatcher _patternMatcher;
         private CharacteristicPointsFinder _characteristicPointsFinder;
         private Settings _settings;
+        private StrokeDatabase _strokeDatabase;
         private bool _strokesStarted = false;
 
-        internal DrawingInputController(MainForm instance, PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder, Settings settings)
+        internal DrawingInputController(MainForm instance, PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder, Settings settings, StrokeDatabase strokeDatabase)
         {
             drawingView = instance;
             _points = new List<Vector2>();
@@ -29,6 +32,7 @@ namespace WykryjMycha
             _characteristicPointsFinder = characteristicPointsFinder;
             _settings = settings;
             drawingView.ClearDrawingBoard();
+            _strokeDatabase = strokeDatabase;
         }
 
         internal void FinishedStroke()
@@ -36,6 +40,7 @@ namespace WykryjMycha
             _strokesStarted = false;
             _pointsValid = true;
             ProcessDrawnPattern(_points);
+            _rawPoints = new List<Vector2>(_points);
 
             _points = MathUtils.NormalizePoints(_points);
             drawingView.ClearDrawingBoard();
@@ -130,6 +135,26 @@ namespace WykryjMycha
                 _pointsValid = false;
                 return;
             }
+        }
+
+        internal void AddNewStroke(TextBox txt)
+        {
+            if (_rawPoints == null)
+            {
+                MessageBox.Show("Stroke invalid");
+                return;
+            }
+            if (txt.Text.Length == 0)
+            {
+                MessageBox.Show("Stroke name too short");
+                return;
+            }
+            var newStrokeName = txt.Text;
+
+            var isPattern = Regex.IsMatch(newStrokeName, @"^[A-Z]");
+            _strokeDatabase.AddStroke(new Stroke() { name = newStrokeName, points = _rawPoints, isPattern = isPattern});
+            Logger.Log = $"Added stroke '{newStrokeName}' to strokes database isPattern {isPattern}";
+            txt.Text = "";
         }
     }
 }

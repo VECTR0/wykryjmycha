@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Numerics;
 using System.Text;
@@ -68,6 +69,19 @@ namespace WykryjMycha
             {
                 g.DrawEllipse(pen, p.X - size / 2, (float)(p.Y - size / 2), size * 2, size * 2);
             });
+            pic.Invalidate();
+        }
+
+        internal static void DrawStroke(Stroke stroke, PictureBox pic)
+        {
+            using Graphics g = Graphics.FromImage(pic.Image);
+            var points = stroke.points;
+            for (int i = 0; i < points.Count - 1; i++)
+            {
+                var current = points[i];
+                var next = points[i + 1];
+                g.DrawRectangle(Pens.Black, current.X, current.Y, 1, 1);
+            }
             pic.Invalidate();
         }
     }

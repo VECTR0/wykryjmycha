@@ -77,5 +77,9 @@ namespace WykryjMycha
         {
             _drawingInputController.AddNewPattern(txtNewPatternName);
         }
+        private void btnAddStroke_Click(object sender, EventArgs e)
+        {
+            _drawingInputController.AddNewStroke(txtNewPatternName);
+        }
     }
 }
