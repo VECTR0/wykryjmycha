@@ -97,5 +97,12 @@ namespace WykryjMycha
                 points[i] += delta;
             }
         }
+
+        public static float GetSmallestAbsoluteAngle(float deltaAngle)
+        {
+            deltaAngle = (float)Math.Abs(deltaAngle) % (float)(2 * Math.PI);
+            if (deltaAngle > Math.PI) deltaAngle = (float)(2 * Math.PI) - deltaAngle;
+            return deltaAngle;
+        }
     }
 }

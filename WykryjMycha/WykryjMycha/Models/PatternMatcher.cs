@@ -40,8 +40,7 @@ namespace WykryjMycha
             var targetAngle = (float)Math.Atan2(pattern[0].Y - offset, pattern[0].X - offset);
             var deltaAngle = targetAngle - angle;
             MathUtils.RotatePoints(points, new Vector2(normalizedSize, normalizedSize), deltaAngle);
-            float absDeltaAngle = (float)(Math.Abs(deltaAngle) > Math.PI ? Math.Abs(deltaAngle) - Math.PI : Math.Abs(deltaAngle));
-            return absDeltaAngle;
+            return MathUtils.GetSmallestAbsoluteAngle(deltaAngle);
         }
 
         public static int NearestIndex(Vector2 point, List<Vector2> other, int range = 10, int startingIndex = 0, int countToCheck = 3)
@@ -142,7 +141,7 @@ namespace WykryjMycha
                     float angle = (float)Math.Atan2(current.Y, current.X);
                     float targetAngle = (float)Math.Atan2(target.Y, target.X);
                     float deltaAngle = targetAngle - angle;
-                    float absDeltaAngle = (float)(Math.Abs(deltaAngle) > Math.PI ? Math.Abs(deltaAngle) - Math.PI : Math.Abs(deltaAngle));
+                    float absDeltaAngle = MathUtils.GetSmallestAbsoluteAngle(deltaAngle);
                     result.maxRotationAngle = Math.Max(result.maxRotationAngle, absDeltaAngle);
                     MathUtils.RotatePoints(points, points[i], deltaAngle);
                     patternObject.steps.Add(new Step()
