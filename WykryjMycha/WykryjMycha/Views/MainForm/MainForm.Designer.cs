@@ -42,7 +42,7 @@
             this.picSteps = new System.Windows.Forms.PictureBox();
             this.tpPatterns = new System.Windows.Forms.TabPage();
             this.btnDeletePattern = new System.Windows.Forms.Button();
-            this.Save = new System.Windows.Forms.Button();
+            this.btnExportPatterns = new System.Windows.Forms.Button();
             this.picPattern = new System.Windows.Forms.PictureBox();
             this.lstEditorPatterns = new System.Windows.Forms.ListBox();
             this.tpTests = new System.Windows.Forms.TabPage();
@@ -70,6 +70,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
+            this.btnImportPatterns = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -226,8 +227,9 @@
             // 
             // tpPatterns
             // 
+            this.tpPatterns.Controls.Add(this.btnImportPatterns);
             this.tpPatterns.Controls.Add(this.btnDeletePattern);
-            this.tpPatterns.Controls.Add(this.Save);
+            this.tpPatterns.Controls.Add(this.btnExportPatterns);
             this.tpPatterns.Controls.Add(this.picPattern);
             this.tpPatterns.Controls.Add(this.lstEditorPatterns);
             this.tpPatterns.Location = new System.Drawing.Point(4, 24);
@@ -244,21 +246,22 @@
             this.btnDeletePattern.Location = new System.Drawing.Point(534, 6);
             this.btnDeletePattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDeletePattern.Name = "btnDeletePattern";
-            this.btnDeletePattern.Size = new System.Drawing.Size(88, 27);
+            this.btnDeletePattern.Size = new System.Drawing.Size(75, 23);
             this.btnDeletePattern.TabIndex = 13;
             this.btnDeletePattern.Text = "Delete";
             this.btnDeletePattern.UseVisualStyleBackColor = true;
             this.btnDeletePattern.Click += new System.EventHandler(this.btnDeletePattern_Click);
             // 
-            // Save
+            // btnExportPatterns
             // 
-            this.Save.Location = new System.Drawing.Point(534, 39);
-            this.Save.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.Save.Name = "Save";
-            this.Save.Size = new System.Drawing.Size(88, 27);
-            this.Save.TabIndex = 12;
-            this.Save.Text = "button3";
-            this.Save.UseVisualStyleBackColor = true;
+            this.btnExportPatterns.Location = new System.Drawing.Point(534, 35);
+            this.btnExportPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.btnExportPatterns.Name = "btnExportPatterns";
+            this.btnExportPatterns.Size = new System.Drawing.Size(75, 23);
+            this.btnExportPatterns.TabIndex = 12;
+            this.btnExportPatterns.Text = "Export DB";
+            this.btnExportPatterns.UseVisualStyleBackColor = true;
+            this.btnExportPatterns.Click += new System.EventHandler(this.btnExportPatterns_Click);
             // 
             // picPattern
             // 
@@ -560,6 +563,16 @@
             this.tmrDrawing.Interval = 1000;
             this.tmrDrawing.Tick += new System.EventHandler(this.tmrDrawing_Tick);
             // 
+            // btnImportPatterns
+            // 
+            this.btnImportPatterns.Location = new System.Drawing.Point(533, 64);
+            this.btnImportPatterns.Name = "btnImportPatterns";
+            this.btnImportPatterns.Size = new System.Drawing.Size(75, 23);
+            this.btnImportPatterns.TabIndex = 14;
+            this.btnImportPatterns.Text = "Import DB";
+            this.btnImportPatterns.UseVisualStyleBackColor = true;
+            this.btnImportPatterns.Click += new System.EventHandler(this.btnImportPatterns_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -612,7 +625,7 @@
         private System.Windows.Forms.TrackBar trbSteps;
         private System.Windows.Forms.PictureBox picSteps;
         private System.Windows.Forms.Button btnDeletePattern;
-        private System.Windows.Forms.Button Save;
+        private System.Windows.Forms.Button btnExportPatterns;
         private System.Windows.Forms.PictureBox picPattern;
         private System.Windows.Forms.ListBox lstEditorPatterns;
         private System.Windows.Forms.NumericUpDown maxSearchDistance;
@@ -640,6 +653,7 @@
         private Button btnRunTests;
         private PictureBox picStroke;
         private ListBox lstStrokes;
+        private Button btnImportPatterns;
     }
 }
 

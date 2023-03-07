@@ -52,5 +52,15 @@ namespace WykryjMycha
         {
             _patternEditorController.HandleEditorMouseUp(e.X, e.Y);
         }
+
+        private void btnExportPatterns_Click(object sender, EventArgs e)
+        {
+            _patternEditorController.ExportPatternDatabase();
+        }
+
+        private void btnImportPatterns_Click(object sender, EventArgs e)
+        {
+            _patternEditorController.ImportPatternDatabase();
+        }
     }
 }

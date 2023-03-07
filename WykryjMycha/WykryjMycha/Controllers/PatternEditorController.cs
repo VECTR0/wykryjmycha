@@ -76,5 +76,15 @@ namespace WykryjMycha
             pattern.points = MathUtils.NormalizePoints(pattern.points);
             editorView.RenderPattern(_patternDatabase.GetPatterns()[_selectedEditorPattern]);
         }
+
+        internal void ExportPatternDatabase()
+        {
+            _patternDatabase.Export();
+        }
+
+        internal void ImportPatternDatabase()
+        {
+            _patternDatabase.Import();
+        }
     }
 }

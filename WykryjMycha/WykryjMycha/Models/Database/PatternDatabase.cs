@@ -9,13 +9,12 @@ namespace WykryjMycha
     internal class PatternDatabase
     {
         internal event EventHandler changed;
-        private readonly List<Pattern> _patterns = PatternDatabase.GetPatternList();
+        private readonly List<Pattern> _patterns = new List<Pattern>();
 
         public void AddPattern(Pattern pattern)
         {
             _patterns.Add(pattern);
             changed?.Invoke(this, EventArgs.Empty);
-            PatternWriter.Write(pattern.points, pattern.name);
         }
 
         public void DeletePattern(int index)
@@ -28,6 +27,23 @@ namespace WykryjMycha
         public List<Pattern> GetPatterns()
         {
             return _patterns;
+        }
+
+        internal void Export(string directory = "") //TODO finish
+        {
+            foreach (var pattern in _patterns)
+            {
+                PatternWriter.Write(pattern.points, pattern.name);
+            }
+        }
+
+        internal void Import(string directory = "", bool clear = false) //TODO finish
+        {
+            if(clear) _patterns.Clear();
+            foreach(var pattern in GetPatternList())
+            {
+                AddPattern(pattern);
+            }
         }
 
         internal static List<Pattern> GetPatternList()
