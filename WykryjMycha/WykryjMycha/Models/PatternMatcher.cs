@@ -106,6 +106,9 @@ namespace WykryjMycha
             if (initialAlignRotation > 40 / 180f * 3.14f) return result.Fail($"initial rotation limit exceeded {initialAlignRotation}");//TODO move to settings
             result.maxTranslationDistance = 0;
             result.maxRotationAngle = 0;
+            result.avgRotationAngle = 0;
+            int rotations = 0;
+            float sumedRotation = 0;
             for (int i = 0; i < points.Count; i++) // TODO: check last points
             {
                 MergeCheck(points, pattern, i, settings);
@@ -150,6 +153,8 @@ namespace WykryjMycha
                         points = new List<Vector2>(points),
                         pattern = new List<Vector2>(pattern),
                     });
+                    sumedRotation += absDeltaAngle;
+                    result.avgRotationAngle = sumedRotation / ++rotations;
                 }
             }
             if (points.Count != pattern.Count) return result.Fail("stroke-pattern point count mismatch");

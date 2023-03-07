@@ -12,6 +12,7 @@ namespace WykryjMycha
         internal bool success;
         internal float maxTranslationDistance;
         internal float maxRotationAngle;
+        internal float avgRotationAngle;
         internal string? status;
 
         internal PatternMatchingResult(string name)
