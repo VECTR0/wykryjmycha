@@ -38,9 +38,6 @@ namespace WykryjMycha
 
             string filepath = "patterns/" + patternName + ".json";
 
-
-            Console.WriteLine(jsonString);
-
             File.WriteAllText(filepath, jsonString);
         }
     }

@@ -20,7 +20,6 @@ namespace WykryjMycha
             if (stroke == null) return;
             _strokes.Add(stroke);
             changed?.Invoke(this, EventArgs.Empty);
-            Logger.Log = $"Added pattern{stroke.name}";
         }
 
         public List<Stroke> GetStrokes()

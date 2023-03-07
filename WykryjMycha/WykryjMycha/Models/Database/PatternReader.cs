@@ -24,8 +24,6 @@ namespace WykryjMycha
 
             jsonContent = File.ReadAllText(filename);
 
-            Console.WriteLine(jsonContent);
-
             var jpattern = JsonSerializer.Deserialize<JSONPattern>(jsonContent);
 
             this.patternName = jpattern.name;
