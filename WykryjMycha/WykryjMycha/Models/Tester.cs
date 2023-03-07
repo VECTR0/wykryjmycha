@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Numerics;
 using System.Runtime;
 using System.Text;
 using System.Threading.Tasks;
@@ -9,51 +10,42 @@ namespace WykryjMycha
 {
     internal class Tester
     {
+        internal Tester()
+        {
 
-        internal Tester() {
-        
         }
 
-        internal void Run(StrokeDatabase strokeDatabase, Settings settings) // TODO add settings randomization
+        internal void Run(StrokeDatabase strokeDatabase, Settings settings, IMetric metric) // TODO add settings randomization
         {
             Logger.Log = "=== TESTING ===";
             var strokes = strokeDatabase.GetStrokes();
-            var inputStrokes = new List<Stroke>();
-            var patternStrokes = new List<Stroke>();
-            foreach(var stroke in strokes)
+
+            var patternDatabase = new PatternDatabase();
+            foreach (var stroke in strokes.Where(x => x.isPattern))
             {
-                if(stroke.isPattern)patternStrokes.Add(stroke); // TODO leave some unknown patterns
-                else inputStrokes.Add(stroke);
+                var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
+                var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
+                var pattern = new Pattern() { name = stroke.name, points = characteristicPoints };
+                patternDatabase.AddPattern(pattern);
             }
 
             var patternMatcher = new PatternMatcher();
-
-            var patternDatabase = new PatternDatabase();
-
+            var correct = 0;
             var incorrect = 0;
-           
-            foreach(var stroke in patternStrokes) {
+            foreach (var stroke in strokes.Where(x => !x.isPattern))
+            {
                 var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
                 var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
-                var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(new AngleMetric());
-                if(best != null) // TODO cross check patter and stroke
-                {
-                    if(best.name.ToLower() == stroke.name.ToLower()) {
-
-                    }
-                    else
-                    {
-                        incorrect++;
-                    }
-                }else
-                {
-                    incorrect++;
-                }
-               
+                var possible = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetPossible(metric);
+                var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(metric);
+                if (best != null) Logger.Log = $"Found {best.name} for {stroke.name}";
+                else Logger.Log = $"Found none for {stroke.name}";
+                if (best != null && best.name.ToLower() == stroke.name.ToLower()) correct++;
+                else incorrect++;
             }
-            Logger.Log = $"Run {patternDatabase.GetPatterns().Count} tests";
+            Logger.Log = $"Run {(correct + incorrect)} tests";
             Logger.Log = $"{incorrect} incorrect";
-            Logger.Log = $"Quality {1-1.0*incorrect/patternDatabase.GetPatterns().Count}";
+            Logger.Log = $"Success rate {Math.Round((1 - 1.0 * incorrect / (correct + incorrect)) * 100)}%";
             Logger.Log = "===         ===";
         }
     }

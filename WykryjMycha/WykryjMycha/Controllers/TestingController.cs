@@ -31,7 +31,7 @@ namespace WykryjMycha
 
         internal void RunTests()
         {
-            _tester.Run(_strokeDatabase, Settings.GetInstance()); //TODO: randomize
+            _tester.Run(_strokeDatabase, Settings.GetInstance(), new AverageMetric()); //TODO: randomize settings
         }
 
         internal void HandleStrokeSelected(int selectedIndex)
