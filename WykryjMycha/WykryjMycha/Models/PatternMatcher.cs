@@ -17,11 +17,21 @@ namespace WykryjMycha
             {
                 var pointsCopy = new List<Vector2>(points);
                 var patternPointsCopy = new List<Vector2>(pattern.points);
-                var simmilarity = PatternsSimmilarity(pointsCopy, patternPointsCopy, pattern, settings);
-                if (simmilarity != null)
+                var result = PatternsSimmilarity(pointsCopy, patternPointsCopy, pattern, settings);
+                var simmilarity = result.maxRotationAngle;
+                if (result.success)
                 {
                     possiblePatterns.Add(new Tuple<string, float>(pattern.name, (float)simmilarity));
                     System.Diagnostics.Debug.WriteLine($"Added {pattern.name} {simmilarity}");
+                }
+                else
+                {
+                    pattern.steps.Add(new Step()
+                    {
+                        name = result.status,
+                        points = new List<Vector2>(points),
+                        pattern = new List<Vector2>(),
+                    });
                 }
             }
             possiblePatterns.Sort(delegate (Tuple<string, float> x, Tuple<string, float> y)
@@ -29,7 +39,8 @@ namespace WykryjMycha
                 return x.Item2.CompareTo(y.Item2);
             });
             Logger.Log = "Possible matches:";
-            foreach (var possiblePattern in possiblePatterns) {
+            foreach (var possiblePattern in possiblePatterns)
+            {
                 Logger.Log = $"{possiblePattern.Item1}: {possiblePattern.Item2}";
             }
             if (possiblePatterns.Count == 0) return null;
@@ -66,12 +77,14 @@ namespace WykryjMycha
 
         public static void MergeCheck(List<Vector2> toMerge, List<Vector2> reference, int startingIndex, Settings settings)
         {
-            for (int i = startingIndex; i < toMerge.Count && i < reference.Count; i++)
+            for (int i = startingIndex; i < toMerge.Count && i - 1 < reference.Count; i++)
             {
                 if (i > 0)
                 {
                     var distanceToPrevious = Vector2.Distance(toMerge[i], reference[i - 1]);
-                    var distanceToCurrent = Vector2.Distance(toMerge[i], reference[i]);
+                    var distanceToCurrent = 0f;
+                    if (i < reference.Count) distanceToCurrent = Vector2.Distance(toMerge[i], reference[i]);
+                    else distanceToCurrent = float.PositiveInfinity;
                     if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPrevious < settings.maxMergeDistance)
                     {
                         var removed = toMerge[i];
@@ -79,7 +92,7 @@ namespace WykryjMycha
                         toMerge[i - 1] = (toMerge[i - 1] + removed) / 2;
                         i--;
                     }
-                    else if (i >= startingIndex + 2)
+                    else if (i > startingIndex + 1)
                     {
                         return;
                     }
@@ -87,8 +100,9 @@ namespace WykryjMycha
             }
         }
 
-        public static float? PatternsSimmilarity(List<Vector2> points, List<Vector2> pattern, Pattern patternObject, Settings settings)
+        public static PatternMatchingResult PatternsSimmilarity(List<Vector2> points, List<Vector2> pattern, Pattern patternObject, Settings settings)
         {
+            PatternMatchingResult result = new PatternMatchingResult();
             patternObject.steps = new List<Step>()
             {
                 new Step(){
@@ -104,10 +118,10 @@ namespace WykryjMycha
                 points = new List<Vector2>(points),
                 pattern = new List<Vector2>(pattern),
             });
-            if (initialAlignRotation > 40 / 180f * 3.14f) return null;
-            float maxTranslationDistance = 0;
-            float maxRotationAngle = 0;
-            for (int i = 0; i < points.Count - 1; i++) // TODO: check last points
+            if (initialAlignRotation > 40 / 180f * 3.14f) return result.Fail($"initial rotation limit exceeded {initialAlignRotation}"); ;
+            result.maxTranslationDistance = 0;
+            result.maxRotationAngle = 0;
+            for (int i = 0; i < points.Count; i++) // TODO: check last points
             {
                 MergeCheck(points, pattern, i, settings);
                 MergeCheck(pattern, points, i, settings);
@@ -117,9 +131,9 @@ namespace WykryjMycha
                     points = new List<Vector2>(points),
                     pattern = new List<Vector2>(pattern),
                 });
-                if (i > points.Count || i > pattern.Count) return null;
+                if (i >= points.Count || i >= pattern.Count) return result.Fail("stroke-pattern point count mismatch");
                 float distance = Vector2.Distance(points[i], pattern[i]);
-                maxTranslationDistance = Math.Max(maxTranslationDistance, distance);
+                result.maxTranslationDistance = Math.Max(result.maxTranslationDistance, distance);
                 MathUtils.TranslatePoints(points, pattern[i] - points[i]);
                 patternObject.steps.Add(new Step()
                 {
@@ -128,31 +142,33 @@ namespace WykryjMycha
                     pattern = new List<Vector2>(pattern),
                 });
                 MergeCheck(points, pattern, i + 1, settings);
-                MergeCheck(pattern, points, i + 1, settings);
+                MergeCheck(pattern, points, i + 1, settings); // conditional?
                 patternObject.steps.Add(new Step()
                 {
                     name = $"{i + 1} Merge",
                     points = new List<Vector2>(points),
                     pattern = new List<Vector2>(pattern),
                 });
-                if (i + 1 >= points.Count || i + 1 >= pattern.Count) return null;
-                var current = points[i + 1] - points[i];
-                var target = pattern[i + 1] - points[i];
-                float angle = (float)Math.Atan2(current.Y, current.X);
-                float targetAngle = (float)Math.Atan2(target.Y, target.X);
-                float deltaAngle = targetAngle - angle;
-                float absDeltaAngle = (float)(Math.Abs(deltaAngle) > Math.PI ? Math.Abs(deltaAngle) - Math.PI : Math.Abs(deltaAngle));
-                maxRotationAngle = Math.Max(maxRotationAngle, absDeltaAngle);
-                MathUtils.RotatePoints(points, points[i], deltaAngle);
-                patternObject.steps.Add(new Step()
+                if (i + 1 < points.Count && i + 1 < pattern.Count)
                 {
-                    name = $"Rotation",
-                    points = new List<Vector2>(points),
-                    pattern = new List<Vector2>(pattern),
-                });
+                    var current = points[i + 1] - points[i];
+                    var target = pattern[i + 1] - points[i];
+                    float angle = (float)Math.Atan2(current.Y, current.X);
+                    float targetAngle = (float)Math.Atan2(target.Y, target.X);
+                    float deltaAngle = targetAngle - angle;
+                    float absDeltaAngle = (float)(Math.Abs(deltaAngle) > Math.PI ? Math.Abs(deltaAngle) - Math.PI : Math.Abs(deltaAngle));
+                    result.maxRotationAngle = Math.Max(result.maxRotationAngle, absDeltaAngle);
+                    MathUtils.RotatePoints(points, points[i], deltaAngle);
+                    patternObject.steps.Add(new Step()
+                    {
+                        name = $"Rotation",
+                        points = new List<Vector2>(points),
+                        pattern = new List<Vector2>(pattern),
+                    });
+                }
             }
-            if (points.Count != pattern.Count) return null;
-            return maxRotationAngle;
+            if (points.Count != pattern.Count) return result.Fail("stroke-pattern point count mismatch");
+            return result.Succeed();
         }
     }
 }
