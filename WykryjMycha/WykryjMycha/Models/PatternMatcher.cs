@@ -68,9 +68,10 @@ namespace WykryjMycha
                 {
                     var distanceToPrevious = Vector2.Distance(toMerge[i], reference[i - 1]);
                     var distanceToCurrent = 0f;
+                    var distanceToPreviousToMerge = Vector2.Distance(toMerge[i], toMerge[i-1]);
                     if (i < reference.Count) distanceToCurrent = Vector2.Distance(toMerge[i], reference[i]);
                     else distanceToCurrent = float.PositiveInfinity;
-                    if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPrevious < settings.maxMergeDistance)
+                    if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPreviousToMerge < settings.maxMergeDistance)
                     {
                         var removed = toMerge[i];
                         toMerge.RemoveAt(i);
