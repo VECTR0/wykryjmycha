@@ -6,12 +6,18 @@ using System.Threading.Tasks;
 
 namespace WykryjMycha
 {
-    internal class PatternMatchingResult
+    public class PatternMatchingResult
     {
+        internal string name;
         internal bool success;
         internal float maxTranslationDistance;
         internal float maxRotationAngle;
         internal string? status;
+
+        internal PatternMatchingResult(string name)
+        {
+            this.name = name;
+        }
 
         internal PatternMatchingResult Succeed()
         {
@@ -22,7 +28,7 @@ namespace WykryjMycha
         internal PatternMatchingResult Fail(string reason)
         {
             success = false;
-            status = reason;
+            status = reason ?? "failure";
             return this;
         }
     }

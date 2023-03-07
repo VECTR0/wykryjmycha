@@ -35,10 +35,10 @@ namespace WykryjMycha
             foreach(var stroke in patternStrokes) {
                 var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
                 var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
-                string name = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings) ?? "No match";
-                if(name != null) // TODO cross check patter and stroke
+                var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(new AngleMetric());
+                if(best != null) // TODO cross check patter and stroke
                 {
-                    if(name == stroke.name.ToLower()) {
+                    if(best.name.ToLower() == stroke.name.ToLower()) {
 
                     }
                     else

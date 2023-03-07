@@ -6,7 +6,6 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WykryjMycha
 {
@@ -47,7 +46,16 @@ namespace WykryjMycha
             drawingView.RenderDrawingStroke(_points);
             _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!, _settings);
             drawingView.RenderStrokeCharacteristicPoints(_characteristicPoints);
-            Logger.Log = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase, _settings) ?? "No match";
+            var results = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase, _settings);
+            var metric = new AngleMetric();
+            Logger.Log = "Possible matches:";
+            foreach (var result in results.GetPossible(metric))
+            {
+                Logger.Log = $"\t{result.name} {metric.GetValue(result)}";
+            }
+            var best = results.GetBest(metric);
+            if(best == null) Logger.Log = $"found none";
+            else Logger.Log = $"found: {best.name}";
         }
 
         internal void HandleDrawingMouseDown(MouseEventArgs e, PictureBox pic)

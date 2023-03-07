@@ -10,41 +10,27 @@ namespace WykryjMycha
 {
     internal class PatternMatcher
     {
-        public string? MatchPattern(List<Vector2> points, PatternDatabase database, Settings settings)
+        public PatternMatchingResults MatchPattern(List<Vector2> points, PatternDatabase database, Settings settings)
         {
-            var possiblePatterns = new List<Tuple<string, float>>();
+            var results = new PatternMatchingResults();
             foreach (Pattern pattern in database.GetPatterns())
             {
                 var pointsCopy = new List<Vector2>(points);
                 var patternPointsCopy = new List<Vector2>(pattern.points);
                 var result = PatternsSimmilarity(pointsCopy, patternPointsCopy, pattern, settings);
-                var simmilarity = result.maxRotationAngle;
-                if (result.success)
-                {
-                    possiblePatterns.Add(new Tuple<string, float>(pattern.name, (float)simmilarity));
-                    System.Diagnostics.Debug.WriteLine($"Added {pattern.name} {simmilarity}");
-                }
-                else
+                results.Add(result);
+
+                if (!result.success)
                 {
                     pattern.steps.Add(new Step()
                     {
                         name = result.status,
                         points = new List<Vector2>(points),
-                        pattern = new List<Vector2>(),
+                        pattern = new List<Vector2>(pattern.points),
                     });
                 }
             }
-            possiblePatterns.Sort(delegate (Tuple<string, float> x, Tuple<string, float> y)
-            {
-                return x.Item2.CompareTo(y.Item2);
-            });
-            Logger.Log = "Possible matches:";
-            foreach (var possiblePattern in possiblePatterns)
-            {
-                Logger.Log = $"{possiblePattern.Item1}: {possiblePattern.Item2}";
-            }
-            if (possiblePatterns.Count == 0) return null;
-            else return possiblePatterns[0].Item1;
+            return results;
         }
 
         public static float AlignPoints(List<Vector2> points, List<Vector2> pattern, float normalizedSize = 150f)
@@ -102,7 +88,7 @@ namespace WykryjMycha
 
         public static PatternMatchingResult PatternsSimmilarity(List<Vector2> points, List<Vector2> pattern, Pattern patternObject, Settings settings)
         {
-            PatternMatchingResult result = new PatternMatchingResult();
+            PatternMatchingResult result = new PatternMatchingResult(patternObject.name);
             patternObject.steps = new List<Step>()
             {
                 new Step(){
@@ -114,11 +100,11 @@ namespace WykryjMycha
             var initialAlignRotation = AlignPoints(points, pattern);
             patternObject.steps.Add(new Step()
             {
-                name = "align",
+                name = $"align {initialAlignRotation}",
                 points = new List<Vector2>(points),
                 pattern = new List<Vector2>(pattern),
             });
-            if (initialAlignRotation > 40 / 180f * 3.14f) return result.Fail($"initial rotation limit exceeded {initialAlignRotation}"); ;
+            if (initialAlignRotation > 40 / 180f * 3.14f) return result.Fail($"initial rotation limit exceeded {initialAlignRotation}");//TODO move to settings
             result.maxTranslationDistance = 0;
             result.maxRotationAngle = 0;
             for (int i = 0; i < points.Count; i++) // TODO: check last points
