@@ -3,14 +3,16 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Numerics;
 using System.Text;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace WykryjMycha
 {
-    internal class Stroke
+    public class Stroke
     {
-        internal string name;
-        internal List<Vector2> points;
-        internal bool isPattern;
+        public string name { get; set; }
+        public List<Vector2> points { get; set; }
+        public bool isPattern { get; set; }
     }
 }

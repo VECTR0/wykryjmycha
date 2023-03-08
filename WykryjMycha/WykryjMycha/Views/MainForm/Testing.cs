@@ -14,7 +14,7 @@ namespace WykryjMycha
 
         internal void SetStrokesCount(int count)
         {
-            lblStrokesCount.Text = "Strokes Count: " + count;
+            lblStrokesCount.Text = "Strokes Num: " + count;
         }
 
         internal void SetStrokesList(List<Stroke> strokes)
@@ -44,6 +44,29 @@ namespace WykryjMycha
         private void lstStrokes_SelectedIndexChanged(object sender, EventArgs e)
         {
             _testingController.HandleStrokeSelected(lstStrokes.SelectedIndex);
+        }
+
+        private void btnImportStrokes_Click(object sender, EventArgs e)
+        {
+            var result = ofdStrokes.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _testingController.ImportStrokes(ofdStrokes.FileName);
+            }
+        }
+
+        private void btnExportStrokes_Click(object sender, EventArgs e)
+        {
+            var result = sfdStrokes.ShowDialog();
+            if (result == DialogResult.OK)
+            {
+                _testingController.ExportStrokes(sfdStrokes.FileName);
+            }
+        }
+
+        private void btnDeleteStroke_Click(object sender, EventArgs e)
+        {
+            _testingController.DeletePattern();
         }
     }
 }

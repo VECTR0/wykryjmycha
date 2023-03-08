@@ -11,7 +11,7 @@ namespace WykryjMycha
         internal MainForm testingView;
         private StrokeDatabase _strokeDatabase;
         private Tester _tester;
-
+        private int _selectedStroke = -1;
         internal TestingController(MainForm instance, StrokeDatabase strokeDatabase, Tester tester)
         {
             testingView = instance;
@@ -25,6 +25,7 @@ namespace WykryjMycha
 
         private void StrokesDatabaseChanged(object? sender, EventArgs e)
         {
+            _selectedStroke = -1;
             testingView.SetStrokesCount(_strokeDatabase.GetStrokes().Count);
             testingView.SetStrokesList(_strokeDatabase.GetStrokes());
         }
@@ -37,9 +38,25 @@ namespace WykryjMycha
         internal void HandleStrokeSelected(int selectedIndex)
         {
             if (selectedIndex < 0 || selectedIndex >= _strokeDatabase.GetStrokes().Count) return;
-
+            _selectedStroke = selectedIndex;
             testingView.ClearPicStroke();
             testingView.RenderStroke(_strokeDatabase.GetStrokes()[selectedIndex]);
+        }
+
+        internal void ExportStrokes(string filename)
+        {
+            _strokeDatabase.Export(filename);
+        }
+
+        internal void ImportStrokes(string filename)
+        {
+            _strokeDatabase.Import(filename);
+        }
+
+        internal void DeletePattern()
+        {
+            _strokeDatabase.DeleteStroke(_selectedStroke);
+            testingView.SetStrokesList(_strokeDatabase.GetStrokes());
         }
     }
 }

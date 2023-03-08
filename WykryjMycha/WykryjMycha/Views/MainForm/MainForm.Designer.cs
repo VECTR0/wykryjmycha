@@ -41,11 +41,15 @@
             this.trbSteps = new System.Windows.Forms.TrackBar();
             this.picSteps = new System.Windows.Forms.PictureBox();
             this.tpPatterns = new System.Windows.Forms.TabPage();
+            this.btnImportPatterns = new System.Windows.Forms.Button();
             this.btnDeletePattern = new System.Windows.Forms.Button();
             this.btnExportPatterns = new System.Windows.Forms.Button();
             this.picPattern = new System.Windows.Forms.PictureBox();
             this.lstEditorPatterns = new System.Windows.Forms.ListBox();
             this.tpTests = new System.Windows.Forms.TabPage();
+            this.btnDeleteStroke = new System.Windows.Forms.Button();
+            this.btnImportStrokes = new System.Windows.Forms.Button();
+            this.btnExportStrokes = new System.Windows.Forms.Button();
             this.picStroke = new System.Windows.Forms.PictureBox();
             this.lstStrokes = new System.Windows.Forms.ListBox();
             this.btnRunTests = new System.Windows.Forms.Button();
@@ -70,7 +74,8 @@
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
-            this.btnImportPatterns = new System.Windows.Forms.Button();
+            this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
+            this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -241,6 +246,16 @@
             this.tpPatterns.Text = "Patterns Editor";
             this.tpPatterns.UseVisualStyleBackColor = true;
             // 
+            // btnImportPatterns
+            // 
+            this.btnImportPatterns.Location = new System.Drawing.Point(533, 64);
+            this.btnImportPatterns.Name = "btnImportPatterns";
+            this.btnImportPatterns.Size = new System.Drawing.Size(75, 23);
+            this.btnImportPatterns.TabIndex = 14;
+            this.btnImportPatterns.Text = "Import DB";
+            this.btnImportPatterns.UseVisualStyleBackColor = true;
+            this.btnImportPatterns.Click += new System.EventHandler(this.btnImportPatterns_Click);
+            // 
             // btnDeletePattern
             // 
             this.btnDeletePattern.Location = new System.Drawing.Point(534, 6);
@@ -289,6 +304,9 @@
             // 
             // tpTests
             // 
+            this.tpTests.Controls.Add(this.btnDeleteStroke);
+            this.tpTests.Controls.Add(this.btnImportStrokes);
+            this.tpTests.Controls.Add(this.btnExportStrokes);
             this.tpTests.Controls.Add(this.picStroke);
             this.tpTests.Controls.Add(this.lstStrokes);
             this.tpTests.Controls.Add(this.btnRunTests);
@@ -300,6 +318,36 @@
             this.tpTests.TabIndex = 4;
             this.tpTests.Text = "Testing";
             this.tpTests.UseVisualStyleBackColor = true;
+            // 
+            // btnDeleteStroke
+            // 
+            this.btnDeleteStroke.Location = new System.Drawing.Point(93, 358);
+            this.btnDeleteStroke.Name = "btnDeleteStroke";
+            this.btnDeleteStroke.Size = new System.Drawing.Size(75, 23);
+            this.btnDeleteStroke.TabIndex = 15;
+            this.btnDeleteStroke.Text = "Delete";
+            this.btnDeleteStroke.UseVisualStyleBackColor = true;
+            this.btnDeleteStroke.Click += new System.EventHandler(this.btnDeleteStroke_Click);
+            // 
+            // btnImportStrokes
+            // 
+            this.btnImportStrokes.Location = new System.Drawing.Point(176, 358);
+            this.btnImportStrokes.Name = "btnImportStrokes";
+            this.btnImportStrokes.Size = new System.Drawing.Size(75, 23);
+            this.btnImportStrokes.TabIndex = 14;
+            this.btnImportStrokes.Text = "Import";
+            this.btnImportStrokes.UseVisualStyleBackColor = true;
+            this.btnImportStrokes.Click += new System.EventHandler(this.btnImportStrokes_Click);
+            // 
+            // btnExportStrokes
+            // 
+            this.btnExportStrokes.Location = new System.Drawing.Point(257, 358);
+            this.btnExportStrokes.Name = "btnExportStrokes";
+            this.btnExportStrokes.Size = new System.Drawing.Size(75, 23);
+            this.btnExportStrokes.TabIndex = 13;
+            this.btnExportStrokes.Text = "Export";
+            this.btnExportStrokes.UseVisualStyleBackColor = true;
+            this.btnExportStrokes.Click += new System.EventHandler(this.btnExportStrokes_Click);
             // 
             // picStroke
             // 
@@ -337,9 +385,9 @@
             this.lblStrokesCount.AutoSize = true;
             this.lblStrokesCount.Location = new System.Drawing.Point(8, 362);
             this.lblStrokesCount.Name = "lblStrokesCount";
-            this.lblStrokesCount.Size = new System.Drawing.Size(94, 15);
+            this.lblStrokesCount.Size = new System.Drawing.Size(85, 15);
             this.lblStrokesCount.TabIndex = 1;
-            this.lblStrokesCount.Text = "Strokes Count: X";
+            this.lblStrokesCount.Text = "StrokesNum: X";
             // 
             // btnPurgeInputs
             // 
@@ -563,15 +611,15 @@
             this.tmrDrawing.Interval = 1000;
             this.tmrDrawing.Tick += new System.EventHandler(this.tmrDrawing_Tick);
             // 
-            // btnImportPatterns
+            // ofdStrokes
             // 
-            this.btnImportPatterns.Location = new System.Drawing.Point(533, 64);
-            this.btnImportPatterns.Name = "btnImportPatterns";
-            this.btnImportPatterns.Size = new System.Drawing.Size(75, 23);
-            this.btnImportPatterns.TabIndex = 14;
-            this.btnImportPatterns.Text = "Import DB";
-            this.btnImportPatterns.UseVisualStyleBackColor = true;
-            this.btnImportPatterns.Click += new System.EventHandler(this.btnImportPatterns_Click);
+            this.ofdStrokes.DefaultExt = "json";
+            this.ofdStrokes.Filter = "JSON|*.json|All files|*.*";
+            // 
+            // sfdStrokes
+            // 
+            this.sfdStrokes.DefaultExt = "json";
+            this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
             // MainForm
             // 
@@ -654,6 +702,11 @@
         private PictureBox picStroke;
         private ListBox lstStrokes;
         private Button btnImportPatterns;
+        private Button btnImportStrokes;
+        private Button btnExportStrokes;
+        private OpenFileDialog ofdStrokes;
+        private SaveFileDialog sfdStrokes;
+        private Button btnDeleteStroke;
     }
 }
 
