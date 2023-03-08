@@ -51,7 +51,8 @@ namespace WykryjMycha
             var result = ofdStrokes.ShowDialog();
             if (result == DialogResult.OK)
             {
-                _testingController.ImportStrokes(ofdStrokes.FileName);
+                DialogResult msgResult = MessageBox.Show("Clear currently loaded strokes","Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                _testingController.ImportStrokes(ofdStrokes.FileName, DialogResult == DialogResult.Yes);
             }
         }
 

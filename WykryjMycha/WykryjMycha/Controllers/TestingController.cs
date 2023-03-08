@@ -16,7 +16,7 @@ namespace WykryjMycha
         {
             testingView = instance;
             _strokeDatabase = strokeDatabase;
-            _strokeDatabase.changed += StrokesDatabaseChanged;
+            _strokeDatabase.Changed += StrokesDatabaseChanged;
             _tester = tester;
 
             testingView.SetStrokesCount(_strokeDatabase.GetStrokes().Count);
@@ -48,9 +48,9 @@ namespace WykryjMycha
             _strokeDatabase.Export(filename);
         }
 
-        internal void ImportStrokes(string filename)
+        internal void ImportStrokes(string filename, bool clearExisting)
         {
-            _strokeDatabase.Import(filename);
+            _strokeDatabase.Import(filename, clearExisting);
         }
 
         internal void DeletePattern()

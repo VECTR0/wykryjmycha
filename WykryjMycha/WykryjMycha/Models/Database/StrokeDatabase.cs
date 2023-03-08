@@ -10,8 +10,8 @@ namespace WykryjMycha
 {
     internal class StrokeDatabase
     {
-        internal event EventHandler changed;
-        private List<Stroke> _strokes;
+        internal event EventHandler Changed;
+        private readonly List<Stroke> _strokes;
         public StrokeDatabase()
         {
             _strokes = new List<Stroke>();
@@ -21,14 +21,14 @@ namespace WykryjMycha
         {
             if (stroke == null) return;
             _strokes.Add(stroke);
-            changed?.Invoke(this, EventArgs.Empty);
+            Changed?.Invoke(this, EventArgs.Empty);
         }
 
         internal void DeleteStroke(int index)
         {
             if (_strokes.Count == 0 || index < 0 || index >= _strokes.Count) return;
             _strokes.RemoveAt(index);
-            changed?.Invoke(this, EventArgs.Empty);
+            Changed?.Invoke(this, EventArgs.Empty);
         }
 
         public List<Stroke> GetStrokes()
@@ -36,7 +36,7 @@ namespace WykryjMycha
             return _strokes;
         }
 
-        internal bool Import(string filename, bool clear = true)
+        internal bool Import(string filename, bool clearExisting = true)
         {
             var serializeOptions = new JsonSerializerOptions
             {
@@ -47,7 +47,7 @@ namespace WykryjMycha
             try
             {
                 var strokes = JsonSerializer.Deserialize<List<Stroke>>(json, serializeOptions);
-                if(clear) _strokes.Clear();
+                if(clearExisting) _strokes.Clear();
                 foreach(var stroke in strokes)
                 {
                     AddStroke(stroke);
