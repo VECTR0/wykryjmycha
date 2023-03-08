@@ -12,11 +12,6 @@ namespace WykryjMycha
     {
         private TestingController _testingController;
 
-        internal void SetStrokesCount(int count)
-        {
-            lblStrokesCount.Text = "Strokes Num: " + count;
-        }
-
         internal void SetStrokesList(List<Stroke> strokes)
         {
             lstStrokes.Items.Clear();
@@ -67,7 +62,11 @@ namespace WykryjMycha
 
         private void btnDeleteStroke_Click(object sender, EventArgs e)
         {
-            _testingController.DeletePattern();
+            _testingController.DeleteStroke();
+        }
+        private void btnClearStrokes_Click(object sender, EventArgs e)
+        {
+            _testingController.DeleteAllStrokes();
         }
     }
 }

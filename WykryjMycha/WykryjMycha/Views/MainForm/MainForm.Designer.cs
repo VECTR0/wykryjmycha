@@ -53,7 +53,6 @@
             this.picStroke = new System.Windows.Forms.PictureBox();
             this.lstStrokes = new System.Windows.Forms.ListBox();
             this.btnRunTests = new System.Windows.Forms.Button();
-            this.lblStrokesCount = new System.Windows.Forms.Label();
             this.btnPurgeInputs = new System.Windows.Forms.Button();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
@@ -76,6 +75,7 @@
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
+            this.btnClearStrokes = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -304,13 +304,13 @@
             // 
             // tpTests
             // 
+            this.tpTests.Controls.Add(this.btnClearStrokes);
             this.tpTests.Controls.Add(this.btnDeleteStroke);
             this.tpTests.Controls.Add(this.btnImportStrokes);
             this.tpTests.Controls.Add(this.btnExportStrokes);
             this.tpTests.Controls.Add(this.picStroke);
             this.tpTests.Controls.Add(this.lstStrokes);
             this.tpTests.Controls.Add(this.btnRunTests);
-            this.tpTests.Controls.Add(this.lblStrokesCount);
             this.tpTests.Controls.Add(this.btnPurgeInputs);
             this.tpTests.Location = new System.Drawing.Point(4, 24);
             this.tpTests.Name = "tpTests";
@@ -321,7 +321,7 @@
             // 
             // btnDeleteStroke
             // 
-            this.btnDeleteStroke.Location = new System.Drawing.Point(93, 358);
+            this.btnDeleteStroke.Location = new System.Drawing.Point(8, 361);
             this.btnDeleteStroke.Name = "btnDeleteStroke";
             this.btnDeleteStroke.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteStroke.TabIndex = 15;
@@ -379,15 +379,6 @@
             this.btnRunTests.Text = "Run Tests";
             this.btnRunTests.UseVisualStyleBackColor = true;
             this.btnRunTests.Click += new System.EventHandler(this.btnRunTests_Click);
-            // 
-            // lblStrokesCount
-            // 
-            this.lblStrokesCount.AutoSize = true;
-            this.lblStrokesCount.Location = new System.Drawing.Point(8, 362);
-            this.lblStrokesCount.Name = "lblStrokesCount";
-            this.lblStrokesCount.Size = new System.Drawing.Size(85, 15);
-            this.lblStrokesCount.TabIndex = 1;
-            this.lblStrokesCount.Text = "StrokesNum: X";
             // 
             // btnPurgeInputs
             // 
@@ -621,6 +612,16 @@
             this.sfdStrokes.DefaultExt = "json";
             this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
+            // btnClearStrokes
+            // 
+            this.btnClearStrokes.Location = new System.Drawing.Point(89, 361);
+            this.btnClearStrokes.Name = "btnClearStrokes";
+            this.btnClearStrokes.Size = new System.Drawing.Size(75, 23);
+            this.btnClearStrokes.TabIndex = 16;
+            this.btnClearStrokes.Text = "Delete All";
+            this.btnClearStrokes.UseVisualStyleBackColor = true;
+            this.btnClearStrokes.Click += new System.EventHandler(this.btnClearStrokes_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -642,7 +643,6 @@
             this.tpPatterns.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
             this.tpTests.ResumeLayout(false);
-            this.tpTests.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
@@ -697,7 +697,6 @@
         private TabPage tpTests;
         private Button btnPurgeInputs;
         private Button btnAddStroke;
-        private Label lblStrokesCount;
         private Button btnRunTests;
         private PictureBox picStroke;
         private ListBox lstStrokes;
@@ -707,6 +706,7 @@
         private OpenFileDialog ofdStrokes;
         private SaveFileDialog sfdStrokes;
         private Button btnDeleteStroke;
+        private Button btnClearStrokes;
     }
 }
 

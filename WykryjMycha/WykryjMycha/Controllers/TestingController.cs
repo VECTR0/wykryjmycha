@@ -19,15 +19,14 @@ namespace WykryjMycha
             _strokeDatabase.Changed += StrokesDatabaseChanged;
             _tester = tester;
 
-            testingView.SetStrokesCount(_strokeDatabase.GetStrokes().Count);
             testingView.SetStrokesList(_strokeDatabase.GetStrokes());
         }
 
         private void StrokesDatabaseChanged(object? sender, EventArgs e)
         {
             _selectedStroke = -1;
-            testingView.SetStrokesCount(_strokeDatabase.GetStrokes().Count);
             testingView.SetStrokesList(_strokeDatabase.GetStrokes());
+            testingView.ClearPicStroke();
         }
 
         internal void RunTests()
@@ -53,10 +52,15 @@ namespace WykryjMycha
             _strokeDatabase.Import(filename, clearExisting);
         }
 
-        internal void DeletePattern()
+        internal void DeleteStroke()
         {
             _strokeDatabase.DeleteStroke(_selectedStroke);
             testingView.SetStrokesList(_strokeDatabase.GetStrokes());
+        }
+
+        internal void DeleteAllStrokes()
+        {
+            _strokeDatabase.DeleteAllStrokes();
         }
     }
 }

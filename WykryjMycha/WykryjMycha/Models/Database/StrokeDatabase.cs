@@ -77,5 +77,11 @@ namespace WykryjMycha
             }
             return true;
         }
+
+        internal void DeleteAllStrokes()
+        {
+            _strokes.Clear();
+            Changed?.Invoke(this, EventArgs.Empty);
+        }
     }
 }
