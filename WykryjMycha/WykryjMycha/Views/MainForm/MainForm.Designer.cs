@@ -47,13 +47,13 @@
             this.picPattern = new System.Windows.Forms.PictureBox();
             this.lstEditorPatterns = new System.Windows.Forms.ListBox();
             this.tpTests = new System.Windows.Forms.TabPage();
+            this.btnClearStrokes = new System.Windows.Forms.Button();
             this.btnDeleteStroke = new System.Windows.Forms.Button();
             this.btnImportStrokes = new System.Windows.Forms.Button();
             this.btnExportStrokes = new System.Windows.Forms.Button();
             this.picStroke = new System.Windows.Forms.PictureBox();
             this.lstStrokes = new System.Windows.Forms.ListBox();
             this.btnRunTests = new System.Windows.Forms.Button();
-            this.btnPurgeInputs = new System.Windows.Forms.Button();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
@@ -75,7 +75,6 @@
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
-            this.btnClearStrokes = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -248,7 +247,7 @@
             // 
             // btnImportPatterns
             // 
-            this.btnImportPatterns.Location = new System.Drawing.Point(533, 64);
+            this.btnImportPatterns.Location = new System.Drawing.Point(8, 358);
             this.btnImportPatterns.Name = "btnImportPatterns";
             this.btnImportPatterns.Size = new System.Drawing.Size(75, 23);
             this.btnImportPatterns.TabIndex = 14;
@@ -258,7 +257,7 @@
             // 
             // btnDeletePattern
             // 
-            this.btnDeletePattern.Location = new System.Drawing.Point(534, 6);
+            this.btnDeletePattern.Location = new System.Drawing.Point(451, 358);
             this.btnDeletePattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDeletePattern.Name = "btnDeletePattern";
             this.btnDeletePattern.Size = new System.Drawing.Size(75, 23);
@@ -269,7 +268,7 @@
             // 
             // btnExportPatterns
             // 
-            this.btnExportPatterns.Location = new System.Drawing.Point(534, 35);
+            this.btnExportPatterns.Location = new System.Drawing.Point(93, 358);
             this.btnExportPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExportPatterns.Name = "btnExportPatterns";
             this.btnExportPatterns.Size = new System.Drawing.Size(75, 23);
@@ -311,7 +310,6 @@
             this.tpTests.Controls.Add(this.picStroke);
             this.tpTests.Controls.Add(this.lstStrokes);
             this.tpTests.Controls.Add(this.btnRunTests);
-            this.tpTests.Controls.Add(this.btnPurgeInputs);
             this.tpTests.Location = new System.Drawing.Point(4, 24);
             this.tpTests.Name = "tpTests";
             this.tpTests.Size = new System.Drawing.Size(802, 387);
@@ -319,9 +317,19 @@
             this.tpTests.Text = "Testing";
             this.tpTests.UseVisualStyleBackColor = true;
             // 
+            // btnClearStrokes
+            // 
+            this.btnClearStrokes.Location = new System.Drawing.Point(370, 358);
+            this.btnClearStrokes.Name = "btnClearStrokes";
+            this.btnClearStrokes.Size = new System.Drawing.Size(75, 23);
+            this.btnClearStrokes.TabIndex = 16;
+            this.btnClearStrokes.Text = "Delete All";
+            this.btnClearStrokes.UseVisualStyleBackColor = true;
+            this.btnClearStrokes.Click += new System.EventHandler(this.btnClearStrokes_Click);
+            // 
             // btnDeleteStroke
             // 
-            this.btnDeleteStroke.Location = new System.Drawing.Point(8, 361);
+            this.btnDeleteStroke.Location = new System.Drawing.Point(451, 358);
             this.btnDeleteStroke.Name = "btnDeleteStroke";
             this.btnDeleteStroke.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteStroke.TabIndex = 15;
@@ -331,7 +339,7 @@
             // 
             // btnImportStrokes
             // 
-            this.btnImportStrokes.Location = new System.Drawing.Point(176, 358);
+            this.btnImportStrokes.Location = new System.Drawing.Point(8, 358);
             this.btnImportStrokes.Name = "btnImportStrokes";
             this.btnImportStrokes.Size = new System.Drawing.Size(75, 23);
             this.btnImportStrokes.TabIndex = 14;
@@ -341,7 +349,7 @@
             // 
             // btnExportStrokes
             // 
-            this.btnExportStrokes.Location = new System.Drawing.Point(257, 358);
+            this.btnExportStrokes.Location = new System.Drawing.Point(93, 358);
             this.btnExportStrokes.Name = "btnExportStrokes";
             this.btnExportStrokes.Size = new System.Drawing.Size(75, 23);
             this.btnExportStrokes.TabIndex = 13;
@@ -372,22 +380,13 @@
             // 
             // btnRunTests
             // 
-            this.btnRunTests.Location = new System.Drawing.Point(451, 354);
+            this.btnRunTests.Location = new System.Drawing.Point(289, 358);
             this.btnRunTests.Name = "btnRunTests";
             this.btnRunTests.Size = new System.Drawing.Size(75, 23);
             this.btnRunTests.TabIndex = 2;
             this.btnRunTests.Text = "Run Tests";
             this.btnRunTests.UseVisualStyleBackColor = true;
             this.btnRunTests.Click += new System.EventHandler(this.btnRunTests_Click);
-            // 
-            // btnPurgeInputs
-            // 
-            this.btnPurgeInputs.Location = new System.Drawing.Point(724, 6);
-            this.btnPurgeInputs.Name = "btnPurgeInputs";
-            this.btnPurgeInputs.Size = new System.Drawing.Size(75, 23);
-            this.btnPurgeInputs.TabIndex = 0;
-            this.btnPurgeInputs.Text = "Purge IN";
-            this.btnPurgeInputs.UseVisualStyleBackColor = true;
             // 
             // tpSettings
             // 
@@ -612,16 +611,6 @@
             this.sfdStrokes.DefaultExt = "json";
             this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
-            // btnClearStrokes
-            // 
-            this.btnClearStrokes.Location = new System.Drawing.Point(89, 361);
-            this.btnClearStrokes.Name = "btnClearStrokes";
-            this.btnClearStrokes.Size = new System.Drawing.Size(75, 23);
-            this.btnClearStrokes.TabIndex = 16;
-            this.btnClearStrokes.Text = "Delete All";
-            this.btnClearStrokes.UseVisualStyleBackColor = true;
-            this.btnClearStrokes.Click += new System.EventHandler(this.btnClearStrokes_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -695,7 +684,6 @@
         private Label lblProgramSettings;
         private Label label9;
         private TabPage tpTests;
-        private Button btnPurgeInputs;
         private Button btnAddStroke;
         private Button btnRunTests;
         private PictureBox picStroke;

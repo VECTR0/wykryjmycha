@@ -46,27 +46,26 @@ namespace WykryjMycha
             var result = ofdStrokes.ShowDialog();
             if (result == DialogResult.OK)
             {
-                DialogResult msgResult = MessageBox.Show("Clear currently loaded strokes","Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                _testingController.ImportStrokes(ofdStrokes.FileName, DialogResult == DialogResult.Yes);
+                var msgResult = MessageBox.Show("Clear currently loaded strokes","Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                _testingController.ImportStrokes(ofdStrokes.FileName, msgResult == DialogResult.Yes);
             }
         }
 
         private void btnExportStrokes_Click(object sender, EventArgs e)
         {
             var result = sfdStrokes.ShowDialog();
-            if (result == DialogResult.OK)
-            {
-                _testingController.ExportStrokes(sfdStrokes.FileName);
-            }
+            if (result == DialogResult.OK) _testingController.ExportStrokes(sfdStrokes.FileName);
         }
 
         private void btnDeleteStroke_Click(object sender, EventArgs e)
         {
-            _testingController.DeleteStroke();
+            var msgResult = MessageBox.Show("Do you want to delete selected stroke?", "Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if(msgResult == DialogResult.Yes) _testingController.DeleteStroke();
         }
         private void btnClearStrokes_Click(object sender, EventArgs e)
         {
-            _testingController.DeleteAllStrokes();
+            var msgResult = MessageBox.Show("Do you want to delete ALL strokes?", "Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (msgResult == DialogResult.Yes) _testingController.DeleteAllStrokes();
         }
     }
 }
