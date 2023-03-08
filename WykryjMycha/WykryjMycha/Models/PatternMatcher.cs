@@ -62,20 +62,25 @@ namespace WykryjMycha
 
         public static void MergeCheck(List<Vector2> toMerge, List<Vector2> reference, int startingIndex, Settings settings)
         {
+            var weights = new List<float>();
+            for (int i = 0; i < toMerge.Count; i++) weights.Add(1f);
             for (int i = startingIndex; i < toMerge.Count && i - 1 < reference.Count; i++)
             {
                 if (i > 0)
                 {
                     var distanceToPrevious = Vector2.Distance(toMerge[i], reference[i - 1]);
                     var distanceToCurrent = 0f;
-                    var distanceToPreviousToMerge = Vector2.Distance(toMerge[i], toMerge[i-1]);
+                    var distanceToPreviousToMerge = Vector2.Distance(toMerge[i], toMerge[i - 1]);
                     if (i < reference.Count) distanceToCurrent = Vector2.Distance(toMerge[i], reference[i]);
                     else distanceToCurrent = float.PositiveInfinity;
                     if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPreviousToMerge < settings.maxMergeDistance)
                     {
                         var removed = toMerge[i];
+                        var removedWeight = weights[i];
                         toMerge.RemoveAt(i);
-                        toMerge[i - 1] = (toMerge[i - 1] + removed) / 2;
+                        weights.RemoveAt(i);
+                        toMerge[i - 1] = (toMerge[i - 1] * weights[i-1] + removed*removedWeight) / (removedWeight+ weights[i - 1]);
+                        weights[i - 1] += removedWeight;
                         i--;
                     }
                     else if (i > startingIndex + 1)
