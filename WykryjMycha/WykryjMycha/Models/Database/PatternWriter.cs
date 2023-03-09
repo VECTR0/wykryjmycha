@@ -40,5 +40,12 @@ namespace WykryjMycha
 
             File.WriteAllText(filepath, jsonString);
         }
+
+        public static void Delete(string filename)
+        {
+            string filepath = "patterns/" + filename + ".json";
+
+            File.Delete(filepath);
+        }
     }
 }

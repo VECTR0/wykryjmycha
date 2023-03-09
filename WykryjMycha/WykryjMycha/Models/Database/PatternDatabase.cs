@@ -20,6 +20,7 @@ namespace WykryjMycha
         public void DeletePattern(int index)
         {
             if (_patterns.Count == 0 || index < 0 || index >= _patterns.Count) return;
+            PatternWriter.Delete(_patterns[index].name);
             _patterns.RemoveAt(index);
             changed?.Invoke(this, EventArgs.Empty);
         }
