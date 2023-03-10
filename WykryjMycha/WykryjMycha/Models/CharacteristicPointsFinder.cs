@@ -21,25 +21,25 @@
                         break;
                     }
                 }
-
-                // imposed DOWN / UP characteristic point apply
-                // TODO: why last point is not added?
-                if (input[i].PointOrigin != PointOrigin.PenMove)
-                {
-                    lastCharacteristicPoint = input[i];
-                    result.Add(lastCharacteristicPoint);
-                    continue;
-                }
-
                 if (reachedTheEnd) break;
 
-                Point a = lastCharacteristicPoint - input[i];
-                Point b = input[nextIdx] - input[i];
-
-                if (Point.Distance(lastCharacteristicPoint, input[i]) >= minDistance && CalculateAngle(a, b) >= angleLimitDeg)
+                if (Point.Distance(lastCharacteristicPoint, input[i]) >= minDistance)
                 {
-                    lastCharacteristicPoint = input[i];
-                    result.Add(lastCharacteristicPoint);
+                    if (input[i].PointOrigin != PointOrigin.PenMove)
+                    {
+                        lastCharacteristicPoint = input[i];
+                        result.Add(lastCharacteristicPoint);
+                        continue;
+                    }
+
+                    Point a = lastCharacteristicPoint - input[i];
+                    Point b = input[nextIdx] - input[i];
+
+                    if (CalculateAngle(a, b) >= angleLimitDeg)
+                    {
+                        lastCharacteristicPoint = input[i];
+                        result.Add(lastCharacteristicPoint);
+                    }
                 }
             }
 
