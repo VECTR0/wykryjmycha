@@ -6,37 +6,34 @@ namespace WykryjMycha
     {
         internal float X { get; set; }
         internal float Y { get; set; }
+        internal PointOrigin PointOrigin { get; set; }
 
-        internal Point(Vector2 coords)
-        {
-            X = coords.X;
-            Y = coords.Y;
-        }
-
-        internal Point(float x = 0, float y = 0)
+        internal Point(float x = 0, float y = 0, PointOrigin pointOrigin = PointOrigin.PenMove)
         {
             X = x;
             Y = y;
+            PointOrigin = pointOrigin;
         }
 
+        // Note that PointOrigin of left value is preserved
         public static Point operator +(Point left, Point right)
         {
-            return new Point(left.X + right.X, left.Y + right.Y);
+            return new Point(left.X + right.X, left.Y + right.Y, left.PointOrigin);
         }
 
         public static Point operator -(Point left, Point right)
         {
-            return new Point(left.X - right.X, left.Y - right.Y);
+            return new Point(left.X - right.X, left.Y - right.Y, left.PointOrigin);
         }
 
         public static Point operator *(Point left, float right)
         {
-            return new Point(left.X * right, left.Y * right);
+            return new Point(left.X * right, left.Y * right, left.PointOrigin);
         }
 
         public static Point operator /(Point left, float right)
         {
-            return new Point(left.X / right, left.Y / right);
+            return new Point(left.X / right, left.Y / right, left.PointOrigin);
         }
 
         internal static Point Min(Point val1, Point val2)

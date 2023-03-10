@@ -68,7 +68,7 @@ namespace WykryjMycha
                 }
                 _mouseDown = true;
 
-                _points?.Add(new Point(e.X, e.Y));
+                _points?.Add(new Point(e.X, e.Y, PointOrigin.PenDown));
                 DrawUtils.DrawPoint(e.X, e.Y, pic);
             }
         }
@@ -89,6 +89,7 @@ namespace WykryjMycha
             {
                 _mouseDown = false;
                 drawingView.StartDrawingTimer(_settings.drawingTimeout);
+                _points?.Add(new Point(e.X, e.Y, PointOrigin.PenUp));
             }
         }
 

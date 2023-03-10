@@ -6,10 +6,10 @@
         {
             if (input == null) return null;
 
-            Point lastCharacteristicPoint = input[0];
-            List<Point> result = new List<Point> { lastCharacteristicPoint };
+            Point lastCharacteristicPoint = default;
+            List<Point> result = new List<Point> { };
 
-            for (int i = 1; i < input.Count - 1; i++)
+            for (int i = 0; i < input.Count - 1; i++)
             {
                 int nextIdx = i + 1;
                 bool reachedTheEnd = false;
@@ -21,6 +21,16 @@
                         break;
                     }
                 }
+
+                // imposed DOWN / UP characteristic point apply
+                // TODO: why last point is not added?
+                if (input[i].PointOrigin != PointOrigin.PenMove)
+                {
+                    lastCharacteristicPoint = input[i];
+                    result.Add(lastCharacteristicPoint);
+                    continue;
+                }
+
                 if (reachedTheEnd) break;
 
                 Point a = lastCharacteristicPoint - input[i];
