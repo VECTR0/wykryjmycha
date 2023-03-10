@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using System.Timers;
+﻿using System.Text.RegularExpressions;
 
 namespace WykryjMycha
 {
@@ -13,7 +6,7 @@ namespace WykryjMycha
     {
         internal MainForm drawingView;
         private bool _mouseDown = false;
-        private List<Vector2> _points, _characteristicPoints, _rawPoints;
+        private List<Point> _points, _characteristicPoints, _rawPoints;
         private bool _pointsValid = false;
         private PatternDatabase _patternDatabase;
         private PatternMatcher _patternMatcher;
@@ -25,7 +18,7 @@ namespace WykryjMycha
         internal DrawingInputController(MainForm instance, PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder, Settings settings, StrokeDatabase strokeDatabase)
         {
             drawingView = instance;
-            _points = new List<Vector2>();
+            _points = new List<Point>();
             _patternDatabase = patternDatabase;
             _patternMatcher = patternMatcher;
             _characteristicPointsFinder = characteristicPointsFinder;
@@ -39,7 +32,7 @@ namespace WykryjMycha
             _strokesStarted = false;
             _pointsValid = true;
             ProcessDrawnPattern(_points);
-            _rawPoints = new List<Vector2>(_points);
+            _rawPoints = new List<Point>(_points);
 
             _points = MathUtils.NormalizePoints(_points);
             drawingView.ClearDrawingBoard();
@@ -71,11 +64,11 @@ namespace WykryjMycha
                 {
                     _strokesStarted = true;
                     DrawUtils.ClearPictureBox(pic);
-                    _points = new List<Vector2>();
+                    _points = new List<Point>();
                 }
                 _mouseDown = true;
 
-                _points?.Add(new Vector2(e.X, e.Y));
+                _points?.Add(new Point(e.X, e.Y));
                 DrawUtils.DrawPoint(e.X, e.Y, pic);
             }
         }
@@ -85,7 +78,7 @@ namespace WykryjMycha
             if (x < 0 || y < 0 || x > pic.Width || x > pic.Height) _mouseDown = false;
             if (_mouseDown)
             {
-                _points?.Add(new Vector2(x, y));
+                _points?.Add(new Point(x, y));
                 DrawUtils.DrawPoint(x, y, pic);
             }
         }
@@ -132,7 +125,7 @@ namespace WykryjMycha
             txt.Text = "";
         }
 
-        internal void ProcessDrawnPattern(List<Vector2> points)
+        internal void ProcessDrawnPattern(List<Point> points)
         {
             if (points == null) return;
             var bbox = MathUtils.GetBoundingBox(_points);

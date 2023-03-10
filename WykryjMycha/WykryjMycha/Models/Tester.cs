@@ -1,12 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Runtime;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     internal class Tester
     {

@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Text.Json;
-using System.Threading.Tasks;
+﻿using System.Text.Json;
 
 namespace WykryjMycha
 {
@@ -41,7 +35,7 @@ namespace WykryjMycha
             var serializeOptions = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                Converters = { new Vector2JsonConverter() }
+                Converters = { new PointJsonConverter() }
             };
             var json = File.ReadAllText(filename);
             try
@@ -65,7 +59,7 @@ namespace WykryjMycha
             var serializeOptions = new JsonSerializerOptions
             {
                 WriteIndented = true,
-                Converters = { new Vector2JsonConverter() }
+                Converters = { new PointJsonConverter() }
             };
             try
             {

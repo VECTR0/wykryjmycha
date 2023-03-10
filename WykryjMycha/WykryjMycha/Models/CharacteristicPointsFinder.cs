@@ -1,27 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     internal class CharacteristicPointsFinder
     {
-
-        internal static List<Vector2>? GetCharacteristicPoints(List<Vector2> input, Settings settings, float minDistance = Settings.DefaultMinCharacteriticPointsDistance, float angleLimitDeg = Settings.DefaultCharacteriticPointsAngleLimitDegrees)
+        internal static List<Point>? GetCharacteristicPoints(List<Point> input, Settings settings, float minDistance = Settings.DefaultMinCharacteriticPointsDistance, float angleLimitDeg = Settings.DefaultCharacteriticPointsAngleLimitDegrees)
         {
             if (input == null) return null;
 
-            Vector2 lastCharacteristicPoint = input[0];
-            List<Vector2> result = new List<Vector2> { lastCharacteristicPoint };
+            Point lastCharacteristicPoint = input[0];
+            List<Point> result = new List<Point> { lastCharacteristicPoint };
 
             for (int i = 1; i < input.Count - 1; i++)
             {
                 int nextIdx = i + 1;
                 bool reachedTheEnd = false;
-                while (Vector2.Distance(input[i], input[nextIdx]) < settings.referencePointMinDistance)
+                while (Point.Distance(input[i], input[nextIdx]) < settings.referencePointMinDistance)
                 {
                     if (++nextIdx >= input.Count - 1)
                     {
@@ -31,10 +23,10 @@ namespace WykryjMycha
                 }
                 if (reachedTheEnd) break;
 
-                Vector2 a = lastCharacteristicPoint - input[i];
-                Vector2 b = input[nextIdx] - input[i];
+                Point a = lastCharacteristicPoint - input[i];
+                Point b = input[nextIdx] - input[i];
 
-                if (Vector2.Distance(lastCharacteristicPoint, input[i]) >= minDistance && CalculateAngle(a, b) >= angleLimitDeg)
+                if (Point.Distance(lastCharacteristicPoint, input[i]) >= minDistance && CalculateAngle(a, b) >= angleLimitDeg)
                 {
                     lastCharacteristicPoint = input[i];
                     result.Add(lastCharacteristicPoint);
@@ -42,7 +34,7 @@ namespace WykryjMycha
             }
 
             // only if this addition would be significant, add last point
-            if (Vector2.Distance(lastCharacteristicPoint, input[^1]) >= minDistance)
+            if (Point.Distance(lastCharacteristicPoint, input[^1]) >= minDistance)
             {
                 result.Add(input[^1]);
             }
@@ -50,7 +42,7 @@ namespace WykryjMycha
             return result;
         }
 
-        private static double CalculateAngle(Vector2 a, Vector2 b)
+        private static double CalculateAngle(Point a, Point b)
         {
             double theta1 = Math.Atan2(a.Y, a.X);
             double theta2 = Math.Atan2(b.Y, b.X);
@@ -64,11 +56,11 @@ namespace WykryjMycha
         // alternative method (but not yet fully tested)
         private const float DOUGLAS_PEUCKER_EPSILON = 2f;
 
-        //var simplifiedPoints = new List<Vector2>();
+        //var simplifiedPoints = new List<Point>();
         //DouglasPeucker(input, DOUGLAS_PEUCKER_EPSILON, 0, input.Count - 1, ref simplifiedPoints);
         //input = simplifiedPoints;
 
-        private static void DouglasPeucker(List<Vector2> points, float epsilon, int startIdx, int endIdx, ref List<Vector2> result)
+        private static void DouglasPeucker(List<Point> points, float epsilon, int startIdx, int endIdx, ref List<Point> result)
         {
             // Add the first point only on the initial iteration
             if (result.Count == 0)

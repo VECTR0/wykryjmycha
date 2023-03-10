@@ -1,16 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     internal static class DrawUtils
     {
-        internal static void DrawPattern(List<Vector2> points, PictureBox pic, float size = 10f)
+        internal static void DrawPattern(List<Point> points, PictureBox pic, float size = 10f)
         {
             using Graphics g = Graphics.FromImage(pic.Image);
             for (int i = 0; i < points.Count - 1; i++)
@@ -42,7 +34,7 @@ namespace WykryjMycha
             pic.Invalidate();
         }
 
-        internal static void DrawPoints(List<Vector2> points, Brush brush, PictureBox pic, float size = 3)
+        internal static void DrawPoints(List<Point> points, Brush brush, PictureBox pic, float size = 3)
         {
             using Graphics g = Graphics.FromImage(pic.Image);
             points.ForEach(p =>
@@ -52,7 +44,7 @@ namespace WykryjMycha
             pic.Invalidate();
         }
 
-        internal static void DrawLines(List<Vector2> points, Pen pen, PictureBox pic)
+        internal static void DrawLines(List<Point> points, Pen pen, PictureBox pic)
         {
             using Graphics g = Graphics.FromImage(pic.Image);
             for (int i = 0; i < points.Count - 1; i++)
@@ -62,7 +54,7 @@ namespace WykryjMycha
             pic.Invalidate();
         }
 
-        internal static void DrawCircles(List<Vector2> points, Pen pen, PictureBox pic, float size = 3)
+        internal static void DrawCircles(List<Point> points, Pen pen, PictureBox pic, float size = 3)
         {
             using Graphics g = Graphics.FromImage(pic.Image);
             points.ForEach(p =>

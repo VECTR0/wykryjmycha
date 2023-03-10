@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     partial class MainForm
     {
@@ -38,12 +31,12 @@ namespace WykryjMycha
             DrawUtils.ClearPictureBox(picDrawing);
         }
 
-        internal void RenderDrawingStroke(List<Vector2> points)
+        internal void RenderDrawingStroke(List<Point> points)
         {
             DrawUtils.DrawPoints(points, Brushes.Black, picDrawing, 1.5f);
         }
 
-        internal void RenderStrokeCharacteristicPoints(List<Vector2> characteristicPoints)
+        internal void RenderStrokeCharacteristicPoints(List<Point> characteristicPoints)
         {
             DrawUtils.DrawCircles(characteristicPoints, Pens.Red, picDrawing, 6);
         }

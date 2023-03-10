@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Text.Json;
-using System.Numerics;
+﻿using System.Text.Json;
 
 namespace WykryjMycha
 {
     internal class PatternWriter
     {
-        public static void Write(List<Vector2> points, string patternName)
+        public static void Write(List<Point> points, string patternName)
         {
             if (points == null || patternName == null)
             {

@@ -1,17 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Text.Json.Serialization;
+﻿using System.Text.Json.Serialization;
 using System.Text.Json;
-using System.Threading.Tasks;
 
 namespace WykryjMycha
 {
-    public class Vector2JsonConverter : JsonConverter<Vector2>
+    internal class PointJsonConverter : JsonConverter<Point>
     {
-        public override Vector2 Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override Point Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
         {
             if (reader.TokenType != JsonTokenType.StartArray) throw new JsonException();
             reader.Read();
@@ -20,10 +14,10 @@ namespace WykryjMycha
             float y = (float)reader.GetDecimal();
             reader.Read();
             if (reader.TokenType != JsonTokenType.EndArray) throw new JsonException();
-            return new Vector2(x, y);
+            return new Point(x, y);
         }
 
-        public override void Write(Utf8JsonWriter writer, Vector2 value, JsonSerializerOptions options)
+        public override void Write(Utf8JsonWriter writer, Point value, JsonSerializerOptions options)
         {
             writer.WriteStartArray();
             writer.WriteNumberValue(value.X);

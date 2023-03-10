@@ -1,17 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Numerics;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     internal static class MathUtils
     {
-        public static Vector2 GetCentroid(List<Vector2> points)
+        public static Point GetCentroid(List<Point> points)
         {
-            Vector2 centroid = new Vector2();
+            Point centroid = new Point();
             foreach (var vector in points)
             {
                 centroid += vector;
@@ -20,25 +13,25 @@ namespace WykryjMycha
             return centroid;
         }
 
-        public static Tuple<Vector2, Vector2> GetBoundingBox(List<Vector2> points)
+        public static Tuple<Point, Point> GetBoundingBox(List<Point> points)
         {
-            var min = new Vector2(999, 999);
-            var max = new Vector2(-999, -999);
+            var min = new Point(999, 999);
+            var max = new Point(-999, -999);
             foreach (var point in points)
             {
-                min = Vector2.Min(min, point);
-                max = Vector2.Max(max, point);
+                min = Point.Min(min, point);
+                max = Point.Max(max, point);
             }
-            return new Tuple<Vector2, Vector2>(min, max);
+            return new Tuple<Point, Point>(min, max);
         }
 
-        public static List<Vector2> NormalizePoints(List<Vector2> points, float targetSize = 150f)
+        public static List<Point> NormalizePoints(List<Point> points, float targetSize = 150f)
         {
             var bbox = GetBoundingBox(points);
             float scale = 1f / Math.Max(bbox.Item2.X - bbox.Item1.X, bbox.Item2.Y - bbox.Item1.Y);
             scale *= targetSize;
             var centroid = GetCentroid(points);
-            var offset = new Vector2(targetSize, targetSize);
+            var offset = new Point(targetSize, targetSize);
             for (int i = 0; i < points.Count; i++)
             {
                 points[i] -= centroid;
@@ -48,7 +41,7 @@ namespace WykryjMycha
             return points;
         }
 
-        public static float DistanceFromLine(Vector2 x, Vector2 a, Vector2 b)
+        public static float DistanceFromLine(Point x, Point a, Point b)
         {
             var x0 = x.X;
             var y0 = x.Y;
@@ -60,18 +53,18 @@ namespace WykryjMycha
                 Math.Sqrt(Math.Pow(x2 - x1, 2) + Math.Pow(y2 - y1, 2)));
         }
 
-        public static float DistanceFromSegment(Vector2 x, Vector2 a, Vector2 b)
+        public static float DistanceFromSegment(Point x, Point a, Point b)
         {
             var ab = b - a;
             var ax = x - a;
-            var proj = Vector2.Dot(ax, ab);
+            var proj = Point.Dot(ax, ab);
             var d = proj / ab.LengthSquared();
             if (d < 0) return ax.Length();
             else if (d > 0) return (b - x).Length();
             else return DistanceFromLine(x, a, b);
         }
 
-        public static List<Vector2> RotatePoints(List<Vector2> points, Vector2 rotationPoint, float angle)
+        public static List<Point> RotatePoints(List<Point> points, Point rotationPoint, float angle)
         {
             float s = (float)Math.Sin(angle);
             float c = (float)Math.Cos(angle);
@@ -90,7 +83,7 @@ namespace WykryjMycha
             }
             return points;
         }
-        public static void TranslatePoints(List<Vector2> points, Vector2 delta)
+        public static void TranslatePoints(List<Point> points, Point delta)
         {
             for (int i = 0; i < points.Count; i++)
             {

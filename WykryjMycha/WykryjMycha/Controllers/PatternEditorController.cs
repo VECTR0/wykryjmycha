@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace WykryjMycha
+﻿namespace WykryjMycha
 {
     internal class PatternEditorController
     {
@@ -50,7 +43,7 @@ namespace WykryjMycha
             for (int i = 0; i < pattern.points.Count; i++)
             {
                 var point = pattern.points[i];
-                float distance = (point - new System.Numerics.Vector2(x,y)).Length();
+                float distance = Point.Distance(new Point(x,y), point);
                 if (distance < nearestDistance)
                 {
                     nearestPointIndex = i;
@@ -65,7 +58,7 @@ namespace WykryjMycha
         {
             if (_selectedEditorPoint < 0) return;
             var pattern = _patternDatabase.GetPatterns()[_selectedEditorPattern];
-            pattern.points[_selectedEditorPoint] = new System.Numerics.Vector2(x, y);
+            pattern.points[_selectedEditorPoint] = new Point(x, y);
             editorView.RenderPattern(_patternDatabase.GetPatterns()[_selectedEditorPattern]);
         }
 
