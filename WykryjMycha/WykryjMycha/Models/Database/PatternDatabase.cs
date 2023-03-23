@@ -35,9 +35,27 @@
         internal void Import(string directory = "", bool clear = false) //TODO finish
         {
             if(clear) _patterns.Clear();
+            bool toImport;
             foreach(var pattern in GetPatternList())
             {
-                AddPattern(pattern);
+                toImport = true;
+                if (_patterns.Count > 0)
+                {
+                    foreach (var actual in _patterns.ToList())
+                    {
+                        if (actual.name == pattern.name)
+                        {
+                            Logger.Log = $"Skipped '{pattern.name}' - already imported";
+                            toImport = false;
+                            break;
+                        }
+                    }
+
+                }
+                if (toImport)
+                {
+                    AddPattern(pattern);
+                }
             }
         }
 
