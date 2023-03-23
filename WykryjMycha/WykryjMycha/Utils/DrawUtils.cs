@@ -5,16 +5,25 @@
         internal static void DrawPattern(List<Point> points, PictureBox pic, int selectedPoint = -1, float size = 10f)
         {
             using Graphics g = Graphics.FromImage(pic.Image);
+            Pen wideBlue = new Pen(Brushes.Blue, 2); 
             for (int i = 0; i < points.Count - 1; i++)
             {
                 var current = points[i];
                 var next = points[i + 1];
-                g.DrawLine(Pens.Red, current.X, current.Y, next.X, next.Y);
+                if (points[i+1].PointOrigin == PointOrigin.PenMove || points[i + 1].PointOrigin == PointOrigin.PenUp)
+                    g.DrawLine(wideBlue, current.X, current.Y, next.X, next.Y);
+                else
+                    g.DrawLine(Pens.Gray, current.X, current.Y, next.X, next.Y);
             }
             for (int i = 0; i < points.Count; i++)
             {
                 var p = points[i];
-                Brush brush = i == 0 ? Brushes.Orange : Brushes.Red;
+                Brush brush = Brushes.Black;
+                if (p.PointOrigin == PointOrigin.PenDown) brush = Brushes.Red;
+                else if (p.PointOrigin == PointOrigin.PenMove) brush = Brushes.Blue;
+                else if (p.PointOrigin == PointOrigin.PenUp) brush = Brushes.Green;
+                if (i == 0) brush = Brushes.Orange;
+                
                 if (i != selectedPoint)
                 {
                     g.FillEllipse(brush, p.X - size / 2, p.Y - size / 2f, size, size);
