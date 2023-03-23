@@ -41,6 +41,11 @@
                         result.Add(lastCharacteristicPoint);
                     }
                 }
+                else if (input[i].PointOrigin == PointOrigin.PenUp || input[i].PointOrigin == PointOrigin.PenDown)
+                {
+                    lastCharacteristicPoint = input[i];
+                    result[result.Count - 1] = lastCharacteristicPoint;
+                }
             }
 
             // only if this addition would be significant, add last point
