@@ -7,7 +7,10 @@
         internal void RenderPattern(Pattern pattern, int selectedPoint)
         {
             DrawUtils.ClearPictureBox(picPattern);
-            DrawUtils.DrawPattern(pattern.points, picPattern, selectedPoint);
+            if (pattern != null)
+            {
+                DrawUtils.DrawPattern(pattern.points, picPattern, selectedPoint);
+            }
         }
 
         internal void ClearEditorPatternsList() => lstEditorPatterns.Items.Clear();

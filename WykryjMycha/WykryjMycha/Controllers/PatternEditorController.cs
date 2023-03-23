@@ -35,10 +35,12 @@
         {
             _patternDatabase.DeletePattern(_selectedEditorPattern);
             editorView.SetEditorPatterns(_patternDatabase.GetPatterns());
+            editorView.RenderPattern(null, _lastSelectedEditorPoint);
         }
 
         internal void HandleEditorMouseDown(int x, int y)
         {
+            if (_selectedEditorPattern < 0) return;
             var pattern = _patternDatabase.GetPatterns()[_selectedEditorPattern];
             int nearestPointIndex = 0;
             float nearestDistance = 9999999;
@@ -71,6 +73,7 @@
 
         internal void HandleEditorMouseUp(int x, int y)
         {
+            if (_selectedEditorPoint < 0) return;
             _selectedEditorPoint = -1;
             var pattern = _patternDatabase.GetPatterns()[_selectedEditorPattern];
             pattern.points = MathUtils.NormalizePoints(pattern.points);
