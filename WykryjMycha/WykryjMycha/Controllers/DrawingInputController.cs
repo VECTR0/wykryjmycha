@@ -121,6 +121,11 @@ namespace WykryjMycha
                 return;
             }
             var newPatternName = txt.Text;
+            if (!Regex.IsMatch(newPatternName, @"^[a-zA-Z0-9_]+$"))
+            {
+                Logger.Log = $"Name '{newPatternName}' contains illegal characters! Only letters, numbers and underscores are permitted";
+                return;
+            }
             _patternDatabase.AddPattern(new Pattern() { name = newPatternName, points = _characteristicPoints });
             Logger.Log = $"Added pattern '{newPatternName}' to known patterns";
             txt.Text = "";
