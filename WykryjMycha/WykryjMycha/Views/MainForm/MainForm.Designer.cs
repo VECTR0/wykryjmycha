@@ -41,6 +41,9 @@
             this.trbSteps = new System.Windows.Forms.TrackBar();
             this.picSteps = new System.Windows.Forms.PictureBox();
             this.tpPatterns = new System.Windows.Forms.TabPage();
+            this.btnSaveWeights = new System.Windows.Forms.Button();
+            this.numDistanceWeight = new System.Windows.Forms.NumericUpDown();
+            this.numAngleWeight = new System.Windows.Forms.NumericUpDown();
             this.btnImportPatterns = new System.Windows.Forms.Button();
             this.btnDeletePattern = new System.Windows.Forms.Button();
             this.btnExportPatterns = new System.Windows.Forms.Button();
@@ -75,6 +78,8 @@
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
+            this.lblAngleWeight = new System.Windows.Forms.Label();
+            this.lblDistanceWeight = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -82,6 +87,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).BeginInit();
             this.tpPatterns.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDistanceWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAngleWeight)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
             this.tpTests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).BeginInit();
@@ -231,6 +238,11 @@
             // 
             // tpPatterns
             // 
+            this.tpPatterns.Controls.Add(this.lblDistanceWeight);
+            this.tpPatterns.Controls.Add(this.lblAngleWeight);
+            this.tpPatterns.Controls.Add(this.btnSaveWeights);
+            this.tpPatterns.Controls.Add(this.numDistanceWeight);
+            this.tpPatterns.Controls.Add(this.numAngleWeight);
             this.tpPatterns.Controls.Add(this.btnImportPatterns);
             this.tpPatterns.Controls.Add(this.btnDeletePattern);
             this.tpPatterns.Controls.Add(this.btnExportPatterns);
@@ -244,6 +256,30 @@
             this.tpPatterns.TabIndex = 1;
             this.tpPatterns.Text = "Patterns Editor";
             this.tpPatterns.UseVisualStyleBackColor = true;
+            // 
+            // btnSaveWeights
+            // 
+            this.btnSaveWeights.Location = new System.Drawing.Point(632, 70);
+            this.btnSaveWeights.Name = "btnSaveWeights";
+            this.btnSaveWeights.Size = new System.Drawing.Size(75, 23);
+            this.btnSaveWeights.TabIndex = 16;
+            this.btnSaveWeights.Text = "Save";
+            this.btnSaveWeights.UseVisualStyleBackColor = true;
+            this.btnSaveWeights.Click += new System.EventHandler(this.btnSaveWeights_Click);
+            // 
+            // numDistanceWeight
+            // 
+            this.numDistanceWeight.Location = new System.Drawing.Point(632, 41);
+            this.numDistanceWeight.Name = "numDistanceWeight";
+            this.numDistanceWeight.Size = new System.Drawing.Size(75, 23);
+            this.numDistanceWeight.TabIndex = 15;
+            // 
+            // numAngleWeight
+            // 
+            this.numAngleWeight.Location = new System.Drawing.Point(632, 4);
+            this.numAngleWeight.Name = "numAngleWeight";
+            this.numAngleWeight.Size = new System.Drawing.Size(75, 23);
+            this.numAngleWeight.TabIndex = 15;
             // 
             // btnImportPatterns
             // 
@@ -611,6 +647,24 @@
             this.sfdStrokes.DefaultExt = "json";
             this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
+            // lblAngleWeight
+            // 
+            this.lblAngleWeight.AutoSize = true;
+            this.lblAngleWeight.Location = new System.Drawing.Point(533, 6);
+            this.lblAngleWeight.Name = "lblAngleWeight";
+            this.lblAngleWeight.Size = new System.Drawing.Size(79, 15);
+            this.lblAngleWeight.TabIndex = 17;
+            this.lblAngleWeight.Text = "Angle Weight";
+            // 
+            // lblDistanceWeight
+            // 
+            this.lblDistanceWeight.AutoSize = true;
+            this.lblDistanceWeight.Location = new System.Drawing.Point(533, 43);
+            this.lblDistanceWeight.Name = "lblDistanceWeight";
+            this.lblDistanceWeight.Size = new System.Drawing.Size(93, 15);
+            this.lblDistanceWeight.TabIndex = 17;
+            this.lblDistanceWeight.Text = "Distance Weight";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -630,6 +684,9 @@
             ((System.ComponentModel.ISupportInitialize)(this.trbSteps)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picSteps)).EndInit();
             this.tpPatterns.ResumeLayout(false);
+            this.tpPatterns.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numDistanceWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numAngleWeight)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
             this.tpTests.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).EndInit();
@@ -695,6 +752,11 @@
         private SaveFileDialog sfdStrokes;
         private Button btnDeleteStroke;
         private Button btnClearStrokes;
+        private NumericUpDown numDistanceWeight;
+        private NumericUpDown numAngleWeight;
+        private Button btnSaveWeights;
+        private Label lblDistanceWeight;
+        private Label lblAngleWeight;
     }
 }
 

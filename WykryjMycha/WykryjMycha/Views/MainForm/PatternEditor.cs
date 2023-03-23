@@ -4,10 +4,10 @@
     {
         private PatternEditorController _patternEditorController;
 
-        internal void RenderPattern(Pattern pattern)
+        internal void RenderPattern(Pattern pattern, int selectedPoint)
         {
             DrawUtils.ClearPictureBox(picPattern);
-            DrawUtils.DrawPattern(pattern.points, picPattern);
+            DrawUtils.DrawPattern(pattern.points, picPattern, selectedPoint);
         }
 
         internal void ClearEditorPatternsList() => lstEditorPatterns.Items.Clear();
@@ -18,7 +18,7 @@
             foreach (var pattern in patterns)
                 lstEditorPatterns.Items.Add(pattern.name);
             if (lstEditorPatterns.SelectedIndex == -1) return;
-            RenderPattern(patterns[lstEditorPatterns.SelectedIndex]);
+            RenderPattern(patterns[lstEditorPatterns.SelectedIndex], -1);
         }
 
         private void lstEditorPatterns_SelectedIndexChanged(object sender, EventArgs e)
@@ -55,6 +55,21 @@
         private void btnImportPatterns_Click(object sender, EventArgs e)
         {
             _patternEditorController.ImportPatternDatabase();
+        }
+
+        internal void SetAngleWeight(decimal value)
+        {
+            numAngleWeight.Value = value;
+        }
+        internal void SetDistanceWeight(decimal value)
+        {
+            numDistanceWeight.Value = value;
+        }
+
+        private void btnSaveWeights_Click(object sender, EventArgs e)
+        {
+            _patternEditorController.AngleWeightChanged((float)numAngleWeight.Value);
+            _patternEditorController.DistanceWeightChanged((float)numDistanceWeight.Value);
         }
     }
 }

@@ -2,7 +2,7 @@
 {
     internal static class DrawUtils
     {
-        internal static void DrawPattern(List<Point> points, PictureBox pic, float size = 10f)
+        internal static void DrawPattern(List<Point> points, PictureBox pic, int selectedPoint = -1, float size = 10f)
         {
             using Graphics g = Graphics.FromImage(pic.Image);
             for (int i = 0; i < points.Count - 1; i++)
@@ -15,7 +15,14 @@
             {
                 var p = points[i];
                 Brush brush = i == 0 ? Brushes.Orange : Brushes.Red;
-                g.FillEllipse(brush, p.X - size / 2, p.Y - size / 2f, size, size);
+                if (i != selectedPoint)
+                {
+                    g.FillEllipse(brush, p.X - size / 2, p.Y - size / 2f, size, size);
+                }
+                else
+                {
+                    g.FillEllipse(brush, p.X - size / 4f, p.Y - size / 4f, size/2f, size / 2f);
+                }
             }
             pic.Invalidate();
         }
