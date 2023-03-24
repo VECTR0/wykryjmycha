@@ -24,37 +24,37 @@
 
         internal void SetMaxSearchDistance(decimal value)
         {
-            _settings.maxSearchDistance = (float)value;
+            _settings.MaxSearchDistance = (float)value;
         }
 
         internal void SetMaxAllowedRotation(decimal value)
         {
-            _settings.maxAllowedRotation = (float)value;
+            _settings.MaxAllowedRotation = (float)value;
         }
 
         internal void SetMaxMergeDistance(decimal value)
         {
-            _settings.maxMergeDistance = (float)value;
+            _settings.MaxMergeDistance = (float)value;
         }
 
         internal void SetMinDistance(decimal value)
         {
-            _settings.minCharacteriticPointsDistance = (float)value;
+            _settings.MinCharacteriticPointsDistance = (float)value;
         }
 
         internal void SetAngleLimitDegree(decimal value)
         {
-            _settings.characteriticPointsAngleLimitDegrees = (float)value;
+            _settings.CharacteriticPointsAngleLimitDegrees = (float)value;
         }
 
         internal void SetAngleReferencePointMinimalDistance(decimal value)
         {
-            _settings.referencePointMinDistance = (float)value;
+            _settings.ReferencePointMinDistance = (float)value;
         }
 
         internal void SetDrawingTimeout(int value)
         {
-            _settings.drawingTimeout = value;
+            _settings.DrawingTimeout = value;
         }
     }
 }

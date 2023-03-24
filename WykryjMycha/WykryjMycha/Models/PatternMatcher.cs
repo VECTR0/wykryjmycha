@@ -65,7 +65,7 @@
                     var distanceToPreviousToMerge = Point.Distance(toMerge[i], toMerge[i - 1]);
                     if (i < reference.Count) distanceToCurrent = Point.Distance(toMerge[i], reference[i]);
                     else distanceToCurrent = float.PositiveInfinity;
-                    if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPreviousToMerge < settings.maxMergeDistance)
+                    if (i == startingIndex + 1 && distanceToPrevious < distanceToCurrent && distanceToPreviousToMerge < settings.MaxMergeDistance)
                     {
                         var removed = toMerge[i];
                         var removedWeight = weights[i];

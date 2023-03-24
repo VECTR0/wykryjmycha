@@ -14,13 +14,12 @@
             CharacteristicPointsFinder characteristicPointsFinder = new CharacteristicPointsFinder();
             Settings settings = Settings.GetInstance();
             StrokeDatabase strokeDatabase = new StrokeDatabase();
-            Tester tester = new Tester();
             _drawingInputController = new DrawingInputController(this, patternDatabase, patternMatcher, characteristicPointsFinder, settings, strokeDatabase);
             _visualiserController = new VisualiserController(this, patternDatabase);
             _patternEditorController = new PatternEditorController(this, patternDatabase);
             _settingsController = new SettingsController(this, settings);
             _settingsController.Initialize(maxSearchDistance, maxAllowedRotation, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist, numDrawingTimeout);
-            _testingController = new TestingController(this, strokeDatabase, tester);
+            _testingController = new TestingController(this, strokeDatabase);
         }
 
         public TextBox GetConsoleTextBox() => txtConsole;
