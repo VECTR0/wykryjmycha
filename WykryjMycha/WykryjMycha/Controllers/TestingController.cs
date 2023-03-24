@@ -1,17 +1,17 @@
-﻿namespace WykryjMycha
+﻿using WykryjMycha.Models.GeneticOptimiser;
+
+namespace WykryjMycha
 {
     internal class TestingController
     {
         internal MainForm testingView;
         private StrokeDatabase _strokeDatabase;
-        private Tester _tester;
         private int _selectedStroke = -1;
-        internal TestingController(MainForm instance, StrokeDatabase strokeDatabase, Tester tester)
+        internal TestingController(MainForm instance, StrokeDatabase strokeDatabase)
         {
             testingView = instance;
             _strokeDatabase = strokeDatabase;
             _strokeDatabase.Changed += StrokesDatabaseChanged;
-            _tester = tester;
 
             testingView.SetStrokesList(_strokeDatabase.GetStrokes());
         }
@@ -25,7 +25,29 @@
 
         internal void RunTests()
         {
-            _tester.Run(_strokeDatabase, Settings.GetInstance(), new AverageMetric()); //TODO: randomize settings
+            StrokesBasedTester.Run(_strokeDatabase, new AverageMetric(), Settings.GetInstance());
+        }
+
+        internal void OptimiseParameters()
+        {
+            // TODO: move these parameters to GUI
+            int maxIterations = 50;
+            int populationAmount = 500;
+            int selectedAmount = 80;
+            float mutationProbability = 0.01f;
+            float targetQuality = 0.8f;
+
+            IMetric matcherMetric = new AverageMetric();
+            IPopulationGenerator<SettingsChromosome> populationGenerator = new PopulationGenerator();
+            IQualityMetric<SettingsChromosome> qualityMetric = new QualityMetric(targetQuality, _strokeDatabase, matcherMetric);
+            ISelector<SettingsChromosome> selector = new RouletteSelector();
+            ICrosser<SettingsChromosome> crosser = new SwappingCrosser();
+            IMutator<SettingsChromosome> mutator = new Mutator(mutationProbability);
+            ISuccessor<SettingsChromosome> successor = new WholeNewGenerationSuccessor(crosser, mutator);
+
+            SettingsOptimiser settingsOptimiser = new SettingsOptimiser(populationGenerator, qualityMetric, selector, successor);
+            var suboptimalSettings = settingsOptimiser.Run(maxIterations, populationAmount, selectedAmount);
+            settingsOptimiser.SetSettings(suboptimalSettings);
         }
 
         internal void HandleStrokeSelected(int selectedIndex)

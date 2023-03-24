@@ -88,7 +88,7 @@ namespace WykryjMycha
             if (e.Button == MouseButtons.Left)
             {
                 _mouseDown = false;
-                drawingView.StartDrawingTimer(_settings.drawingTimeout);
+                drawingView.StartDrawingTimer(_settings.DrawingTimeout);
                 _points?.Add(new Point(e.X, e.Y, PointOrigin.PenUp));
             }
         }

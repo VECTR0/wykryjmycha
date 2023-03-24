@@ -2,7 +2,7 @@
 {
     internal class CharacteristicPointsFinder
     {
-        internal static List<Point>? GetCharacteristicPoints(List<Point> input, Settings settings, float minDistance = Settings.DefaultMinCharacteriticPointsDistance, float angleLimitDeg = Settings.DefaultCharacteriticPointsAngleLimitDegrees)
+        internal static List<Point>? GetCharacteristicPoints(List<Point> input, Settings settings)
         {
             if (input == null) return null;
 
@@ -13,7 +13,7 @@
             {
                 int nextIdx = i + 1;
                 bool reachedTheEnd = false;
-                while (Point.Distance(input[i], input[nextIdx]) < settings.referencePointMinDistance)
+                while (Point.Distance(input[i], input[nextIdx]) < settings.ReferencePointMinDistance)
                 {
                     if (++nextIdx >= input.Count - 1)
                     {
@@ -23,7 +23,7 @@
                 }
                 if (reachedTheEnd) break;
 
-                if (Point.Distance(lastCharacteristicPoint, input[i]) >= minDistance)
+                if (Point.Distance(lastCharacteristicPoint, input[i]) >= settings.MinCharacteriticPointsDistance)
                 {
                     if (input[i].PointOrigin != PointOrigin.PenMove)
                     {
@@ -35,7 +35,7 @@
                     Point a = lastCharacteristicPoint - input[i];
                     Point b = input[nextIdx] - input[i];
 
-                    if (CalculateAngle(a, b) >= angleLimitDeg)
+                    if (CalculateAngle(a, b) >= settings.CharacteriticPointsAngleLimitDegrees)
                     {
                         lastCharacteristicPoint = input[i];
                         result.Add(lastCharacteristicPoint);
@@ -49,7 +49,7 @@
             }
 
             // only if this addition would be significant, add last point
-            if (Point.Distance(lastCharacteristicPoint, input[^1]) >= minDistance)
+            if (Point.Distance(lastCharacteristicPoint, input[^1]) >= settings.MinCharacteriticPointsDistance)
             {
                 result.Add(input[^1]);
             }

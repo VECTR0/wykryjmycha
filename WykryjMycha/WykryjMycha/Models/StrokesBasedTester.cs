@@ -1,15 +1,20 @@
 ﻿namespace WykryjMycha
 {
-    internal class Tester
+    internal static class StrokesBasedTester
     {
-        internal Tester()
-        {
-
-        }
-
-        internal void Run(StrokeDatabase strokeDatabase, Settings settings, IMetric metric) // TODO add settings randomization
+        internal static void Run(StrokeDatabase strokeDatabase, IMetric metric, Settings settings)
         {
             Logger.Log = "=== TESTING ===";
+
+            float result = RunHeadless(strokeDatabase, metric, settings);
+
+            Logger.Log = $"Run {strokeDatabase.GetStrokes().Where(x => !x.isPattern).Count()} tests";
+            Logger.Log = $"Success rate {Math.Round(result * 100)}%";
+            Logger.Log = "===         ===";
+        }
+
+        internal static float RunHeadless(StrokeDatabase strokeDatabase, IMetric metric, Settings settings)
+        {
             var strokes = strokeDatabase.GetStrokes();
 
             var patternDatabase = new PatternDatabase();
@@ -22,23 +27,22 @@
             }
 
             var patternMatcher = new PatternMatcher();
-            var correct = 0;
-            var incorrect = 0;
+            int correct = 0;
+            int incorrect = 0;
             foreach (var stroke in strokes.Where(x => !x.isPattern))
             {
                 var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
                 var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
                 var possible = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetPossible(metric);
                 var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(metric);
-                if (best != null) Logger.Log = $"Found {best.name} for {stroke.name}";
-                else Logger.Log = $"Found none for {stroke.name}";
-                if (best != null && best.name.ToLower() == stroke.name.ToLower()) correct++;
-                else incorrect++;
+
+                if (best != null && best.name.ToLower() == stroke.name.ToLower())
+                    correct++;
+                else
+                    incorrect++;
             }
-            Logger.Log = $"Run {(correct + incorrect)} tests";
-            Logger.Log = $"{incorrect} incorrect";
-            Logger.Log = $"Success rate {Math.Round((1 - 1.0 * incorrect / (correct + incorrect)) * 100)}%";
-            Logger.Log = "===         ===";
+
+            return correct / (correct + incorrect);
         }
     }
 }
