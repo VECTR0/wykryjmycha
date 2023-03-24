@@ -41,6 +41,8 @@
             this.trbSteps = new System.Windows.Forms.TrackBar();
             this.picSteps = new System.Windows.Forms.PictureBox();
             this.tpPatterns = new System.Windows.Forms.TabPage();
+            this.lblDistanceWeight = new System.Windows.Forms.Label();
+            this.lblAngleWeight = new System.Windows.Forms.Label();
             this.btnSaveWeights = new System.Windows.Forms.Button();
             this.numDistanceWeight = new System.Windows.Forms.NumericUpDown();
             this.numAngleWeight = new System.Windows.Forms.NumericUpDown();
@@ -78,8 +80,6 @@
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
-            this.lblAngleWeight = new System.Windows.Forms.Label();
-            this.lblDistanceWeight = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -107,13 +107,13 @@
             this.txtConsole.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.txtConsole.Location = new System.Drawing.Point(14, 436);
+            this.txtConsole.Location = new System.Drawing.Point(14, 393);
             this.txtConsole.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtConsole.Multiline = true;
             this.txtConsole.Name = "txtConsole";
             this.txtConsole.ReadOnly = true;
             this.txtConsole.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.txtConsole.Size = new System.Drawing.Size(804, 125);
+            this.txtConsole.Size = new System.Drawing.Size(677, 85);
             this.txtConsole.TabIndex = 0;
             // 
             // tabControl1
@@ -129,7 +129,7 @@
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(810, 415);
+            this.tabControl1.Size = new System.Drawing.Size(677, 373);
             this.tabControl1.TabIndex = 2;
             // 
             // tpDrawing
@@ -142,14 +142,14 @@
             this.tpDrawing.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tpDrawing.Name = "tpDrawing";
             this.tpDrawing.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tpDrawing.Size = new System.Drawing.Size(802, 387);
+            this.tpDrawing.Size = new System.Drawing.Size(669, 345);
             this.tpDrawing.TabIndex = 0;
             this.tpDrawing.Text = "Drawing";
             this.tpDrawing.UseVisualStyleBackColor = true;
             // 
             // btnAddStroke
             // 
-            this.btnAddStroke.Location = new System.Drawing.Point(275, 357);
+            this.btnAddStroke.Location = new System.Drawing.Point(225, 312);
             this.btnAddStroke.Name = "btnAddStroke";
             this.btnAddStroke.Size = new System.Drawing.Size(82, 23);
             this.btnAddStroke.TabIndex = 5;
@@ -159,7 +159,7 @@
             // 
             // btnAddPattern
             // 
-            this.btnAddPattern.Location = new System.Drawing.Point(187, 357);
+            this.btnAddPattern.Location = new System.Drawing.Point(136, 312);
             this.btnAddPattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnAddPattern.Name = "btnAddPattern";
             this.btnAddPattern.Size = new System.Drawing.Size(82, 23);
@@ -174,7 +174,7 @@
             this.picDrawing.Location = new System.Drawing.Point(7, 7);
             this.picDrawing.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.picDrawing.Name = "picDrawing";
-            this.picDrawing.Size = new System.Drawing.Size(350, 346);
+            this.picDrawing.Size = new System.Drawing.Size(300, 300);
             this.picDrawing.TabIndex = 2;
             this.picDrawing.TabStop = false;
             this.picDrawing.MouseClick += new System.Windows.Forms.MouseEventHandler(this.picDrawing_MouseClick);
@@ -185,11 +185,11 @@
             // 
             // txtNewPatternName
             // 
-            this.txtNewPatternName.Location = new System.Drawing.Point(7, 357);
+            this.txtNewPatternName.Location = new System.Drawing.Point(7, 313);
             this.txtNewPatternName.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.txtNewPatternName.Name = "txtNewPatternName";
             this.txtNewPatternName.PlaceholderText = "New Pattern Name";
-            this.txtNewPatternName.Size = new System.Drawing.Size(172, 23);
+            this.txtNewPatternName.Size = new System.Drawing.Size(121, 23);
             this.txtNewPatternName.TabIndex = 3;
             // 
             // tpVisualisation
@@ -200,7 +200,7 @@
             this.tpVisualisation.Location = new System.Drawing.Point(4, 24);
             this.tpVisualisation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tpVisualisation.Name = "tpVisualisation";
-            this.tpVisualisation.Size = new System.Drawing.Size(802, 387);
+            this.tpVisualisation.Size = new System.Drawing.Size(669, 345);
             this.tpVisualisation.TabIndex = 3;
             this.tpVisualisation.Text = "Algorithm Visualisation";
             this.tpVisualisation.UseVisualStyleBackColor = true;
@@ -212,17 +212,17 @@
             this.lstStepPatterns.Location = new System.Drawing.Point(8, 6);
             this.lstStepPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstStepPatterns.Name = "lstStepPatterns";
-            this.lstStepPatterns.Size = new System.Drawing.Size(160, 349);
+            this.lstStepPatterns.Size = new System.Drawing.Size(160, 304);
             this.lstStepPatterns.TabIndex = 8;
             this.lstStepPatterns.SelectedIndexChanged += new System.EventHandler(this.lstStepPatterns_SelectedIndexChanged);
             // 
             // trbSteps
             // 
-            this.trbSteps.Location = new System.Drawing.Point(534, 6);
+            this.trbSteps.Location = new System.Drawing.Point(484, 6);
             this.trbSteps.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.trbSteps.Name = "trbSteps";
             this.trbSteps.Orientation = System.Windows.Forms.Orientation.Vertical;
-            this.trbSteps.Size = new System.Drawing.Size(45, 346);
+            this.trbSteps.Size = new System.Drawing.Size(45, 300);
             this.trbSteps.TabIndex = 7;
             this.trbSteps.Scroll += new System.EventHandler(this.trbSteps_Scroll);
             // 
@@ -232,7 +232,7 @@
             this.picSteps.Location = new System.Drawing.Point(176, 6);
             this.picSteps.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.picSteps.Name = "picSteps";
-            this.picSteps.Size = new System.Drawing.Size(350, 346);
+            this.picSteps.Size = new System.Drawing.Size(300, 300);
             this.picSteps.TabIndex = 6;
             this.picSteps.TabStop = false;
             // 
@@ -252,14 +252,32 @@
             this.tpPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tpPatterns.Name = "tpPatterns";
             this.tpPatterns.Padding = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.tpPatterns.Size = new System.Drawing.Size(802, 387);
+            this.tpPatterns.Size = new System.Drawing.Size(669, 345);
             this.tpPatterns.TabIndex = 1;
             this.tpPatterns.Text = "Patterns Editor";
             this.tpPatterns.UseVisualStyleBackColor = true;
             // 
+            // lblDistanceWeight
+            // 
+            this.lblDistanceWeight.AutoSize = true;
+            this.lblDistanceWeight.Location = new System.Drawing.Point(483, 35);
+            this.lblDistanceWeight.Name = "lblDistanceWeight";
+            this.lblDistanceWeight.Size = new System.Drawing.Size(93, 15);
+            this.lblDistanceWeight.TabIndex = 17;
+            this.lblDistanceWeight.Text = "Distance Weight";
+            // 
+            // lblAngleWeight
+            // 
+            this.lblAngleWeight.AutoSize = true;
+            this.lblAngleWeight.Location = new System.Drawing.Point(483, 6);
+            this.lblAngleWeight.Name = "lblAngleWeight";
+            this.lblAngleWeight.Size = new System.Drawing.Size(79, 15);
+            this.lblAngleWeight.TabIndex = 17;
+            this.lblAngleWeight.Text = "Angle Weight";
+            // 
             // btnSaveWeights
             // 
-            this.btnSaveWeights.Location = new System.Drawing.Point(632, 70);
+            this.btnSaveWeights.Location = new System.Drawing.Point(582, 62);
             this.btnSaveWeights.Name = "btnSaveWeights";
             this.btnSaveWeights.Size = new System.Drawing.Size(75, 23);
             this.btnSaveWeights.TabIndex = 16;
@@ -269,21 +287,21 @@
             // 
             // numDistanceWeight
             // 
-            this.numDistanceWeight.Location = new System.Drawing.Point(632, 41);
+            this.numDistanceWeight.Location = new System.Drawing.Point(582, 33);
             this.numDistanceWeight.Name = "numDistanceWeight";
             this.numDistanceWeight.Size = new System.Drawing.Size(75, 23);
             this.numDistanceWeight.TabIndex = 15;
             // 
             // numAngleWeight
             // 
-            this.numAngleWeight.Location = new System.Drawing.Point(632, 4);
+            this.numAngleWeight.Location = new System.Drawing.Point(582, 6);
             this.numAngleWeight.Name = "numAngleWeight";
             this.numAngleWeight.Size = new System.Drawing.Size(75, 23);
             this.numAngleWeight.TabIndex = 15;
             // 
             // btnImportPatterns
             // 
-            this.btnImportPatterns.Location = new System.Drawing.Point(8, 358);
+            this.btnImportPatterns.Location = new System.Drawing.Point(8, 316);
             this.btnImportPatterns.Name = "btnImportPatterns";
             this.btnImportPatterns.Size = new System.Drawing.Size(75, 23);
             this.btnImportPatterns.TabIndex = 14;
@@ -293,7 +311,7 @@
             // 
             // btnDeletePattern
             // 
-            this.btnDeletePattern.Location = new System.Drawing.Point(451, 358);
+            this.btnDeletePattern.Location = new System.Drawing.Point(401, 312);
             this.btnDeletePattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnDeletePattern.Name = "btnDeletePattern";
             this.btnDeletePattern.Size = new System.Drawing.Size(75, 23);
@@ -304,7 +322,7 @@
             // 
             // btnExportPatterns
             // 
-            this.btnExportPatterns.Location = new System.Drawing.Point(93, 358);
+            this.btnExportPatterns.Location = new System.Drawing.Point(93, 316);
             this.btnExportPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.btnExportPatterns.Name = "btnExportPatterns";
             this.btnExportPatterns.Size = new System.Drawing.Size(75, 23);
@@ -319,7 +337,7 @@
             this.picPattern.Location = new System.Drawing.Point(176, 6);
             this.picPattern.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.picPattern.Name = "picPattern";
-            this.picPattern.Size = new System.Drawing.Size(350, 346);
+            this.picPattern.Size = new System.Drawing.Size(300, 300);
             this.picPattern.TabIndex = 10;
             this.picPattern.TabStop = false;
             this.picPattern.MouseDown += new System.Windows.Forms.MouseEventHandler(this.picPattern_MouseDown);
@@ -333,7 +351,7 @@
             this.lstEditorPatterns.Location = new System.Drawing.Point(8, 6);
             this.lstEditorPatterns.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstEditorPatterns.Name = "lstEditorPatterns";
-            this.lstEditorPatterns.Size = new System.Drawing.Size(160, 349);
+            this.lstEditorPatterns.Size = new System.Drawing.Size(160, 304);
             this.lstEditorPatterns.TabIndex = 9;
             this.lstEditorPatterns.SelectedIndexChanged += new System.EventHandler(this.lstEditorPatterns_SelectedIndexChanged);
             // 
@@ -348,14 +366,14 @@
             this.tpTests.Controls.Add(this.btnRunTests);
             this.tpTests.Location = new System.Drawing.Point(4, 24);
             this.tpTests.Name = "tpTests";
-            this.tpTests.Size = new System.Drawing.Size(802, 387);
+            this.tpTests.Size = new System.Drawing.Size(669, 345);
             this.tpTests.TabIndex = 4;
             this.tpTests.Text = "Testing";
             this.tpTests.UseVisualStyleBackColor = true;
             // 
             // btnClearStrokes
             // 
-            this.btnClearStrokes.Location = new System.Drawing.Point(370, 358);
+            this.btnClearStrokes.Location = new System.Drawing.Point(320, 312);
             this.btnClearStrokes.Name = "btnClearStrokes";
             this.btnClearStrokes.Size = new System.Drawing.Size(75, 23);
             this.btnClearStrokes.TabIndex = 16;
@@ -365,7 +383,7 @@
             // 
             // btnDeleteStroke
             // 
-            this.btnDeleteStroke.Location = new System.Drawing.Point(451, 358);
+            this.btnDeleteStroke.Location = new System.Drawing.Point(401, 312);
             this.btnDeleteStroke.Name = "btnDeleteStroke";
             this.btnDeleteStroke.Size = new System.Drawing.Size(75, 23);
             this.btnDeleteStroke.TabIndex = 15;
@@ -375,7 +393,7 @@
             // 
             // btnImportStrokes
             // 
-            this.btnImportStrokes.Location = new System.Drawing.Point(8, 358);
+            this.btnImportStrokes.Location = new System.Drawing.Point(8, 316);
             this.btnImportStrokes.Name = "btnImportStrokes";
             this.btnImportStrokes.Size = new System.Drawing.Size(75, 23);
             this.btnImportStrokes.TabIndex = 14;
@@ -385,7 +403,7 @@
             // 
             // btnExportStrokes
             // 
-            this.btnExportStrokes.Location = new System.Drawing.Point(93, 358);
+            this.btnExportStrokes.Location = new System.Drawing.Point(93, 316);
             this.btnExportStrokes.Name = "btnExportStrokes";
             this.btnExportStrokes.Size = new System.Drawing.Size(75, 23);
             this.btnExportStrokes.TabIndex = 13;
@@ -399,7 +417,7 @@
             this.picStroke.Location = new System.Drawing.Point(176, 6);
             this.picStroke.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.picStroke.Name = "picStroke";
-            this.picStroke.Size = new System.Drawing.Size(350, 346);
+            this.picStroke.Size = new System.Drawing.Size(300, 300);
             this.picStroke.TabIndex = 12;
             this.picStroke.TabStop = false;
             // 
@@ -410,13 +428,13 @@
             this.lstStrokes.Location = new System.Drawing.Point(8, 6);
             this.lstStrokes.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.lstStrokes.Name = "lstStrokes";
-            this.lstStrokes.Size = new System.Drawing.Size(160, 349);
+            this.lstStrokes.Size = new System.Drawing.Size(160, 304);
             this.lstStrokes.TabIndex = 11;
             this.lstStrokes.SelectedIndexChanged += new System.EventHandler(this.lstStrokes_SelectedIndexChanged);
             // 
             // btnRunTests
             // 
-            this.btnRunTests.Location = new System.Drawing.Point(289, 358);
+            this.btnRunTests.Location = new System.Drawing.Point(174, 312);
             this.btnRunTests.Name = "btnRunTests";
             this.btnRunTests.Size = new System.Drawing.Size(75, 23);
             this.btnRunTests.TabIndex = 2;
@@ -446,7 +464,7 @@
             this.tpSettings.Location = new System.Drawing.Point(4, 24);
             this.tpSettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tpSettings.Name = "tpSettings";
-            this.tpSettings.Size = new System.Drawing.Size(802, 387);
+            this.tpSettings.Size = new System.Drawing.Size(669, 345);
             this.tpSettings.TabIndex = 2;
             this.tpSettings.Text = "Settings";
             this.tpSettings.UseVisualStyleBackColor = true;
@@ -647,29 +665,11 @@
             this.sfdStrokes.DefaultExt = "json";
             this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
-            // lblAngleWeight
-            // 
-            this.lblAngleWeight.AutoSize = true;
-            this.lblAngleWeight.Location = new System.Drawing.Point(533, 6);
-            this.lblAngleWeight.Name = "lblAngleWeight";
-            this.lblAngleWeight.Size = new System.Drawing.Size(79, 15);
-            this.lblAngleWeight.TabIndex = 17;
-            this.lblAngleWeight.Text = "Angle Weight";
-            // 
-            // lblDistanceWeight
-            // 
-            this.lblDistanceWeight.AutoSize = true;
-            this.lblDistanceWeight.Location = new System.Drawing.Point(533, 43);
-            this.lblDistanceWeight.Name = "lblDistanceWeight";
-            this.lblDistanceWeight.Size = new System.Drawing.Size(93, 15);
-            this.lblDistanceWeight.TabIndex = 17;
-            this.lblDistanceWeight.Text = "Distance Weight";
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(832, 576);
+            this.ClientSize = new System.Drawing.Size(699, 490);
             this.Controls.Add(this.tabControl1);
             this.Controls.Add(this.txtConsole);
             this.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
