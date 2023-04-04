@@ -2,15 +2,20 @@
 {
     internal class PopulationGenerator : IPopulationGenerator<SettingsChromosome>
     {
+        private readonly Random _random;
+        public PopulationGenerator(Random random)
+        {
+            _random = random;
+        }
+
         public SettingsChromosome[] Generate(int howMany)
         {
             SettingsChromosome[] population = new SettingsChromosome[howMany];
-            Random random = new Random();
 
             for (int i = 0; i < howMany; i++)
             {
                 population[i] = new SettingsChromosome();
-                population[i].GenerateValues(random);
+                population[i].GenerateValues(_random);
             }
 
             return population;

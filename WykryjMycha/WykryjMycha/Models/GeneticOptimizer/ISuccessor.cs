@@ -2,6 +2,6 @@
 {
     internal interface ISuccessor<T> where T : IChromosome
     {
-        public T[] CreateNextGeneration(T[] chosenOnes);
+        public T[] CreateNextGeneration(T[] chosenOnes, int populationAmount);
     }
 }

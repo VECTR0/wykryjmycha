@@ -1,13 +1,13 @@
 ﻿namespace WykryjMycha.Models.GeneticOptimiser
 {
-    internal class GeneticOptimiser<T> where T : IChromosome
+    internal class GeneticOptimizer<T> where T : IChromosome
     {
         private IPopulationGenerator<T> populationGenerator;
         private IQualityMetric<T> qualityMetric;
         private ISelector<T> selector;
         private ISuccessor<T> successor;
 
-        public GeneticOptimiser(IPopulationGenerator<T> pg, IQualityMetric<T> qm, ISelector<T> se, ISuccessor<T> su)
+        public GeneticOptimizer(IPopulationGenerator<T> pg, IQualityMetric<T> qm, ISelector<T> se, ISuccessor<T> su)
         {
             populationGenerator = pg;
             qualityMetric = qm;
@@ -24,7 +24,7 @@
                 T? chosenOne = EvaluatePopulationQuality(population);
                 if (chosenOne != null) return chosenOne;
                 T[] selectedSpecimes = selector.Select(population, selectedAmount);
-                population = successor.CreateNextGeneration(selectedSpecimes);
+                population = successor.CreateNextGeneration(selectedSpecimes, populationAmount);
             }
 
             return SelectBestOne(population);

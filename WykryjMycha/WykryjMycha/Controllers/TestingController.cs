@@ -37,15 +37,16 @@ namespace WykryjMycha
             float mutationProbability = 0.01f;
             float targetQuality = 0.8f;
 
+            Random random = new Random();
             IMetric matcherMetric = new AverageMetric();
-            IPopulationGenerator<SettingsChromosome> populationGenerator = new PopulationGenerator();
+            IPopulationGenerator<SettingsChromosome> populationGenerator = new PopulationGenerator(random);
             IQualityMetric<SettingsChromosome> qualityMetric = new QualityMetric(targetQuality, _strokeDatabase, matcherMetric);
-            ISelector<SettingsChromosome> selector = new RouletteSelector();
-            ICrosser<SettingsChromosome> crosser = new SwappingCrosser();
-            IMutator<SettingsChromosome> mutator = new Mutator(mutationProbability);
-            ISuccessor<SettingsChromosome> successor = new WholeNewGenerationSuccessor(crosser, mutator);
+            ISelector<SettingsChromosome> selector = new RouletteSelector(random);
+            ICrosser<SettingsChromosome> crosser = new SwappingCrosser(random);
+            IMutator<SettingsChromosome> mutator = new Mutator(mutationProbability, random);
+            ISuccessor<SettingsChromosome> successor = new WholeNewGenerationSuccessor(crosser, mutator, random);
 
-            SettingsOptimiser settingsOptimiser = new SettingsOptimiser(populationGenerator, qualityMetric, selector, successor);
+            SettingsOptimizer settingsOptimiser = new SettingsOptimizer(populationGenerator, qualityMetric, selector, successor);
             var suboptimalSettings = settingsOptimiser.Run(maxIterations, populationAmount, selectedAmount);
             settingsOptimiser.SetSettings(suboptimalSettings);
         }

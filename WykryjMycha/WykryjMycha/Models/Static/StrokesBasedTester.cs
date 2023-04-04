@@ -5,8 +5,10 @@
         internal static void Run(StrokeDatabase strokeDatabase, IMetric metric, Settings settings)
         {
             Logger.Log = "=== TESTING ===";
-
+            DateTime start = DateTime.Now;
             float result = RunHeadless(strokeDatabase, metric, settings);
+            DateTime end = DateTime.Now;
+            Logger.Log = $"Process time = {end.Subtract(start)}";
 
             Logger.Log = $"Run {strokeDatabase.GetStrokes().Where(x => !x.isPattern).Count()} tests";
             Logger.Log = $"Success rate {Math.Round(result * 100)}%";

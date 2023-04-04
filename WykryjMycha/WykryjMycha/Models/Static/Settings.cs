@@ -2,6 +2,8 @@
 {
     internal class Settings
     {
+        internal const int NumberOfParameters = 4;
+
         // Pattern Matcher
         internal const float DefaultMaxSearchDistance = 25f;
         internal const float DefaultMaxAllowedRotation = 30f;
@@ -55,6 +57,40 @@
                 _instance = new Settings();
             }
             return _instance;
+        }
+
+        internal float GetParameter(int i)
+        {
+            switch (i)
+            {
+                case 0: return MaxMergeDistance;
+                case 1: return MinCharacteriticPointsDistance;
+                case 2: return CharacteriticPointsAngleLimitDegrees;
+                case 3: return ReferencePointMinDistance;
+                default:
+                    throw new ArgumentException("Wanted to reach inexisting parameter");
+            }
+        }
+
+        internal void SetParameter(int i, float value)
+        {
+            switch (i)
+            {
+                case 0: 
+                    MaxMergeDistance = value;
+                    break;
+                case 1: 
+                    MinCharacteriticPointsDistance = value;
+                    break;
+                case 2: 
+                    CharacteriticPointsAngleLimitDegrees = value;
+                    break;
+                case 3: 
+                    ReferencePointMinDistance = value;
+                    break;
+                default:
+                    throw new ArgumentException("Wanted to reach inexisting parameter");
+            }
         }
     }
 }

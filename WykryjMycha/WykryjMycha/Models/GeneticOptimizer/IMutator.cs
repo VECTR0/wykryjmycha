@@ -2,7 +2,7 @@
 {
     internal interface IMutator<T> where T : IChromosome
     {
-        public T Mutate(T specimen);
+        public void Mutate(T specimen);
 
         public float Probability { get; init; }
     }
