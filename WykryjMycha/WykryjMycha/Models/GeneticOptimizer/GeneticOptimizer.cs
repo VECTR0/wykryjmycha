@@ -1,6 +1,4 @@
-﻿using System.Diagnostics;
-
-namespace WykryjMycha.Models.GeneticOptimiser
+﻿namespace WykryjMycha.Models.GeneticOptimiser
 {
     internal class GeneticOptimizer<T> where T : IChromosome
     {

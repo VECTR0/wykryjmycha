@@ -56,8 +56,9 @@
         }
         private void btnClearStrokes_Click(object sender, EventArgs e)
         {
-            var msgResult = MessageBox.Show("Do you want to delete ALL strokes?", "Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (msgResult == DialogResult.Yes) _testingController.DeleteAllStrokes();
+            _testingController.OptimiseParameters();
+            //var msgResult = MessageBox.Show("Do you want to delete ALL strokes?", "Prompt", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            //if (msgResult == DialogResult.Yes) _testingController.DeleteAllStrokes();
         }
     }
 }

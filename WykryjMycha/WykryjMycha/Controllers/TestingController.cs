@@ -27,8 +27,7 @@ namespace WykryjMycha
 
         internal void RunTests()
         {
-            OptimiseParameters();
-            //StrokesBasedTester.Run(_strokeDatabase, new AverageMetric(), Settings.GetInstance());
+            StrokesBasedTester.Run(_strokeDatabase, new AverageMetric(), Settings.GetInstance(), true);
         }
 
         internal void OptimiseParameters()
@@ -38,7 +37,7 @@ namespace WykryjMycha
             int populationAmount = 500;
             int selectedAmount = 80;
             float mutationProbability = 0.01f;
-            float targetQuality = 0.9f;
+            float targetQuality = 0.85f;
 
             Random random = new Random();
             IMetric matcherMetric = new AverageMetric();

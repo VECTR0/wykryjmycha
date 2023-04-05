@@ -2,11 +2,11 @@
 {
     internal static class StrokesBasedTester
     {
-        internal static void Run(StrokeDatabase strokeDatabase, IMetric metric, Settings settings)
+        internal static void Run(StrokeDatabase strokeDatabase, IMetric metric, Settings settings, bool displayDebugLogsForEachStroke = false)
         {
             Logger.Log = "=== TESTING ===";
             DateTime start = DateTime.Now;
-            float result = RunHeadless(strokeDatabase, metric, settings);
+            float result = RunHeadless(strokeDatabase, metric, settings, displayDebugLogsForEachStroke);
             DateTime end = DateTime.Now;
             Logger.Log = $"Process time = {end.Subtract(start)}";
 
@@ -15,7 +15,7 @@
             Logger.Log = "===         ===";
         }
 
-        internal static float RunHeadless(StrokeDatabase strokeDatabase, IMetric metric, Settings settings)
+        internal static float RunHeadless(StrokeDatabase strokeDatabase, IMetric metric, Settings settings, bool displayDebugLogs=false)
         {
             var strokes = strokeDatabase.GetStrokes();
 
@@ -47,6 +47,11 @@
                         correct++;
                     else
                         incorrect++;
+
+                    if (!displayDebugLogs) continue;
+
+                    if (best != null) Logger.Log = $"Found {best.name} for {stroke.name}";
+                    else Logger.Log = $"Found none for {stroke.name}";
                 }
             }
 

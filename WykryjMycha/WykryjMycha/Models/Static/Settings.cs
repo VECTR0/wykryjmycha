@@ -7,7 +7,7 @@
         // Pattern Matcher
         internal const float DefaultMaxSearchDistance = 25f;
         internal const float DefaultMaxAllowedRotation = 30f;
-        internal const float DefaultMaxMergeDistance = 30f;
+        internal const float DefaultMaxMergeDistance = 69.03f;
 
         private float _maxSearchDistance;
         private float _maxAllowedRotation;
@@ -18,9 +18,9 @@
         public float MaxMergeDistance { get => _maxMergeDistance; set => _maxMergeDistance = Math.Clamp(value, 0f, 100f); }
 
         // Characteristic Points Finder
-        internal const float DefaultMinCharacteriticPointsDistance = 10f;
-        internal const float DefaultCharacteriticPointsAngleLimitDegrees = 40f;
-        internal const float DefaultReferencePointMinDistance = 4f;
+        internal const float DefaultMinCharacteriticPointsDistance = 6.80f;
+        internal const float DefaultCharacteriticPointsAngleLimitDegrees = 43.82f;
+        internal const float DefaultReferencePointMinDistance = 23.74f;
 
         private float _minCharacteriticPointsDistance;
         private float _characteriticPointsAngleLimitDegrees;
