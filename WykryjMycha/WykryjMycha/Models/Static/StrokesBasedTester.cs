@@ -22,10 +22,13 @@
             var patternDatabase = new PatternDatabase();
             foreach (var stroke in strokes.Where(x => x.isPattern))
             {
-                var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
-                var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
-                var pattern = new Pattern() { name = stroke.name, points = characteristicPoints };
-                patternDatabase.AddPattern(pattern);
+                lock (stroke)
+                {
+                    var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
+                    var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
+                    var pattern = new Pattern() { name = stroke.name, points = characteristicPoints };
+                    patternDatabase.AddPattern(pattern);
+                }
             }
 
             var patternMatcher = new PatternMatcher();
@@ -33,18 +36,21 @@
             int incorrect = 0;
             foreach (var stroke in strokes.Where(x => !x.isPattern))
             {
-                var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
-                var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
-                var possible = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetPossible(metric);
-                var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(metric);
+                lock (stroke)
+                {
+                    var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
+                    var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
+                    var possible = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetPossible(metric);
+                    var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(metric);
 
-                if (best != null && best.name.ToLower() == stroke.name.ToLower())
-                    correct++;
-                else
-                    incorrect++;
+                    if (best != null && best.name.ToLower() == stroke.name.ToLower())
+                        correct++;
+                    else
+                        incorrect++;
+                }
             }
 
-            return correct / (correct + incorrect);
+            return (float)correct / (correct + incorrect);
         }
     }
 }

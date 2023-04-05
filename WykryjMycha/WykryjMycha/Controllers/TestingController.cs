@@ -6,12 +6,14 @@ namespace WykryjMycha
     {
         internal MainForm testingView;
         private StrokeDatabase _strokeDatabase;
+        private SettingsController _settingsController;
         private int _selectedStroke = -1;
-        internal TestingController(MainForm instance, StrokeDatabase strokeDatabase)
+        internal TestingController(MainForm instance, StrokeDatabase strokeDatabase, SettingsController settingsController)
         {
             testingView = instance;
             _strokeDatabase = strokeDatabase;
             _strokeDatabase.Changed += StrokesDatabaseChanged;
+            _settingsController = settingsController;
 
             testingView.SetStrokesList(_strokeDatabase.GetStrokes());
         }
@@ -25,7 +27,8 @@ namespace WykryjMycha
 
         internal void RunTests()
         {
-            StrokesBasedTester.Run(_strokeDatabase, new AverageMetric(), Settings.GetInstance());
+            OptimiseParameters();
+            //StrokesBasedTester.Run(_strokeDatabase, new AverageMetric(), Settings.GetInstance());
         }
 
         internal void OptimiseParameters()
@@ -35,7 +38,7 @@ namespace WykryjMycha
             int populationAmount = 500;
             int selectedAmount = 80;
             float mutationProbability = 0.01f;
-            float targetQuality = 0.8f;
+            float targetQuality = 0.9f;
 
             Random random = new Random();
             IMetric matcherMetric = new AverageMetric();
@@ -48,7 +51,9 @@ namespace WykryjMycha
 
             SettingsOptimizer settingsOptimiser = new SettingsOptimizer(populationGenerator, qualityMetric, selector, successor);
             var suboptimalSettings = settingsOptimiser.Run(maxIterations, populationAmount, selectedAmount);
+            Logger.Log = "Finished parameters optimalisation! Check new settings";
             settingsOptimiser.SetSettings(suboptimalSettings);
+            _settingsController.DisplayUpdatedSettings();
         }
 
         internal void HandleStrokeSelected(int selectedIndex)

@@ -1,4 +1,6 @@
-﻿namespace WykryjMycha.Models.GeneticOptimiser
+﻿using System.Diagnostics;
+
+namespace WykryjMycha.Models.GeneticOptimiser
 {
     internal class GeneticOptimizer<T> where T : IChromosome
     {
@@ -17,14 +19,23 @@
 
         public T Run(int maxIterations, int populationAmount, int selectedAmount)
         {
+            CustomStopwatch stopwatch = new CustomStopwatch();
+            stopwatch.Start();
+
+            Logger.Log = "=== GENERATING NEW PARAMETERS ===";
+
             T[] population = populationGenerator.Generate(populationAmount);
+            Logger.Log = $"Generated population in {stopwatch.MeasureAndStart()}";
 
             for (int i = 0; i < maxIterations; i++)
             {
                 T? chosenOne = EvaluatePopulationQuality(population);
+                Logger.Log = $"Evaluated quality of generation no. {i} in {stopwatch.MeasureAndStart()}";
                 if (chosenOne != null) return chosenOne;
                 T[] selectedSpecimes = selector.Select(population, selectedAmount);
+                Logger.Log = $"Selected elite of generation no. {i} in {stopwatch.MeasureAndStart()}";
                 population = successor.CreateNextGeneration(selectedSpecimes, populationAmount);
+                Logger.Log = $"Created new generation - no. {i + 1} - in {stopwatch.MeasureAndStart()}";
             }
 
             return SelectBestOne(population);
@@ -35,6 +46,8 @@
             Parallel.ForEach(population, qualityMetric.EvaluateQuality);
 
             T bestOne = SelectBestOne(population);
+
+            Logger.Log = $"Best quality is {100 * bestOne.Quality}%";
 
             return bestOne.Quality >= qualityMetric.TargetQuality ? bestOne : default;
         }

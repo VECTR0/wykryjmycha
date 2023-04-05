@@ -19,7 +19,7 @@
             _patternEditorController = new PatternEditorController(this, patternDatabase);
             _settingsController = new SettingsController(this, settings);
             _settingsController.Initialize(maxSearchDistance, maxAllowedRotation, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist, numDrawingTimeout);
-            _testingController = new TestingController(this, strokeDatabase);
+            _testingController = new TestingController(this, strokeDatabase, _settingsController);
         }
 
         public TextBox GetConsoleTextBox() => txtConsole;
