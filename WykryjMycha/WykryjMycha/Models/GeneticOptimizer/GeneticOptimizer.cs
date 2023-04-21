@@ -7,6 +7,8 @@
         private ISelector<T> selector;
         private ISuccessor<T> successor;
 
+        T currentBest;
+
         public GeneticOptimizer(IPopulationGenerator<T> pg, IQualityMetric<T> qm, ISelector<T> se, ISuccessor<T> su)
         {
             populationGenerator = pg;
@@ -23,20 +25,22 @@
             Logger.Log = "=== GENERATING NEW PARAMETERS ===";
 
             T[] population = populationGenerator.Generate(populationAmount);
+            currentBest = population[0];
             Logger.Log = $"Generated population in {stopwatch.MeasureAndStart()}";
 
             for (int i = 0; i < maxIterations; i++)
             {
                 T? chosenOne = EvaluatePopulationQuality(population);
                 Logger.Log = $"Evaluated quality of generation no. {i} in {stopwatch.MeasureAndStart()}";
-                if (chosenOne != null) return chosenOne;
+                if (chosenOne != null) 
+                    return chosenOne;
                 T[] selectedSpecimes = selector.Select(population, selectedAmount);
                 Logger.Log = $"Selected elite of generation no. {i} in {stopwatch.MeasureAndStart()}";
                 population = successor.CreateNextGeneration(selectedSpecimes, populationAmount);
                 Logger.Log = $"Created new generation - no. {i + 1} - in {stopwatch.MeasureAndStart()}";
             }
 
-            return SelectBestOne(population);
+            return currentBest;
         }
 
         private T? EvaluatePopulationQuality(T[] population)
@@ -45,8 +49,9 @@
 
             T bestOne = SelectBestOne(population);
 
-            Logger.Log = $"Best quality is {100 * bestOne.Quality}%";
+            Logger.Log = $"Best quality is {100f * bestOne.Quality:0.00}%";
 
+            if (bestOne.Quality > currentBest.Quality) currentBest = bestOne;
             return bestOne.Quality >= qualityMetric.TargetQuality ? bestOne : default;
         }
 

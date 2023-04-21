@@ -6,5 +6,7 @@
         {
             return result.maxRotationAngle;
         }
+
+        public void Initialize(Settings settings) { }
     }
 }

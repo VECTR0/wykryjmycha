@@ -27,20 +27,20 @@ namespace WykryjMycha
 
         internal void RunTests()
         {
-            StrokesBasedTester.Run(_strokeDatabase, new AverageMetric(), Settings.GetInstance(), true);
+            StrokesBasedTester.Run(_strokeDatabase, new AngleDistanceMetric(), Settings.GetInstance(), true);
         }
 
         internal void OptimiseParameters()
         {
             // TODO: move these parameters to GUI
-            int maxIterations = 50;
-            int populationAmount = 500;
-            int selectedAmount = 80;
-            float mutationProbability = 0.01f;
+            int maxIterations = 5;
+            int populationAmount = 600;
+            int selectedAmount = 100;
+            float mutationProbability = 0.02f;
             float targetQuality = 0.85f;
 
             Random random = new Random();
-            IMetric matcherMetric = new AverageMetric();
+            IMetric matcherMetric = new AngleDistanceMetric();
             IPopulationGenerator<SettingsChromosome> populationGenerator = new PopulationGenerator(random);
             IQualityMetric<SettingsChromosome> qualityMetric = new QualityMetric(targetQuality, _strokeDatabase, matcherMetric);
             ISelector<SettingsChromosome> selector = new RouletteSelector(random);
@@ -52,6 +52,7 @@ namespace WykryjMycha
             var suboptimalSettings = settingsOptimiser.Run(maxIterations, populationAmount, selectedAmount);
             Logger.Log = "Finished parameters optimalisation! Check new settings";
             settingsOptimiser.SetSettings(suboptimalSettings);
+            Logger.Log = $"MetricAngleWeight = {Settings.GetInstance().MetricAngleWeight:0.00}, MetricDistanceWeight = {Settings.GetInstance().MetricDistanceWeight:0.00}";
             _settingsController.DisplayUpdatedSettings();
         }
 

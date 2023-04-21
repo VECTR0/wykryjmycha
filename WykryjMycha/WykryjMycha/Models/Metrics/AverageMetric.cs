@@ -6,5 +6,7 @@
         {
             return result.avgRotationAngle;
         }
+
+        public void Initialize(Settings settings) { }
     }
 }

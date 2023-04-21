@@ -9,6 +9,8 @@
         internal float avgRotationAngle;
         internal string? status;
 
+        internal float MaxTranslationDistanceNormalized => maxTranslationDistance / 100f;
+        internal float MaxRotationAngleNormalized => maxRotationAngle / (float)Math.PI;
         internal PatternMatchingResult(string name)
         {
             this.name = name;

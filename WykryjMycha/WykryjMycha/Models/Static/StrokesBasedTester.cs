@@ -11,12 +11,13 @@
             Logger.Log = $"Process time = {end.Subtract(start)}";
 
             Logger.Log = $"Run {strokeDatabase.GetStrokes().Where(x => !x.isPattern).Count()} tests";
-            Logger.Log = $"Success rate {Math.Round(result * 100)}%";
+            Logger.Log = $"Success rate {result * 100.0f:0.00}%";
             Logger.Log = "===         ===";
         }
 
         internal static float RunHeadless(StrokeDatabase strokeDatabase, IMetric metric, Settings settings, bool displayDebugLogs=false)
         {
+            metric.Initialize(settings);
             var strokes = strokeDatabase.GetStrokes();
 
             var patternDatabase = new PatternDatabase();
@@ -40,7 +41,6 @@
                 {
                     var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
                     var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
-                    var possible = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetPossible(metric);
                     var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(metric);
 
                     if (best != null && best.name.ToLower() == stroke.name.ToLower())
