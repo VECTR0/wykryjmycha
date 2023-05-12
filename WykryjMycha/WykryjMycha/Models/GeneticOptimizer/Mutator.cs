@@ -13,7 +13,7 @@
 
         public void Mutate(SettingsChromosome specimen)
         {
-            for (int i = 0; i < Settings.NumberOfParameters; i++)
+            for (int i = 0; i < Settings.GetInstance().NumberOfParameters; i++)
             {
                 if (_random.NextSingle() < Probability)
                 {

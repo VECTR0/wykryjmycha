@@ -38,5 +38,9 @@
         {
             _settingsController.SetDrawingTimeout((int)numDrawingTimeout.Value);
         }
+        private void numNumberOfParameters_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsController.SetNumberOfParameters((int)numNumberOfParameters.Value);
+        }
     }
 }

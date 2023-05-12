@@ -8,7 +8,7 @@
         public SwappingCrosser(Random random)
         {
             _random = random;
-            maxMaskValue = 1 << (Settings.NumberOfParameters - 1);
+            maxMaskValue = 1 << (Settings.GetInstance().NumberOfParameters - 1);
         }
 
         public (SettingsChromosome, SettingsChromosome) Cross(SettingsChromosome father, SettingsChromosome mother)
@@ -18,7 +18,7 @@
             SettingsChromosome son = new SettingsChromosome();
             SettingsChromosome daughter = new SettingsChromosome();
 
-            for (int i = 0; i < Settings.NumberOfParameters; i++)
+            for (int i = 0; i < Settings.GetInstance().NumberOfParameters; i++)
             {
                 if (GetBit(swappedTraitsMask, i))
                 {

@@ -60,6 +60,9 @@
             this.lstStrokes = new System.Windows.Forms.ListBox();
             this.btnRunTests = new System.Windows.Forms.Button();
             this.tpSettings = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.numNumberOfParameters = new System.Windows.Forms.NumericUpDown();
+            this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
             this.lblProgramSettings = new System.Windows.Forms.Label();
@@ -93,6 +96,7 @@
             this.tpTests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).BeginInit();
             this.tpSettings.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).BeginInit();
@@ -444,6 +448,9 @@
             // 
             // tpSettings
             // 
+            this.tpSettings.Controls.Add(this.label10);
+            this.tpSettings.Controls.Add(this.numNumberOfParameters);
+            this.tpSettings.Controls.Add(this.label11);
             this.tpSettings.Controls.Add(this.label9);
             this.tpSettings.Controls.Add(this.numDrawingTimeout);
             this.tpSettings.Controls.Add(this.lblProgramSettings);
@@ -468,6 +475,48 @@
             this.tpSettings.TabIndex = 2;
             this.tpSettings.Text = "Settings";
             this.tpSettings.UseVisualStyleBackColor = true;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(396, 35);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(96, 15);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "chromosone size";
+            // 
+            // numNumberOfParameters
+            // 
+            this.numNumberOfParameters.Location = new System.Drawing.Point(325, 33);
+            this.numNumberOfParameters.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numNumberOfParameters.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numNumberOfParameters.Name = "numNumberOfParameters";
+            this.numNumberOfParameters.Size = new System.Drawing.Size(64, 23);
+            this.numNumberOfParameters.TabIndex = 18;
+            this.numNumberOfParameters.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            this.numNumberOfParameters.ValueChanged += new System.EventHandler(this.numNumberOfParameters_ValueChanged);
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(322, 15);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(159, 15);
+            this.label11.TabIndex = 17;
+            this.label11.Text = "Genetic Algorithm Settings";
             // 
             // label9
             // 
@@ -692,6 +741,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).EndInit();
@@ -757,6 +807,9 @@
         private Button btnSaveWeights;
         private Label lblDistanceWeight;
         private Label lblAngleWeight;
+        private Label label10;
+        private NumericUpDown numNumberOfParameters;
+        private Label label11;
     }
 }
 

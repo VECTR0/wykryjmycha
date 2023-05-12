@@ -18,7 +18,7 @@
             _visualiserController = new VisualiserController(this, patternDatabase);
             _patternEditorController = new PatternEditorController(this, patternDatabase);
             _settingsController = new SettingsController(this, settings);
-            _settingsController.Initialize(maxSearchDistance, maxAllowedRotation, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist, numDrawingTimeout);
+            _settingsController.Initialize(maxSearchDistance, maxAllowedRotation, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist, numDrawingTimeout, numNumberOfParameters);
             _testingController = new TestingController(this, strokeDatabase, _settingsController);
         }
 

@@ -9,6 +9,7 @@
         private NumericUpDown minCharacteriticPointsDistance;
         private NumericUpDown characteriticPointsAngleLimitDegrees;
         private NumericUpDown referencePointMinDistance;
+        private NumericUpDown numberOfParameters;
 
 
         internal SettingsController(MainForm instance, Settings settings)
@@ -17,7 +18,7 @@
             this._settings = settings;
         }
 
-        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout)
+        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numberOfParameters)
         {
             maxSearchDistance.Value = (decimal)Settings.DefaultMaxSearchDistance;
             maxAllowedRotation.Value = (decimal)Settings.DefaultMaxAllowedRotation;
@@ -26,12 +27,14 @@
             characteriticPointsAngleLimitDegrees.Value = (decimal)Settings.DefaultCharacteriticPointsAngleLimitDegrees;
             referencePointMinDistance.Value = (decimal)Settings.DefaultReferencePointMinDistance;
             numDrawingTimeout.Value = Settings.DefaultDrawingTimeout;
+            numberOfParameters.Value = (decimal)Settings.DefaultNumberOfParameters;
 
             // parameters changeable by genetic optimiser
             this.maxMergeDistance = maxMergeDistance;
             this.minCharacteriticPointsDistance = minCharacteriticPointsDistance;
             this.characteriticPointsAngleLimitDegrees = characteriticPointsAngleLimitDegrees;
             this.referencePointMinDistance = referencePointMinDistance;
+            this.numberOfParameters = numberOfParameters;
         }
 
         internal void SetMaxSearchDistance(decimal value)
@@ -67,6 +70,11 @@
         internal void SetDrawingTimeout(int value)
         {
             _settings.DrawingTimeout = value;
+        }
+
+        internal void SetNumberOfParameters(int value)
+        {
+            _settings.NumberOfParameters = value;
         }
 
         internal void DisplayUpdatedSettings()

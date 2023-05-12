@@ -2,7 +2,10 @@
 {
     public class Settings
     {
-        internal const int NumberOfParameters = 4;
+        internal const int DefaultNumberOfParameters = 4;
+        private int _NumberOfParameters;
+
+        public int NumberOfParameters { get => _NumberOfParameters; set => _NumberOfParameters = (int)Math.Clamp(value, 1f, 5f); }
 
         // Pattern Matcher
         internal const float DefaultMaxSearchDistance = 25f;
@@ -47,10 +50,12 @@
         internal int DrawingTimeout { get; set; }
 
 
+
         private static Settings _instance;
 
         protected Settings()
         {
+            NumberOfParameters = DefaultNumberOfParameters;
             MaxSearchDistance = DefaultMaxSearchDistance;
             MaxAllowedRotation = DefaultMaxAllowedRotation;
             MaxMergeDistance = DefaultMaxMergeDistance;

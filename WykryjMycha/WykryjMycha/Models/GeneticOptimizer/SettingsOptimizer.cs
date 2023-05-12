@@ -8,7 +8,7 @@
         {
             Settings globalSettings = Settings.GetInstance();
 
-            for (int i = 0; i < Settings.NumberOfParameters; i++)
+            for (int i = 0; i < globalSettings.NumberOfParameters; i++)
             {
                 globalSettings.SetParameter(i, newSettings.GetParameter(i));
             }
