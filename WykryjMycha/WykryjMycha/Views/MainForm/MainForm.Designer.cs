@@ -60,9 +60,6 @@
             this.lstStrokes = new System.Windows.Forms.ListBox();
             this.btnRunTests = new System.Windows.Forms.Button();
             this.tpSettings = new System.Windows.Forms.TabPage();
-            this.label10 = new System.Windows.Forms.Label();
-            this.numNumberOfParameters = new System.Windows.Forms.NumericUpDown();
-            this.label11 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
             this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
             this.lblProgramSettings = new System.Windows.Forms.Label();
@@ -80,6 +77,21 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
+            this.tpGenetic = new System.Windows.Forms.TabPage();
+            this.numNumberOfParameters = new System.Windows.Forms.NumericUpDown();
+            this.btnOptimise = new System.Windows.Forms.Button();
+            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
+            this.label13 = new System.Windows.Forms.Label();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
@@ -96,7 +108,6 @@
             this.tpTests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).BeginInit();
             this.tpSettings.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).BeginInit();
@@ -104,6 +115,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
+            this.tpGenetic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -128,6 +146,7 @@
             this.tabControl1.Controls.Add(this.tpVisualisation);
             this.tabControl1.Controls.Add(this.tpPatterns);
             this.tabControl1.Controls.Add(this.tpTests);
+            this.tabControl1.Controls.Add(this.tpGenetic);
             this.tabControl1.Controls.Add(this.tpSettings);
             this.tabControl1.Location = new System.Drawing.Point(14, 14);
             this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
@@ -448,9 +467,6 @@
             // 
             // tpSettings
             // 
-            this.tpSettings.Controls.Add(this.label10);
-            this.tpSettings.Controls.Add(this.numNumberOfParameters);
-            this.tpSettings.Controls.Add(this.label11);
             this.tpSettings.Controls.Add(this.label9);
             this.tpSettings.Controls.Add(this.numDrawingTimeout);
             this.tpSettings.Controls.Add(this.lblProgramSettings);
@@ -475,48 +491,6 @@
             this.tpSettings.TabIndex = 2;
             this.tpSettings.Text = "Settings";
             this.tpSettings.UseVisualStyleBackColor = true;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(396, 35);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(96, 15);
-            this.label10.TabIndex = 19;
-            this.label10.Text = "chromosone size";
-            // 
-            // numNumberOfParameters
-            // 
-            this.numNumberOfParameters.Location = new System.Drawing.Point(325, 33);
-            this.numNumberOfParameters.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numNumberOfParameters.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numNumberOfParameters.Name = "numNumberOfParameters";
-            this.numNumberOfParameters.Size = new System.Drawing.Size(64, 23);
-            this.numNumberOfParameters.TabIndex = 18;
-            this.numNumberOfParameters.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            this.numNumberOfParameters.ValueChanged += new System.EventHandler(this.numNumberOfParameters_ValueChanged);
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label11.Location = new System.Drawing.Point(322, 15);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(159, 15);
-            this.label11.TabIndex = 17;
-            this.label11.Text = "Genetic Algorithm Settings";
             // 
             // label9
             // 
@@ -699,6 +673,242 @@
             this.maxSearchDistance.TabIndex = 0;
             this.maxSearchDistance.ValueChanged += new System.EventHandler(this.maxSearchDistance_ValueChanged);
             // 
+            // tpGenetic
+            // 
+            this.tpGenetic.Controls.Add(this.numNumberOfParameters);
+            this.tpGenetic.Controls.Add(this.btnOptimise);
+            this.tpGenetic.Controls.Add(this.numericUpDown5);
+            this.tpGenetic.Controls.Add(this.label18);
+            this.tpGenetic.Controls.Add(this.label17);
+            this.tpGenetic.Controls.Add(this.label16);
+            this.tpGenetic.Controls.Add(this.numericUpDown4);
+            this.tpGenetic.Controls.Add(this.label15);
+            this.tpGenetic.Controls.Add(this.numericUpDown3);
+            this.tpGenetic.Controls.Add(this.label14);
+            this.tpGenetic.Controls.Add(this.numericUpDown2);
+            this.tpGenetic.Controls.Add(this.label12);
+            this.tpGenetic.Controls.Add(this.numericUpDown1);
+            this.tpGenetic.Controls.Add(this.label13);
+            this.tpGenetic.Location = new System.Drawing.Point(4, 24);
+            this.tpGenetic.Name = "tpGenetic";
+            this.tpGenetic.Size = new System.Drawing.Size(669, 345);
+            this.tpGenetic.TabIndex = 5;
+            this.tpGenetic.Text = "Genetic";
+            this.tpGenetic.UseVisualStyleBackColor = true;
+            // 
+            // numNumberOfParameters
+            // 
+            this.numNumberOfParameters.Location = new System.Drawing.Point(30, 182);
+            this.numNumberOfParameters.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numNumberOfParameters.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numNumberOfParameters.Name = "numNumberOfParameters";
+            this.numNumberOfParameters.Size = new System.Drawing.Size(64, 23);
+            this.numNumberOfParameters.TabIndex = 25;
+            this.numNumberOfParameters.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // btnOptimise
+            // 
+            this.btnOptimise.Location = new System.Drawing.Point(249, 17);
+            this.btnOptimise.Name = "btnOptimise";
+            this.btnOptimise.Size = new System.Drawing.Size(75, 23);
+            this.btnOptimise.TabIndex = 24;
+            this.btnOptimise.Text = "Optimise";
+            this.btnOptimise.UseVisualStyleBackColor = true;
+            this.btnOptimise.Click += new System.EventHandler(this.btnOptimise_Click);
+            // 
+            // numericUpDown5
+            // 
+            this.numericUpDown5.DecimalPlaces = 2;
+            this.numericUpDown5.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.numericUpDown5.Location = new System.Drawing.Point(30, 151);
+            this.numericUpDown5.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown5.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numericUpDown5.Name = "numericUpDown5";
+            this.numericUpDown5.Size = new System.Drawing.Size(64, 23);
+            this.numericUpDown5.TabIndex = 23;
+            this.numericUpDown5.Value = new decimal(new int[] {
+            85,
+            0,
+            0,
+            131072});
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(99, 153);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(77, 15);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "target quality";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(100, 124);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(116, 15);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "mutation probability";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(100, 95);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(72, 15);
+            this.label16.TabIndex = 22;
+            this.label16.Text = "selected size";
+            // 
+            // numericUpDown4
+            // 
+            this.numericUpDown4.DecimalPlaces = 2;
+            this.numericUpDown4.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numericUpDown4.Location = new System.Drawing.Point(30, 122);
+            this.numericUpDown4.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown4.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numericUpDown4.Name = "numericUpDown4";
+            this.numericUpDown4.Size = new System.Drawing.Size(64, 23);
+            this.numericUpDown4.TabIndex = 21;
+            this.numericUpDown4.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            131072});
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(100, 66);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(87, 15);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "population size";
+            // 
+            // numericUpDown3
+            // 
+            this.numericUpDown3.Location = new System.Drawing.Point(30, 93);
+            this.numericUpDown3.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown3.Name = "numericUpDown3";
+            this.numericUpDown3.Size = new System.Drawing.Size(64, 23);
+            this.numericUpDown3.TabIndex = 21;
+            this.numericUpDown3.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(99, 38);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(82, 15);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "max iterations";
+            // 
+            // numericUpDown2
+            // 
+            this.numericUpDown2.Location = new System.Drawing.Point(30, 64);
+            this.numericUpDown2.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown2.Name = "numericUpDown2";
+            this.numericUpDown2.Size = new System.Drawing.Size(64, 23);
+            this.numericUpDown2.TabIndex = 21;
+            this.numericUpDown2.Value = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(99, 182);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(96, 15);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "chromosone size";
+            // 
+            // numericUpDown1
+            // 
+            this.numericUpDown1.Location = new System.Drawing.Point(29, 35);
+            this.numericUpDown1.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numericUpDown1.Name = "numericUpDown1";
+            this.numericUpDown1.Size = new System.Drawing.Size(64, 23);
+            this.numericUpDown1.TabIndex = 21;
+            this.numericUpDown1.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(26, 17);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(159, 15);
+            this.label13.TabIndex = 20;
+            this.label13.Text = "Genetic Algorithm Settings";
+            // 
             // tmrDrawing
             // 
             this.tmrDrawing.Interval = 1000;
@@ -741,7 +951,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).EndInit();
@@ -749,6 +958,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
+            this.tpGenetic.ResumeLayout(false);
+            this.tpGenetic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -807,9 +1024,21 @@
         private Button btnSaveWeights;
         private Label lblDistanceWeight;
         private Label lblAngleWeight;
-        private Label label10;
+        private TabPage tpGenetic;
         private NumericUpDown numNumberOfParameters;
-        private Label label11;
+        private Button btnOptimise;
+        private NumericUpDown numericUpDown5;
+        private Label label18;
+        private Label label17;
+        private Label label16;
+        private NumericUpDown numericUpDown4;
+        private Label label15;
+        private NumericUpDown numericUpDown3;
+        private Label label14;
+        private NumericUpDown numericUpDown2;
+        private Label label12;
+        private NumericUpDown numericUpDown1;
+        private Label label13;
     }
 }
 
