@@ -20,6 +20,7 @@
             _settingsController = new SettingsController(this, settings);
             _settingsController.Initialize(maxSearchDistance, maxAllowedRotation, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist, numDrawingTimeout, numNumberOfParameters);
             _testingController = new TestingController(this, strokeDatabase, _settingsController);
+            _geneticController = new GeneticController(this);
         }
 
         public TextBox GetConsoleTextBox() => txtConsole;

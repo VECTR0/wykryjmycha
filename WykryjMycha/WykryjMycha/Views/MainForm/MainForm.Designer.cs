@@ -59,6 +59,21 @@
             this.picStroke = new System.Windows.Forms.PictureBox();
             this.lstStrokes = new System.Windows.Forms.ListBox();
             this.btnRunTests = new System.Windows.Forms.Button();
+            this.tpGenetic = new System.Windows.Forms.TabPage();
+            this.numNumberOfParameters = new System.Windows.Forms.NumericUpDown();
+            this.btnOptimise = new System.Windows.Forms.Button();
+            this.numTargetQuality = new System.Windows.Forms.NumericUpDown();
+            this.label18 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.numMutationProbability = new System.Windows.Forms.NumericUpDown();
+            this.label15 = new System.Windows.Forms.Label();
+            this.numSelectedSize = new System.Windows.Forms.NumericUpDown();
+            this.label14 = new System.Windows.Forms.Label();
+            this.numPopulationSize = new System.Windows.Forms.NumericUpDown();
+            this.label12 = new System.Windows.Forms.Label();
+            this.numMaxItertions = new System.Windows.Forms.NumericUpDown();
+            this.lblGeneticAlgorithmSettings = new System.Windows.Forms.Label();
             this.tpSettings = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
             this.numDrawingTimeout = new System.Windows.Forms.NumericUpDown();
@@ -77,21 +92,6 @@
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
-            this.tpGenetic = new System.Windows.Forms.TabPage();
-            this.numNumberOfParameters = new System.Windows.Forms.NumericUpDown();
-            this.btnOptimise = new System.Windows.Forms.Button();
-            this.numericUpDown5 = new System.Windows.Forms.NumericUpDown();
-            this.label18 = new System.Windows.Forms.Label();
-            this.label17 = new System.Windows.Forms.Label();
-            this.label16 = new System.Windows.Forms.Label();
-            this.numericUpDown4 = new System.Windows.Forms.NumericUpDown();
-            this.label15 = new System.Windows.Forms.Label();
-            this.numericUpDown3 = new System.Windows.Forms.NumericUpDown();
-            this.label14 = new System.Windows.Forms.Label();
-            this.numericUpDown2 = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
-            this.label13 = new System.Windows.Forms.Label();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
@@ -107,6 +107,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).BeginInit();
             this.tpTests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).BeginInit();
+            this.tpGenetic.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTargetQuality)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMutationProbability)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSelectedSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPopulationSize)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxItertions)).BeginInit();
             this.tpSettings.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.angleRefPointMinDist)).BeginInit();
@@ -115,13 +122,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
-            this.tpGenetic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -465,6 +465,242 @@
             this.btnRunTests.UseVisualStyleBackColor = true;
             this.btnRunTests.Click += new System.EventHandler(this.btnRunTests_Click);
             // 
+            // tpGenetic
+            // 
+            this.tpGenetic.Controls.Add(this.numNumberOfParameters);
+            this.tpGenetic.Controls.Add(this.btnOptimise);
+            this.tpGenetic.Controls.Add(this.numTargetQuality);
+            this.tpGenetic.Controls.Add(this.label18);
+            this.tpGenetic.Controls.Add(this.label17);
+            this.tpGenetic.Controls.Add(this.label16);
+            this.tpGenetic.Controls.Add(this.numMutationProbability);
+            this.tpGenetic.Controls.Add(this.label15);
+            this.tpGenetic.Controls.Add(this.numSelectedSize);
+            this.tpGenetic.Controls.Add(this.label14);
+            this.tpGenetic.Controls.Add(this.numPopulationSize);
+            this.tpGenetic.Controls.Add(this.label12);
+            this.tpGenetic.Controls.Add(this.numMaxItertions);
+            this.tpGenetic.Controls.Add(this.lblGeneticAlgorithmSettings);
+            this.tpGenetic.Location = new System.Drawing.Point(4, 24);
+            this.tpGenetic.Name = "tpGenetic";
+            this.tpGenetic.Size = new System.Drawing.Size(669, 345);
+            this.tpGenetic.TabIndex = 5;
+            this.tpGenetic.Text = "Genetic";
+            this.tpGenetic.UseVisualStyleBackColor = true;
+            // 
+            // numNumberOfParameters
+            // 
+            this.numNumberOfParameters.Location = new System.Drawing.Point(30, 182);
+            this.numNumberOfParameters.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numNumberOfParameters.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numNumberOfParameters.Name = "numNumberOfParameters";
+            this.numNumberOfParameters.Size = new System.Drawing.Size(64, 23);
+            this.numNumberOfParameters.TabIndex = 25;
+            this.numNumberOfParameters.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // btnOptimise
+            // 
+            this.btnOptimise.Location = new System.Drawing.Point(249, 17);
+            this.btnOptimise.Name = "btnOptimise";
+            this.btnOptimise.Size = new System.Drawing.Size(75, 23);
+            this.btnOptimise.TabIndex = 24;
+            this.btnOptimise.Text = "Optimise";
+            this.btnOptimise.UseVisualStyleBackColor = true;
+            this.btnOptimise.Click += new System.EventHandler(this.btnOptimise_Click);
+            // 
+            // numTargetQuality
+            // 
+            this.numTargetQuality.DecimalPlaces = 2;
+            this.numTargetQuality.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            131072});
+            this.numTargetQuality.Location = new System.Drawing.Point(30, 151);
+            this.numTargetQuality.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numTargetQuality.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numTargetQuality.Name = "numTargetQuality";
+            this.numTargetQuality.Size = new System.Drawing.Size(64, 23);
+            this.numTargetQuality.TabIndex = 23;
+            this.numTargetQuality.Value = new decimal(new int[] {
+            85,
+            0,
+            0,
+            131072});
+            // 
+            // label18
+            // 
+            this.label18.AutoSize = true;
+            this.label18.Location = new System.Drawing.Point(99, 153);
+            this.label18.Name = "label18";
+            this.label18.Size = new System.Drawing.Size(77, 15);
+            this.label18.TabIndex = 22;
+            this.label18.Text = "target quality";
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Location = new System.Drawing.Point(100, 124);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(116, 15);
+            this.label17.TabIndex = 22;
+            this.label17.Text = "mutation probability";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Location = new System.Drawing.Point(100, 95);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(72, 15);
+            this.label16.TabIndex = 22;
+            this.label16.Text = "selected size";
+            // 
+            // numMutationProbability
+            // 
+            this.numMutationProbability.DecimalPlaces = 2;
+            this.numMutationProbability.Increment = new decimal(new int[] {
+            1,
+            0,
+            0,
+            131072});
+            this.numMutationProbability.Location = new System.Drawing.Point(30, 122);
+            this.numMutationProbability.Maximum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMutationProbability.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            196608});
+            this.numMutationProbability.Name = "numMutationProbability";
+            this.numMutationProbability.Size = new System.Drawing.Size(64, 23);
+            this.numMutationProbability.TabIndex = 21;
+            this.numMutationProbability.Value = new decimal(new int[] {
+            2,
+            0,
+            0,
+            131072});
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Location = new System.Drawing.Point(100, 66);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(87, 15);
+            this.label15.TabIndex = 22;
+            this.label15.Text = "population size";
+            // 
+            // numSelectedSize
+            // 
+            this.numSelectedSize.Location = new System.Drawing.Point(30, 93);
+            this.numSelectedSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numSelectedSize.Name = "numSelectedSize";
+            this.numSelectedSize.Size = new System.Drawing.Size(64, 23);
+            this.numSelectedSize.TabIndex = 21;
+            this.numSelectedSize.Value = new decimal(new int[] {
+            100,
+            0,
+            0,
+            0});
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(99, 38);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(82, 15);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "max iterations";
+            // 
+            // numPopulationSize
+            // 
+            this.numPopulationSize.Location = new System.Drawing.Point(30, 64);
+            this.numPopulationSize.Maximum = new decimal(new int[] {
+            2000,
+            0,
+            0,
+            0});
+            this.numPopulationSize.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numPopulationSize.Name = "numPopulationSize";
+            this.numPopulationSize.Size = new System.Drawing.Size(64, 23);
+            this.numPopulationSize.TabIndex = 21;
+            this.numPopulationSize.Value = new decimal(new int[] {
+            600,
+            0,
+            0,
+            0});
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(99, 182);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(96, 15);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "chromosone size";
+            // 
+            // numMaxItertions
+            // 
+            this.numMaxItertions.Location = new System.Drawing.Point(29, 35);
+            this.numMaxItertions.Maximum = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.numMaxItertions.Minimum = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            this.numMaxItertions.Name = "numMaxItertions";
+            this.numMaxItertions.Size = new System.Drawing.Size(64, 23);
+            this.numMaxItertions.TabIndex = 21;
+            this.numMaxItertions.Value = new decimal(new int[] {
+            4,
+            0,
+            0,
+            0});
+            // 
+            // lblGeneticAlgorithmSettings
+            // 
+            this.lblGeneticAlgorithmSettings.AutoSize = true;
+            this.lblGeneticAlgorithmSettings.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
+            this.lblGeneticAlgorithmSettings.Location = new System.Drawing.Point(26, 17);
+            this.lblGeneticAlgorithmSettings.Name = "lblGeneticAlgorithmSettings";
+            this.lblGeneticAlgorithmSettings.Size = new System.Drawing.Size(159, 15);
+            this.lblGeneticAlgorithmSettings.TabIndex = 20;
+            this.lblGeneticAlgorithmSettings.Text = "Genetic Algorithm Settings";
+            // 
             // tpSettings
             // 
             this.tpSettings.Controls.Add(this.label9);
@@ -673,242 +909,6 @@
             this.maxSearchDistance.TabIndex = 0;
             this.maxSearchDistance.ValueChanged += new System.EventHandler(this.maxSearchDistance_ValueChanged);
             // 
-            // tpGenetic
-            // 
-            this.tpGenetic.Controls.Add(this.numNumberOfParameters);
-            this.tpGenetic.Controls.Add(this.btnOptimise);
-            this.tpGenetic.Controls.Add(this.numericUpDown5);
-            this.tpGenetic.Controls.Add(this.label18);
-            this.tpGenetic.Controls.Add(this.label17);
-            this.tpGenetic.Controls.Add(this.label16);
-            this.tpGenetic.Controls.Add(this.numericUpDown4);
-            this.tpGenetic.Controls.Add(this.label15);
-            this.tpGenetic.Controls.Add(this.numericUpDown3);
-            this.tpGenetic.Controls.Add(this.label14);
-            this.tpGenetic.Controls.Add(this.numericUpDown2);
-            this.tpGenetic.Controls.Add(this.label12);
-            this.tpGenetic.Controls.Add(this.numericUpDown1);
-            this.tpGenetic.Controls.Add(this.label13);
-            this.tpGenetic.Location = new System.Drawing.Point(4, 24);
-            this.tpGenetic.Name = "tpGenetic";
-            this.tpGenetic.Size = new System.Drawing.Size(669, 345);
-            this.tpGenetic.TabIndex = 5;
-            this.tpGenetic.Text = "Genetic";
-            this.tpGenetic.UseVisualStyleBackColor = true;
-            // 
-            // numNumberOfParameters
-            // 
-            this.numNumberOfParameters.Location = new System.Drawing.Point(30, 182);
-            this.numNumberOfParameters.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numNumberOfParameters.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numNumberOfParameters.Name = "numNumberOfParameters";
-            this.numNumberOfParameters.Size = new System.Drawing.Size(64, 23);
-            this.numNumberOfParameters.TabIndex = 25;
-            this.numNumberOfParameters.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            // 
-            // btnOptimise
-            // 
-            this.btnOptimise.Location = new System.Drawing.Point(249, 17);
-            this.btnOptimise.Name = "btnOptimise";
-            this.btnOptimise.Size = new System.Drawing.Size(75, 23);
-            this.btnOptimise.TabIndex = 24;
-            this.btnOptimise.Text = "Optimise";
-            this.btnOptimise.UseVisualStyleBackColor = true;
-            this.btnOptimise.Click += new System.EventHandler(this.btnOptimise_Click);
-            // 
-            // numericUpDown5
-            // 
-            this.numericUpDown5.DecimalPlaces = 2;
-            this.numericUpDown5.Increment = new decimal(new int[] {
-            5,
-            0,
-            0,
-            131072});
-            this.numericUpDown5.Location = new System.Drawing.Point(30, 151);
-            this.numericUpDown5.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown5.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.numericUpDown5.Name = "numericUpDown5";
-            this.numericUpDown5.Size = new System.Drawing.Size(64, 23);
-            this.numericUpDown5.TabIndex = 23;
-            this.numericUpDown5.Value = new decimal(new int[] {
-            85,
-            0,
-            0,
-            131072});
-            // 
-            // label18
-            // 
-            this.label18.AutoSize = true;
-            this.label18.Location = new System.Drawing.Point(99, 153);
-            this.label18.Name = "label18";
-            this.label18.Size = new System.Drawing.Size(77, 15);
-            this.label18.TabIndex = 22;
-            this.label18.Text = "target quality";
-            // 
-            // label17
-            // 
-            this.label17.AutoSize = true;
-            this.label17.Location = new System.Drawing.Point(100, 124);
-            this.label17.Name = "label17";
-            this.label17.Size = new System.Drawing.Size(116, 15);
-            this.label17.TabIndex = 22;
-            this.label17.Text = "mutation probability";
-            // 
-            // label16
-            // 
-            this.label16.AutoSize = true;
-            this.label16.Location = new System.Drawing.Point(100, 95);
-            this.label16.Name = "label16";
-            this.label16.Size = new System.Drawing.Size(72, 15);
-            this.label16.TabIndex = 22;
-            this.label16.Text = "selected size";
-            // 
-            // numericUpDown4
-            // 
-            this.numericUpDown4.DecimalPlaces = 2;
-            this.numericUpDown4.Increment = new decimal(new int[] {
-            1,
-            0,
-            0,
-            131072});
-            this.numericUpDown4.Location = new System.Drawing.Point(30, 122);
-            this.numericUpDown4.Maximum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown4.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            196608});
-            this.numericUpDown4.Name = "numericUpDown4";
-            this.numericUpDown4.Size = new System.Drawing.Size(64, 23);
-            this.numericUpDown4.TabIndex = 21;
-            this.numericUpDown4.Value = new decimal(new int[] {
-            2,
-            0,
-            0,
-            131072});
-            // 
-            // label15
-            // 
-            this.label15.AutoSize = true;
-            this.label15.Location = new System.Drawing.Point(100, 66);
-            this.label15.Name = "label15";
-            this.label15.Size = new System.Drawing.Size(87, 15);
-            this.label15.TabIndex = 22;
-            this.label15.Text = "population size";
-            // 
-            // numericUpDown3
-            // 
-            this.numericUpDown3.Location = new System.Drawing.Point(30, 93);
-            this.numericUpDown3.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown3.Name = "numericUpDown3";
-            this.numericUpDown3.Size = new System.Drawing.Size(64, 23);
-            this.numericUpDown3.TabIndex = 21;
-            this.numericUpDown3.Value = new decimal(new int[] {
-            100,
-            0,
-            0,
-            0});
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(99, 38);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(82, 15);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "max iterations";
-            // 
-            // numericUpDown2
-            // 
-            this.numericUpDown2.Location = new System.Drawing.Point(30, 64);
-            this.numericUpDown2.Maximum = new decimal(new int[] {
-            2000,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown2.Name = "numericUpDown2";
-            this.numericUpDown2.Size = new System.Drawing.Size(64, 23);
-            this.numericUpDown2.TabIndex = 21;
-            this.numericUpDown2.Value = new decimal(new int[] {
-            600,
-            0,
-            0,
-            0});
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(99, 182);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(96, 15);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "chromosone size";
-            // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.Location = new System.Drawing.Point(29, 35);
-            this.numericUpDown1.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(64, 23);
-            this.numericUpDown1.TabIndex = 21;
-            this.numericUpDown1.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Font = new System.Drawing.Font("Segoe UI", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point);
-            this.label13.Location = new System.Drawing.Point(26, 17);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(159, 15);
-            this.label13.TabIndex = 20;
-            this.label13.Text = "Genetic Algorithm Settings";
-            // 
             // tmrDrawing
             // 
             this.tmrDrawing.Interval = 1000;
@@ -949,6 +949,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.picPattern)).EndInit();
             this.tpTests.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).EndInit();
+            this.tpGenetic.ResumeLayout(false);
+            this.tpGenetic.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numTargetQuality)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMutationProbability)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSelectedSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numPopulationSize)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMaxItertions)).EndInit();
             this.tpSettings.ResumeLayout(false);
             this.tpSettings.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numDrawingTimeout)).EndInit();
@@ -958,14 +966,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
-            this.tpGenetic.ResumeLayout(false);
-            this.tpGenetic.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown5)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown4)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown2)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1027,18 +1027,18 @@
         private TabPage tpGenetic;
         private NumericUpDown numNumberOfParameters;
         private Button btnOptimise;
-        private NumericUpDown numericUpDown5;
+        private NumericUpDown numTargetQuality;
         private Label label18;
         private Label label17;
         private Label label16;
-        private NumericUpDown numericUpDown4;
+        private NumericUpDown numMutationProbability;
         private Label label15;
-        private NumericUpDown numericUpDown3;
+        private NumericUpDown numSelectedSize;
         private Label label14;
-        private NumericUpDown numericUpDown2;
+        private NumericUpDown numPopulationSize;
         private Label label12;
-        private NumericUpDown numericUpDown1;
-        private Label label13;
+        private NumericUpDown numMaxItertions;
+        private Label lblGeneticAlgorithmSettings;
     }
 }
 
