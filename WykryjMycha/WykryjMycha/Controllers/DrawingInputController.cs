@@ -14,7 +14,8 @@ namespace WykryjMycha
         private Settings _settings;
         private StrokeDatabase _strokeDatabase;
         private bool _strokesStarted = false;
-
+        private string _strokesBuffer = "";
+       
         internal DrawingInputController(MainForm instance, PatternDatabase patternDatabase, PatternMatcher patternMatcher, CharacteristicPointsFinder characteristicPointsFinder, Settings settings, StrokeDatabase strokeDatabase)
         {
             drawingView = instance;
@@ -50,6 +51,15 @@ namespace WykryjMycha
             var best = results.GetBest(metric);
             if(best == null) Logger.Log = $"found none";
             else Logger.Log = $"found: {best.name}";
+
+            _strokesBuffer += " " + (best != null? best.name : "");
+            if(_strokesBuffer.Length > 100) _strokesBuffer = _strokesBuffer.Substring(_strokesBuffer.Length - 100);
+            foreach(var sequence in drawingView.getSequences())
+            {
+                string pattern = "[ ]" + sequence.Replace(" ", "[ ]") + "$";
+                Regex rg = new Regex(pattern);
+                if(rg.IsMatch(_strokesBuffer)) Logger.Log = $"found sequence: {sequence}";
+            }
         }
 
         internal void HandleDrawingMouseDown(MouseEventArgs e, PictureBox pic)
@@ -106,6 +116,7 @@ namespace WykryjMycha
                 DrawUtils.ClearPictureBox(pic);
                 drawingView.StopDrawingTimer();
                 _strokesStarted = false;
+                _strokesBuffer = "";
             }
         }
 

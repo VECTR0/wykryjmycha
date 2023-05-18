@@ -74,5 +74,10 @@
         {
             _drawingInputController.AddNewStroke(txtNewPatternName);
         }
+
+        internal string[] getSequences()
+        {
+            return txtSequence.Lines;
+        }
     }
 }

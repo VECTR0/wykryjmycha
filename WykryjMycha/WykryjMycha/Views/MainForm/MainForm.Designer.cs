@@ -32,6 +32,7 @@
             this.txtConsole = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpDrawing = new System.Windows.Forms.TabPage();
+            this.txtSequence = new System.Windows.Forms.TextBox();
             this.btnAddStroke = new System.Windows.Forms.Button();
             this.btnAddPattern = new System.Windows.Forms.Button();
             this.picDrawing = new System.Windows.Forms.PictureBox();
@@ -95,6 +96,7 @@
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
+            this.lblSeqence = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -157,6 +159,8 @@
             // 
             // tpDrawing
             // 
+            this.tpDrawing.Controls.Add(this.lblSeqence);
+            this.tpDrawing.Controls.Add(this.txtSequence);
             this.tpDrawing.Controls.Add(this.btnAddStroke);
             this.tpDrawing.Controls.Add(this.btnAddPattern);
             this.tpDrawing.Controls.Add(this.picDrawing);
@@ -169,6 +173,14 @@
             this.tpDrawing.TabIndex = 0;
             this.tpDrawing.Text = "Drawing";
             this.tpDrawing.UseVisualStyleBackColor = true;
+            // 
+            // txtSequence
+            // 
+            this.txtSequence.Location = new System.Drawing.Point(314, 25);
+            this.txtSequence.Multiline = true;
+            this.txtSequence.Name = "txtSequence";
+            this.txtSequence.Size = new System.Drawing.Size(348, 282);
+            this.txtSequence.TabIndex = 6;
             // 
             // btnAddStroke
             // 
@@ -924,6 +936,15 @@
             this.sfdStrokes.DefaultExt = "json";
             this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
+            // lblSeqence
+            // 
+            this.lblSeqence.AutoSize = true;
+            this.lblSeqence.Location = new System.Drawing.Point(314, 7);
+            this.lblSeqence.Name = "lblSeqence";
+            this.lblSeqence.Size = new System.Drawing.Size(63, 15);
+            this.lblSeqence.TabIndex = 7;
+            this.lblSeqence.Text = "Sequences";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1039,6 +1060,8 @@
         private Label label12;
         private NumericUpDown numMaxItertions;
         private Label lblGeneticAlgorithmSettings;
+        private TextBox txtSequence;
+        private Label lblSeqence;
     }
 }
 
