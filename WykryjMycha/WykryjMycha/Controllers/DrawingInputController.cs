@@ -38,6 +38,7 @@ namespace WykryjMycha
             _points = MathUtils.NormalizePoints(_points);
             drawingView.ClearDrawingBoard();
             drawingView.RenderDrawingStroke(_points);
+            if (!_pointsValid) return;
             _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!, _settings);
             drawingView.RenderStrokeCharacteristicPoints(_characteristicPoints);
             var results = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase, _settings);
@@ -146,6 +147,12 @@ namespace WykryjMycha
         internal void ProcessDrawnPattern(List<Point> points)
         {
             if (points == null) return;
+            if (points.Count <= 2)
+            {
+                Logger.Log = $"Stroke too small, size: {points.Count}";
+                _pointsValid = false;
+                return;
+            }
             var bbox = MathUtils.GetBoundingBox(_points);
             var bboxSize = (bbox.Item2 - bbox.Item1);
             if (Math.Max(bboxSize.X, bboxSize.Y) < 75)
