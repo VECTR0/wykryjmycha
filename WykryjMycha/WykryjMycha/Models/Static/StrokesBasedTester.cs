@@ -17,7 +17,6 @@
 
         internal static float RunHeadless(StrokeDatabase strokeDatabase, IMetric metric, Settings settings, bool displayDebugLogs=false)
         {
-            metric.Initialize(settings);
             var strokes = strokeDatabase.GetStrokes();
 
             var patternDatabase = new PatternDatabase();

@@ -7,6 +7,6 @@
             return result.maxRotationAngle;
         }
 
-        public void Initialize(Settings settings) { }
+        public IMetric New(Settings settings) => new AngleMetric();
     }
 }

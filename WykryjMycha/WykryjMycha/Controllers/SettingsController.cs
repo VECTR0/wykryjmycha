@@ -27,7 +27,7 @@
             characteriticPointsAngleLimitDegrees.Value = (decimal)Settings.DefaultCharacteriticPointsAngleLimitDegrees;
             referencePointMinDistance.Value = (decimal)Settings.DefaultReferencePointMinDistance;
             numDrawingTimeout.Value = Settings.DefaultDrawingTimeout;
-            numberOfParameters.Value = (decimal)Settings.DefaultNumberOfParameters;
+            //numberOfParameters.Value = (decimal)Settings.DefaultNumberOfParameters;
 
             // parameters changeable by genetic optimiser
             this.maxMergeDistance = maxMergeDistance;

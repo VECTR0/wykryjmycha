@@ -30,7 +30,8 @@ namespace WykryjMycha
 
         internal void RunTests()
         {
-            StrokesBasedTester.Run(_strokeDatabase, new AngleDistanceMetric(), Settings.GetInstance(), true);
+            var settings = Settings.GetInstance();
+            StrokesBasedTester.Run(_strokeDatabase, new AngleDistanceMetric(settings), settings, true);
         }
 
         internal void OptimiseParameters()
@@ -48,9 +49,9 @@ namespace WykryjMycha
             float targetQuality = 0.85f;
 
             Random random = new Random();
-            IMetric matcherMetric = new AngleDistanceMetric();
+            IMetric matcherMetricTemplate = new AngleDistanceMetric();
             IPopulationGenerator<SettingsChromosome> populationGenerator = new PopulationGenerator(random);
-            IQualityMetric<SettingsChromosome> qualityMetric = new QualityMetric(targetQuality, _strokeDatabase, matcherMetric);
+            IQualityMetric<SettingsChromosome> qualityMetric = new QualityMetric(targetQuality, _strokeDatabase, matcherMetricTemplate);
             ISelector<SettingsChromosome> selector = new RouletteSelector(random);
             ICrosser<SettingsChromosome> crosser = new SwappingCrosser(random);
             IMutator<SettingsChromosome> mutator = new Mutator(mutationProbability, random);

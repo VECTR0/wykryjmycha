@@ -42,8 +42,7 @@ namespace WykryjMycha
             _characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(_points!, _settings);
             drawingView.RenderStrokeCharacteristicPoints(_characteristicPoints);
             var results = _patternMatcher.MatchPattern(_characteristicPoints, _patternDatabase, _settings);
-            var metric = new AngleDistanceMetric();
-            metric.Initialize(_settings);
+            var metric = new AngleDistanceMetric(_settings);
             Logger.Log = "Possible matches:";
             foreach (var result in results.GetPossible(metric))
             {

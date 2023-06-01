@@ -16,7 +16,7 @@
 
         public void EvaluateQuality(SettingsChromosome specimen)
         {
-            specimen.Quality = StrokesBasedTester.RunHeadless(_strokeDatabase, _metric, specimen);
+            specimen.Quality = StrokesBasedTester.RunHeadless(_strokeDatabase, _metric.New(specimen), specimen);
         }
     }
 }
