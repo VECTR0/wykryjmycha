@@ -97,7 +97,6 @@
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
-            this.btnStopGenetic = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -489,7 +488,6 @@
             // 
             // tpGenetic
             // 
-            this.tpGenetic.Controls.Add(this.btnStopGenetic);
             this.tpGenetic.Controls.Add(this.numNumberOfParameters);
             this.tpGenetic.Controls.Add(this.btnOptimise);
             this.tpGenetic.Controls.Add(this.numTargetQuality);
@@ -947,16 +945,6 @@
             this.sfdStrokes.DefaultExt = "json";
             this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
-            // btnStopGenetic
-            // 
-            this.btnStopGenetic.Location = new System.Drawing.Point(330, 17);
-            this.btnStopGenetic.Name = "btnStopGenetic";
-            this.btnStopGenetic.Size = new System.Drawing.Size(75, 23);
-            this.btnStopGenetic.TabIndex = 26;
-            this.btnStopGenetic.Text = "Force stop";
-            this.btnStopGenetic.UseVisualStyleBackColor = true;
-            this.btnStopGenetic.Click += new System.EventHandler(this.btnStopGenetic_Click);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -1074,7 +1062,6 @@
         private Label lblGeneticAlgorithmSettings;
         private TextBox txtSequence;
         private Label lblSeqence;
-        private Button btnStopGenetic;
     }
 }
 
