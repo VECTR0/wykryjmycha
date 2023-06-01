@@ -62,7 +62,6 @@
             this.lstStrokes = new System.Windows.Forms.ListBox();
             this.btnRunTests = new System.Windows.Forms.Button();
             this.tpGenetic = new System.Windows.Forms.TabPage();
-            this.numNumberOfParameters = new System.Windows.Forms.NumericUpDown();
             this.btnOptimise = new System.Windows.Forms.Button();
             this.numTargetQuality = new System.Windows.Forms.NumericUpDown();
             this.label18 = new System.Windows.Forms.Label();
@@ -73,7 +72,6 @@
             this.numSelectedSize = new System.Windows.Forms.NumericUpDown();
             this.label14 = new System.Windows.Forms.Label();
             this.numPopulationSize = new System.Windows.Forms.NumericUpDown();
-            this.label12 = new System.Windows.Forms.Label();
             this.numMaxItertions = new System.Windows.Forms.NumericUpDown();
             this.lblGeneticAlgorithmSettings = new System.Windows.Forms.Label();
             this.tpSettings = new System.Windows.Forms.TabPage();
@@ -110,7 +108,6 @@
             this.tpTests.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).BeginInit();
             this.tpGenetic.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetQuality)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMutationProbability)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSelectedSize)).BeginInit();
@@ -488,7 +485,6 @@
             // 
             // tpGenetic
             // 
-            this.tpGenetic.Controls.Add(this.numNumberOfParameters);
             this.tpGenetic.Controls.Add(this.btnOptimise);
             this.tpGenetic.Controls.Add(this.numTargetQuality);
             this.tpGenetic.Controls.Add(this.label18);
@@ -499,7 +495,6 @@
             this.tpGenetic.Controls.Add(this.numSelectedSize);
             this.tpGenetic.Controls.Add(this.label14);
             this.tpGenetic.Controls.Add(this.numPopulationSize);
-            this.tpGenetic.Controls.Add(this.label12);
             this.tpGenetic.Controls.Add(this.numMaxItertions);
             this.tpGenetic.Controls.Add(this.lblGeneticAlgorithmSettings);
             this.tpGenetic.Location = new System.Drawing.Point(4, 24);
@@ -508,28 +503,6 @@
             this.tpGenetic.TabIndex = 5;
             this.tpGenetic.Text = "Genetic";
             this.tpGenetic.UseVisualStyleBackColor = true;
-            // 
-            // numNumberOfParameters
-            // 
-            this.numNumberOfParameters.Location = new System.Drawing.Point(30, 182);
-            this.numNumberOfParameters.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
-            this.numNumberOfParameters.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            this.numNumberOfParameters.Name = "numNumberOfParameters";
-            this.numNumberOfParameters.Size = new System.Drawing.Size(64, 23);
-            this.numNumberOfParameters.TabIndex = 25;
-            this.numNumberOfParameters.Value = new decimal(new int[] {
-            4,
-            0,
-            0,
-            0});
             // 
             // btnOptimise
             // 
@@ -680,15 +653,6 @@
             0,
             0,
             0});
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(99, 182);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(96, 15);
-            this.label12.TabIndex = 22;
-            this.label12.Text = "chromosone size";
             // 
             // numMaxItertions
             // 
@@ -972,7 +936,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.picStroke)).EndInit();
             this.tpGenetic.ResumeLayout(false);
             this.tpGenetic.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numNumberOfParameters)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numTargetQuality)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numMutationProbability)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSelectedSize)).EndInit();
@@ -1046,7 +1009,6 @@
         private Label lblDistanceWeight;
         private Label lblAngleWeight;
         private TabPage tpGenetic;
-        private NumericUpDown numNumberOfParameters;
         private Button btnOptimise;
         private NumericUpDown numTargetQuality;
         private Label label18;
@@ -1057,7 +1019,6 @@
         private NumericUpDown numSelectedSize;
         private Label label14;
         private NumericUpDown numPopulationSize;
-        private Label label12;
         private NumericUpDown numMaxItertions;
         private Label lblGeneticAlgorithmSettings;
         private TextBox txtSequence;

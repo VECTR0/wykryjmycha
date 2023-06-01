@@ -9,7 +9,6 @@
         private NumericUpDown minCharacteriticPointsDistance;
         private NumericUpDown characteriticPointsAngleLimitDegrees;
         private NumericUpDown referencePointMinDistance;
-        private NumericUpDown numberOfParameters;
         private NumericUpDown numMetricAngleWeight;
         private NumericUpDown numMetricDistanceWeight;
 
@@ -20,7 +19,7 @@
             this._settings = settings;
         }
 
-        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numberOfParameters, NumericUpDown numMetricAngleWeight, NumericUpDown numMetricDistanceWeight)
+        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numMetricAngleWeight, NumericUpDown numMetricDistanceWeight)
         {
             maxMergeDistance.Value = (decimal)Settings.DefaultMaxMergeDistance;
             minCharacteriticPointsDistance.Value = (decimal)Settings.DefaultMinCharacteriticPointsDistance;
@@ -36,7 +35,6 @@
             this.minCharacteriticPointsDistance = minCharacteriticPointsDistance;
             this.characteriticPointsAngleLimitDegrees = characteriticPointsAngleLimitDegrees;
             this.referencePointMinDistance = referencePointMinDistance;
-            this.numberOfParameters = numberOfParameters;
             this.numMetricAngleWeight = numMetricAngleWeight;
             this.numMetricDistanceWeight = numMetricDistanceWeight;
         }
