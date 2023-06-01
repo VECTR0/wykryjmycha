@@ -43,6 +43,10 @@
         public float MetricAngleWeight { get => _metricAngleWeight * 0.1f; set => _metricAngleWeight = Math.Clamp(value, 0f, 100f); }
         public float MetricDistanceWeight { get => _metricDistanceWeight * 0.1f; set => _metricDistanceWeight = Math.Clamp(value, 0f, 100f); }
 
+        // if seed is 0, randomize seed
+        public static int DataSplitSeed = 5;
+        public static int DataGroupSize = 50;
+        public static float DataTrainRatio = 0.8f;
 
         // Interface Settings
         //   Drawing

@@ -41,6 +41,8 @@ namespace WykryjMycha
 
             _isOptimiserRunning = true;
 
+            _strokeDatabase.SplitData();
+
             // TODO: move these parameters to GUI
             int maxIterations = 5;
             int populationAmount = 600;

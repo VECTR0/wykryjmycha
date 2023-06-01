@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WykryjMycha
 {
@@ -6,6 +7,10 @@ namespace WykryjMycha
     {
         internal event EventHandler Changed;
         private readonly List<Stroke> _strokes;
+        internal IEnumerable<Stroke> TrainStrokes { get; private set; }
+        internal IEnumerable<Stroke> TestStrokes { get; private set; }
+        internal IEnumerable<Stroke> PatternStrokes { get; private set; }
+
         public StrokeDatabase()
         {
             _strokes = new List<Stroke>();
@@ -81,6 +86,22 @@ namespace WykryjMycha
         {
             _strokes.Clear();
             Changed?.Invoke(this, EventArgs.Empty);
+        }
+
+        internal void SplitData()
+        {
+            PatternStrokes = _strokes.Where(x => char.IsUpper(x.name[0]));
+            int trainSize = (int)Math.Round(Settings.DataGroupSize * Settings.DataTrainRatio);
+            int testSize = (int)Math.Round(Settings.DataGroupSize * (1.0f - Settings.DataTrainRatio));
+
+            var random = new Random(Settings.DataSplitSeed != 0 ? Settings.DataSplitSeed : new Random().Next());
+            (TrainStrokes, TestStrokes) = _strokes.GroupBy(x => x.name).Where(group => group.Count() > 1)
+                .Select(group => group.Take(Settings.DataGroupSize))
+                .Select(subgroup => subgroup.OrderBy(_ => random.Next()))
+                .Select(subgroup => (Train: subgroup.Take(trainSize), Test: subgroup.Skip(trainSize).Take(testSize)))
+                .Aggregate((Train: (IEnumerable<Stroke>)new List<Stroke>(), Test: (IEnumerable<Stroke>)new List<Stroke>()), (acc, val) => (Train: acc.Train.Concat(val.Train), Test: acc.Test.Concat(val.Test)));
+
+            Logger.Log = $"Train {TrainStrokes.Count()}, test {TestStrokes.Count()}";
         }
     }
 }
