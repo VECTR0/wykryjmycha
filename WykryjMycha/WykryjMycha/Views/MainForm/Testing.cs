@@ -62,7 +62,7 @@
 
         private void btnOptimise_Click(object sender, EventArgs e)
         {
-            _testingController.OptimiseParameters();
+            Task.Factory.StartNew(_testingController.OptimiseParameters);
         }
     }
 }
