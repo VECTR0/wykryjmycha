@@ -4,6 +4,8 @@ namespace WykryjMycha
 {
     internal class TestingController
     {
+        private const bool SHOULD_LOG_IMPORT = true;
+
         internal MainForm testingView;
         private StrokeDatabase _strokeDatabase;
         private SettingsController _settingsController;
@@ -72,6 +74,23 @@ namespace WykryjMycha
         internal void ImportStrokes(string filename, bool clearExisting)
         {
             _strokeDatabase.Import(filename, clearExisting);
+
+            if (!SHOULD_LOG_IMPORT)
+                return;
+
+            Logger.Log = "Importing strokes...";
+
+            var strokes = _strokeDatabase.GetStrokes();
+
+            foreach (var stroke in strokes.GroupBy(x => x.name)
+                        .Select(group => new {
+                            Name = group.Key,
+                            Count = group.Count()
+                        })
+                        .OrderBy(x => x.Name))
+            {
+                Logger.Log = $"{stroke.Name} -> {stroke.Count}";
+            }
         }
 
         internal void DeleteStroke()

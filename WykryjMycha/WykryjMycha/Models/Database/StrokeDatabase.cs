@@ -11,11 +11,13 @@ namespace WykryjMycha
             _strokes = new List<Stroke>();
         }
 
-        internal void AddStroke(Stroke stroke)
+        internal void AddStroke(Stroke stroke, bool silentMode = false)
         {
             if (stroke == null) return;
             _strokes.Add(stroke);
-            Changed?.Invoke(this, EventArgs.Empty);
+
+            if (!silentMode)
+                Changed?.Invoke(this, EventArgs.Empty);
         }
 
         internal void DeleteStroke(int index)
@@ -44,13 +46,16 @@ namespace WykryjMycha
                 if(clearExisting) _strokes.Clear();
                 foreach(var stroke in strokes)
                 {
-                    AddStroke(stroke);
+                    AddStroke(stroke, true);
                 }
             }
             catch
             {
                 return false;
             }
+
+            Changed?.Invoke(this, EventArgs.Empty);
+
             return true;
         }
 
