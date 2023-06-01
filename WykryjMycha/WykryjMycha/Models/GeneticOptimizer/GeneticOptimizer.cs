@@ -49,9 +49,10 @@
 
             T bestOne = SelectBestOne(population);
 
-            Logger.Log = $"Best quality is {100f * bestOne.Quality:0.00}%";
-
             if (bestOne.Quality > currentBest.Quality) currentBest = bestOne;
+
+            Logger.Log = $"Best quality of current generation is {100f * bestOne.Quality:0.00}% and all time is {100f * currentBest.Quality:0.00}%";
+
             return bestOne.Quality >= qualityMetric.TargetQuality ? bestOne : default;
         }
 
