@@ -39,9 +39,10 @@
 
         // if seed is 0, randomize seed
         public static int DataSplitSeed = 5;
+        //public static int DataGroupSize = 7;
+        //public static float DataTrainRatio = 0.714285f;
         public static int DataGroupSize = 50;
         public static float DataTrainRatio = 0.8f;
-
         // Interface Settings
         //   Drawing
         internal const int DefaultDrawingTimeout = 1000;
