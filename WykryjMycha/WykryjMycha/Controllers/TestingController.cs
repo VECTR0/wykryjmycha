@@ -114,5 +114,11 @@ namespace WykryjMycha
         {
             _strokeDatabase.DeleteAllStrokes();
         }
+
+        internal void ForceStop()
+        {
+            throw new NotImplementedException();
+        }
+
     }
 }

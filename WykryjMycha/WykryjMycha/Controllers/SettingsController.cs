@@ -10,6 +10,8 @@
         private NumericUpDown characteriticPointsAngleLimitDegrees;
         private NumericUpDown referencePointMinDistance;
         private NumericUpDown numberOfParameters;
+        private NumericUpDown numMetricAngleWeight;
+        private NumericUpDown numMetricDistanceWeight;
 
 
         internal SettingsController(MainForm instance, Settings settings)
@@ -18,7 +20,7 @@
             this._settings = settings;
         }
 
-        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numberOfParameters)
+        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numberOfParameters, NumericUpDown numMetricAngleWeight, NumericUpDown numMetricDistanceWeight)
         {
             maxSearchDistance.Value = (decimal)Settings.DefaultMaxSearchDistance;
             maxAllowedRotation.Value = (decimal)Settings.DefaultMaxAllowedRotation;
@@ -27,6 +29,8 @@
             characteriticPointsAngleLimitDegrees.Value = (decimal)Settings.DefaultCharacteriticPointsAngleLimitDegrees;
             referencePointMinDistance.Value = (decimal)Settings.DefaultReferencePointMinDistance;
             numDrawingTimeout.Value = Settings.DefaultDrawingTimeout;
+            numMetricAngleWeight.Value = (decimal)Settings.DefaultMetricAngleWeight;
+            numMetricDistanceWeight.Value = (decimal)Settings.DefaultMetricDistanceWeight;
             //numberOfParameters.Value = (decimal)Settings.DefaultNumberOfParameters;
 
             // parameters changeable by genetic optimiser
@@ -35,6 +39,8 @@
             this.characteriticPointsAngleLimitDegrees = characteriticPointsAngleLimitDegrees;
             this.referencePointMinDistance = referencePointMinDistance;
             this.numberOfParameters = numberOfParameters;
+            this.numMetricAngleWeight = numMetricAngleWeight;
+            this.numMetricDistanceWeight = numMetricDistanceWeight;
         }
 
         internal void SetMaxSearchDistance(decimal value)
@@ -83,6 +89,16 @@
             minCharacteriticPointsDistance.Value = (decimal)_settings.MinCharacteriticPointsDistance;
             characteriticPointsAngleLimitDegrees.Value = (decimal)_settings.CharacteriticPointsAngleLimitDegrees;
             referencePointMinDistance.Value = (decimal)_settings.ReferencePointMinDistance;
+        }
+
+        internal void SetMetricAngleWeight(int value)
+        {
+            _settings.MetricAngleWeight = value;
+        }
+
+        internal void SetMetricDistanceWeight(int value)
+        {
+            _settings.MetricDistanceWeight = value;
         }
     }
 }

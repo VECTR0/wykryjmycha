@@ -32,6 +32,7 @@
             this.txtConsole = new System.Windows.Forms.TextBox();
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tpDrawing = new System.Windows.Forms.TabPage();
+            this.lblSeqence = new System.Windows.Forms.Label();
             this.txtSequence = new System.Windows.Forms.TextBox();
             this.btnAddStroke = new System.Windows.Forms.Button();
             this.btnAddPattern = new System.Windows.Forms.Button();
@@ -89,14 +90,14 @@
             this.label5 = new System.Windows.Forms.Label();
             this.maxMergeDistance = new System.Windows.Forms.NumericUpDown();
             this.label3 = new System.Windows.Forms.Label();
-            this.maxAllowedRotation = new System.Windows.Forms.NumericUpDown();
+            this.numMetricAngleWeight = new System.Windows.Forms.NumericUpDown();
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.maxSearchDistance = new System.Windows.Forms.NumericUpDown();
+            this.numMetricDistanceWeight = new System.Windows.Forms.NumericUpDown();
             this.tmrDrawing = new System.Windows.Forms.Timer(this.components);
             this.ofdStrokes = new System.Windows.Forms.OpenFileDialog();
             this.sfdStrokes = new System.Windows.Forms.SaveFileDialog();
-            this.lblSeqence = new System.Windows.Forms.Label();
+            this.btnStopGenetic = new System.Windows.Forms.Button();
             this.tabControl1.SuspendLayout();
             this.tpDrawing.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.picDrawing)).BeginInit();
@@ -122,8 +123,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.minDistance)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMetricAngleWeight)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMetricDistanceWeight)).BeginInit();
             this.SuspendLayout();
             // 
             // txtConsole
@@ -173,6 +174,15 @@
             this.tpDrawing.TabIndex = 0;
             this.tpDrawing.Text = "Drawing";
             this.tpDrawing.UseVisualStyleBackColor = true;
+            // 
+            // lblSeqence
+            // 
+            this.lblSeqence.AutoSize = true;
+            this.lblSeqence.Location = new System.Drawing.Point(314, 7);
+            this.lblSeqence.Name = "lblSeqence";
+            this.lblSeqence.Size = new System.Drawing.Size(63, 15);
+            this.lblSeqence.TabIndex = 7;
+            this.lblSeqence.Text = "Sequences";
             // 
             // txtSequence
             // 
@@ -479,6 +489,7 @@
             // 
             // tpGenetic
             // 
+            this.tpGenetic.Controls.Add(this.btnStopGenetic);
             this.tpGenetic.Controls.Add(this.numNumberOfParameters);
             this.tpGenetic.Controls.Add(this.btnOptimise);
             this.tpGenetic.Controls.Add(this.numTargetQuality);
@@ -728,10 +739,10 @@
             this.tpSettings.Controls.Add(this.label5);
             this.tpSettings.Controls.Add(this.maxMergeDistance);
             this.tpSettings.Controls.Add(this.label3);
-            this.tpSettings.Controls.Add(this.maxAllowedRotation);
+            this.tpSettings.Controls.Add(this.numMetricAngleWeight);
             this.tpSettings.Controls.Add(this.label2);
             this.tpSettings.Controls.Add(this.label1);
-            this.tpSettings.Controls.Add(this.maxSearchDistance);
+            this.tpSettings.Controls.Add(this.numMetricDistanceWeight);
             this.tpSettings.Location = new System.Drawing.Point(4, 24);
             this.tpSettings.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
             this.tpSettings.Name = "tpSettings";
@@ -878,19 +889,19 @@
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(100, 61);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(119, 15);
+            this.label3.Size = new System.Drawing.Size(112, 15);
             this.label3.TabIndex = 4;
-            this.label3.Text = "max allowed rotation";
+            this.label3.Text = "metric angle weight";
             // 
-            // maxAllowedRotation
+            // numMetricAngleWeight
             // 
-            this.maxAllowedRotation.DecimalPlaces = 2;
-            this.maxAllowedRotation.Location = new System.Drawing.Point(27, 59);
-            this.maxAllowedRotation.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.maxAllowedRotation.Name = "maxAllowedRotation";
-            this.maxAllowedRotation.Size = new System.Drawing.Size(66, 23);
-            this.maxAllowedRotation.TabIndex = 3;
-            this.maxAllowedRotation.ValueChanged += new System.EventHandler(this.maxAllowedRotation_ValueChanged);
+            this.numMetricAngleWeight.DecimalPlaces = 2;
+            this.numMetricAngleWeight.Location = new System.Drawing.Point(27, 59);
+            this.numMetricAngleWeight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numMetricAngleWeight.Name = "numMetricAngleWeight";
+            this.numMetricAngleWeight.Size = new System.Drawing.Size(66, 23);
+            this.numMetricAngleWeight.TabIndex = 3;
+            this.numMetricAngleWeight.ValueChanged += new System.EventHandler(this.numMetricAngleWeight_ValueChanged);
             // 
             // label2
             // 
@@ -905,21 +916,21 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(100, 34);
+            this.label1.Location = new System.Drawing.Point(100, 35);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(114, 15);
+            this.label1.Size = new System.Drawing.Size(130, 15);
             this.label1.TabIndex = 1;
-            this.label1.Text = "max search distance";
+            this.label1.Text = "metric distance weight ";
             // 
-            // maxSearchDistance
+            // numMetricDistanceWeight
             // 
-            this.maxSearchDistance.DecimalPlaces = 2;
-            this.maxSearchDistance.Location = new System.Drawing.Point(27, 33);
-            this.maxSearchDistance.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
-            this.maxSearchDistance.Name = "maxSearchDistance";
-            this.maxSearchDistance.Size = new System.Drawing.Size(66, 23);
-            this.maxSearchDistance.TabIndex = 0;
-            this.maxSearchDistance.ValueChanged += new System.EventHandler(this.maxSearchDistance_ValueChanged);
+            this.numMetricDistanceWeight.DecimalPlaces = 2;
+            this.numMetricDistanceWeight.Location = new System.Drawing.Point(27, 33);
+            this.numMetricDistanceWeight.Margin = new System.Windows.Forms.Padding(4, 3, 4, 3);
+            this.numMetricDistanceWeight.Name = "numMetricDistanceWeight";
+            this.numMetricDistanceWeight.Size = new System.Drawing.Size(66, 23);
+            this.numMetricDistanceWeight.TabIndex = 0;
+            this.numMetricDistanceWeight.ValueChanged += new System.EventHandler(this.numMetricDistanceWeight_ValueChanged);
             // 
             // tmrDrawing
             // 
@@ -936,14 +947,15 @@
             this.sfdStrokes.DefaultExt = "json";
             this.sfdStrokes.Filter = "JSON|*.json|All files|*.*";
             // 
-            // lblSeqence
+            // btnStopGenetic
             // 
-            this.lblSeqence.AutoSize = true;
-            this.lblSeqence.Location = new System.Drawing.Point(314, 7);
-            this.lblSeqence.Name = "lblSeqence";
-            this.lblSeqence.Size = new System.Drawing.Size(63, 15);
-            this.lblSeqence.TabIndex = 7;
-            this.lblSeqence.Text = "Sequences";
+            this.btnStopGenetic.Location = new System.Drawing.Point(330, 17);
+            this.btnStopGenetic.Name = "btnStopGenetic";
+            this.btnStopGenetic.Size = new System.Drawing.Size(75, 23);
+            this.btnStopGenetic.TabIndex = 26;
+            this.btnStopGenetic.Text = "Force stop";
+            this.btnStopGenetic.UseVisualStyleBackColor = true;
+            this.btnStopGenetic.Click += new System.EventHandler(this.btnStopGenetic_Click);
             // 
             // MainForm
             // 
@@ -985,8 +997,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.angleLimitDegree)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.minDistance)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxMergeDistance)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxAllowedRotation)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.maxSearchDistance)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMetricAngleWeight)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numMetricDistanceWeight)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1010,7 +1022,7 @@
         private System.Windows.Forms.Button btnExportPatterns;
         private System.Windows.Forms.PictureBox picPattern;
         private System.Windows.Forms.ListBox lstEditorPatterns;
-        private System.Windows.Forms.NumericUpDown maxSearchDistance;
+        private System.Windows.Forms.NumericUpDown numMetricDistanceWeight;
         private Label label8;
         private Label label6;
         private NumericUpDown angleRefPointMinDist;
@@ -1021,7 +1033,7 @@
         private Label label5;
         private NumericUpDown maxMergeDistance;
         private Label label3;
-        private NumericUpDown maxAllowedRotation;
+        private NumericUpDown numMetricAngleWeight;
         private Label label2;
         private Label label1;
         private System.Windows.Forms.Timer tmrDrawing;
@@ -1062,6 +1074,7 @@
         private Label lblGeneticAlgorithmSettings;
         private TextBox txtSequence;
         private Label lblSeqence;
+        private Button btnStopGenetic;
     }
 }
 
