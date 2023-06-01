@@ -8,10 +8,8 @@
             MinCharacteriticPointsDistance = 100f * random.NextSingle();
             CharacteriticPointsAngleLimitDegrees = 100f * random.NextSingle();
             ReferencePointMinDistance = 100f * random.NextSingle();
-            //MetricAngleWeight = 100f * random.NextSingle();
-            //MetricDistanceWeight = 100f * random.NextSingle();
-            MetricAngleWeight = DefaultMetricAngleWeight;
-            MetricDistanceWeight = DefaultMetricDistanceWeight;
+            MetricAngleWeight = 100f * random.NextSingle();
+            MetricDistanceWeight = 100f * random.NextSingle();
         }
 
         public float Quality { get; set; }

@@ -10,6 +10,7 @@ namespace WykryjMycha
         private StrokeDatabase _strokeDatabase;
         private SettingsController _settingsController;
         private int _selectedStroke = -1;
+        private bool _isOptimiserRunning = false;
         internal TestingController(MainForm instance, StrokeDatabase strokeDatabase, SettingsController settingsController)
         {
             testingView = instance;
@@ -34,6 +35,11 @@ namespace WykryjMycha
 
         internal void OptimiseParameters()
         {
+            if (_isOptimiserRunning)
+                return;
+
+            _isOptimiserRunning = true;
+
             // TODO: move these parameters to GUI
             int maxIterations = 5;
             int populationAmount = 600;
@@ -54,8 +60,10 @@ namespace WykryjMycha
             var suboptimalSettings = settingsOptimiser.Run(maxIterations, populationAmount, selectedAmount);
             Logger.Log = "Finished parameters optimalisation! Check new settings";
             settingsOptimiser.SetSettings(suboptimalSettings);
-            Logger.Log = $"MetricAngleWeight = {Settings.GetInstance().MetricAngleWeight:0.00}, MetricDistanceWeight = {Settings.GetInstance().MetricDistanceWeight:0.00}";
+            //Logger.Log = $"MetricAngleWeight = {Settings.GetInstance().MetricAngleWeight:0.00}, MetricDistanceWeight = {Settings.GetInstance().MetricDistanceWeight:0.00}";
             _settingsController.DisplayUpdatedSettings();
+
+            _isOptimiserRunning = false;
         }
 
         internal void HandleStrokeSelected(int selectedIndex)

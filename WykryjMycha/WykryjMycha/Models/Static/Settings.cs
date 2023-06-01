@@ -2,10 +2,10 @@
 {
     public class Settings
     {
-        internal const int DefaultNumberOfParameters = 4;
+        internal const int DefaultNumberOfParameters = 6;
         private int _NumberOfParameters;
 
-        public int NumberOfParameters { get => _NumberOfParameters; set => _NumberOfParameters = (int)Math.Clamp(value, 1f, 5f); }
+        public int NumberOfParameters { get => _NumberOfParameters; set => _NumberOfParameters = (int)Math.Clamp(value, 1f, 6f); }
 
         // Pattern Matcher
         internal const float DefaultMaxSearchDistance = 25f;
@@ -34,14 +34,14 @@
         public float ReferencePointMinDistance { get => _referencePointMinDistance; set => _referencePointMinDistance = Math.Clamp(value, 0f, 100f); }
 
 
-        internal const float DefaultMetricAngleWeight = 2.0f;
-        internal const float DefaultMetricDistanceWeight = 0.8f;
+        internal const float DefaultMetricAngleWeight = 20f;
+        internal const float DefaultMetricDistanceWeight = 8f;
 
         private float _metricAngleWeight;
         private float _metricDistanceWeight;
 
-        public float MetricAngleWeight { get => _metricAngleWeight; set => _metricAngleWeight = Math.Clamp(value, 0f, 100f); }
-        public float MetricDistanceWeight { get => _metricDistanceWeight; set => _metricDistanceWeight = Math.Clamp(value, 0f, 100f); }
+        public float MetricAngleWeight { get => _metricAngleWeight * 0.1f; set => _metricAngleWeight = Math.Clamp(value, 0f, 100f); }
+        public float MetricDistanceWeight { get => _metricDistanceWeight * 0.1f; set => _metricDistanceWeight = Math.Clamp(value, 0f, 100f); }
 
 
         // Interface Settings
@@ -80,12 +80,12 @@
         {
             switch (i)
             {
-                case 0: return MaxMergeDistance;
-                case 1: return MinCharacteriticPointsDistance;
-                case 2: return CharacteriticPointsAngleLimitDegrees;
-                case 3: return ReferencePointMinDistance;
-                case 4: return MetricAngleWeight;
-                case 5: return MetricDistanceWeight;
+                case 0: return _maxMergeDistance;
+                case 1: return _minCharacteriticPointsDistance;
+                case 2: return _characteriticPointsAngleLimitDegrees;
+                case 3: return _referencePointMinDistance;
+                case 4: return _metricAngleWeight;
+                case 5: return _metricDistanceWeight;
                 default:
                     throw new ArgumentException("Wanted to reach inexisting parameter");
             }
