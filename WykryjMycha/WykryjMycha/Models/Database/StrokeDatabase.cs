@@ -7,9 +7,9 @@ namespace WykryjMycha
     {
         internal event EventHandler Changed;
         private readonly List<Stroke> _strokes;
-        internal IEnumerable<Stroke> TrainStrokes { get; private set; }
-        internal IEnumerable<Stroke> TestStrokes { get; private set; }
-        internal IEnumerable<Stroke> PatternStrokes { get; private set; }
+        internal IEnumerable<Stroke> TrainStrokes { get; private set; } = null;
+        internal IEnumerable<Stroke> TestStrokes { get; private set; } = null;
+        internal IEnumerable<Stroke> PatternStrokes { get; private set; } = null;
 
         public StrokeDatabase()
         {
@@ -90,7 +90,6 @@ namespace WykryjMycha
 
         internal void SplitData()
         {
-            PatternStrokes = _strokes.Where(x => char.IsUpper(x.name[0]));
             int trainSize = (int)Math.Round(Settings.DataGroupSize * Settings.DataTrainRatio);
             int testSize = (int)Math.Round(Settings.DataGroupSize * (1.0f - Settings.DataTrainRatio));
 
@@ -100,8 +99,11 @@ namespace WykryjMycha
                 .Select(subgroup => subgroup.OrderBy(_ => random.Next()))
                 .Select(subgroup => (Train: subgroup.Take(trainSize), Test: subgroup.Skip(trainSize).Take(testSize)))
                 .Aggregate((Train: (IEnumerable<Stroke>)new List<Stroke>(), Test: (IEnumerable<Stroke>)new List<Stroke>()), (acc, val) => (Train: acc.Train.Concat(val.Train), Test: acc.Test.Concat(val.Test)));
+        }
 
-            Logger.Log = $"Train {TrainStrokes.Count()}, test {TestStrokes.Count()}";
+        internal void SetPattens()
+        {
+            PatternStrokes = _strokes.Where(x => char.IsUpper(x.name[0]));
         }
     }
 }

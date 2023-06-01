@@ -4,16 +4,6 @@
     {
         private SettingsController _settingsController;
 
-        private void maxSearchDistance_ValueChanged(object sender, EventArgs e)
-        {
-            _settingsController.SetMaxSearchDistance(numMetricDistanceWeight.Value);
-        }
-
-        private void maxAllowedRotation_ValueChanged(object sender, EventArgs e)
-        {
-            _settingsController.SetMaxAllowedRotation(numMetricAngleWeight.Value);
-        }
-
         private void maxMergeDistance_ValueChanged(object sender, EventArgs e)
         {
             _settingsController.SetMaxMergeDistance(maxMergeDistance.Value);

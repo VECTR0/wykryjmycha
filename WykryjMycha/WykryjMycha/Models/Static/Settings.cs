@@ -8,16 +8,10 @@
         public int NumberOfParameters { get => _NumberOfParameters; set => _NumberOfParameters = (int)Math.Clamp(value, 1f, 6f); }
 
         // Pattern Matcher
-        internal const float DefaultMaxSearchDistance = 25f;
-        internal const float DefaultMaxAllowedRotation = 30f;
         internal const float DefaultMaxMergeDistance = 84.32f;
 
-        private float _maxSearchDistance;
-        private float _maxAllowedRotation;
         private float _maxMergeDistance;
 
-        public float MaxSearchDistance { get => _maxSearchDistance; set => _maxSearchDistance = Math.Clamp(value, 0f, 100f); }
-        public float MaxAllowedRotation { get => _maxAllowedRotation; set => _maxAllowedRotation = Math.Clamp(value, 0f, 100f); }
         public float MaxMergeDistance { get => _maxMergeDistance; set => _maxMergeDistance = Math.Clamp(value, 0f, 100f); }
 
         // Characteristic Points Finder
@@ -45,9 +39,10 @@
 
         // if seed is 0, randomize seed
         public static int DataSplitSeed = 5;
+        //public static int DataGroupSize = 7;
+        //public static float DataTrainRatio = 0.714285f;
         public static int DataGroupSize = 50;
         public static float DataTrainRatio = 0.8f;
-
         // Interface Settings
         //   Drawing
         internal const int DefaultDrawingTimeout = 1000;
@@ -60,8 +55,6 @@
         protected Settings()
         {
             NumberOfParameters = DefaultNumberOfParameters;
-            MaxSearchDistance = DefaultMaxSearchDistance;
-            MaxAllowedRotation = DefaultMaxAllowedRotation;
             MaxMergeDistance = DefaultMaxMergeDistance;
             MinCharacteriticPointsDistance = DefaultMinCharacteriticPointsDistance;
             CharacteriticPointsAngleLimitDegrees = DefaultCharacteriticPointsAngleLimitDegrees;

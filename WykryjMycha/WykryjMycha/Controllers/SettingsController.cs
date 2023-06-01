@@ -22,8 +22,6 @@
 
         internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numberOfParameters, NumericUpDown numMetricAngleWeight, NumericUpDown numMetricDistanceWeight)
         {
-            maxSearchDistance.Value = (decimal)Settings.DefaultMaxSearchDistance;
-            maxAllowedRotation.Value = (decimal)Settings.DefaultMaxAllowedRotation;
             maxMergeDistance.Value = (decimal)Settings.DefaultMaxMergeDistance;
             minCharacteriticPointsDistance.Value = (decimal)Settings.DefaultMinCharacteriticPointsDistance;
             characteriticPointsAngleLimitDegrees.Value = (decimal)Settings.DefaultCharacteriticPointsAngleLimitDegrees;
@@ -41,16 +39,6 @@
             this.numberOfParameters = numberOfParameters;
             this.numMetricAngleWeight = numMetricAngleWeight;
             this.numMetricDistanceWeight = numMetricDistanceWeight;
-        }
-
-        internal void SetMaxSearchDistance(decimal value)
-        {
-            _settings.MaxSearchDistance = (float)value;
-        }
-
-        internal void SetMaxAllowedRotation(decimal value)
-        {
-            _settings.MaxAllowedRotation = (float)value;
         }
 
         internal void SetMaxMergeDistance(decimal value)
@@ -89,6 +77,8 @@
             minCharacteriticPointsDistance.Value = (decimal)_settings.MinCharacteriticPointsDistance;
             characteriticPointsAngleLimitDegrees.Value = (decimal)_settings.CharacteriticPointsAngleLimitDegrees;
             referencePointMinDistance.Value = (decimal)_settings.ReferencePointMinDistance;
+            numMetricAngleWeight.Value = (decimal)_settings.MetricAngleWeight;
+            numMetricDistanceWeight.Value = (decimal)_settings.MetricDistanceWeight;
         }
 
         internal void SetMetricAngleWeight(int value)

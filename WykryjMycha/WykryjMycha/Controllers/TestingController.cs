@@ -30,8 +30,10 @@ namespace WykryjMycha
 
         internal void RunTests()
         {
+            _strokeDatabase.SetPattens();
+            _strokeDatabase.SplitData();
             var settings = Settings.GetInstance();
-            StrokesBasedTester.Run(_strokeDatabase, new AngleDistanceMetric(settings), settings, true);
+            StrokesBasedTester.Run(_strokeDatabase, new AngleDistanceMetric(settings), settings, false);
         }
 
         internal void OptimiseParameters()
@@ -41,6 +43,7 @@ namespace WykryjMycha
 
             _isOptimiserRunning = true;
 
+            _strokeDatabase.SetPattens();
             _strokeDatabase.SplitData();
 
             // TODO: move these parameters to GUI
