@@ -9,10 +9,5 @@ namespace WykryjMycha
     partial class MainForm
     {
         private GeneticController _geneticController;
-
-        private void btnStopGenetic_Click(object sender, EventArgs e)
-        {
-            _testingController.ForceStop();
-        }
     }
 }

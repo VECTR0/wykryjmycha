@@ -46,12 +46,11 @@ namespace WykryjMycha
             _strokeDatabase.SetPattens();
             _strokeDatabase.SplitData();
 
-            // TODO: move these parameters to GUI
-            int maxIterations = 5;
-            int populationAmount = 600;
-            int selectedAmount = 100;
-            float mutationProbability = 0.02f;
-            float targetQuality = 0.85f;
+            int maxIterations = _settingsController._settings.MaxItertions;
+            int populationAmount = _settingsController._settings.PopulationSize;
+            int selectedAmount = _settingsController._settings.SelectedSize;
+            float mutationProbability = _settingsController._settings.MutationProbability;
+            float targetQuality = _settingsController._settings.TargetQuality;
 
             Random random = new Random();
             IMetric matcherMetricTemplate = new AngleDistanceMetric();
@@ -117,11 +116,5 @@ namespace WykryjMycha
         {
             _strokeDatabase.DeleteAllStrokes();
         }
-
-        internal void ForceStop()
-        {
-            throw new NotImplementedException();
-        }
-
     }
 }

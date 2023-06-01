@@ -49,6 +49,22 @@
         internal int DrawingTimeout { get; set; }
 
 
+        //genetic
+        internal const int DefaultMaxItertions = 5;
+        internal const int DefaultPopulationSize = 600;
+        internal const int DefaultSelectedSize = 100;
+        internal const float DefaultMutationProbability = 0.02f;
+        internal const float DefaultTargetQuality = 0.85f;
+        private int _maxItertions = DefaultMaxItertions;
+        private int _populationSize = DefaultPopulationSize;
+        private int _selectedSize = DefaultSelectedSize;
+        private float _mutationProbability = DefaultMutationProbability;
+        private float _targetQuality = DefaultTargetQuality;
+        public int MaxItertions { get => _maxItertions; set => _maxItertions = (int)Math.Clamp(value, 0f, 1000f); }
+        public int PopulationSize { get => _populationSize; set => _populationSize = (int)Math.Clamp(value, 0f, 1000f); }
+        public int SelectedSize { get => _selectedSize; set => _selectedSize = (int)Math.Clamp(value, 0f, 1000f); }
+        public float MutationProbability { get => _mutationProbability; set => _mutationProbability = (float)Math.Clamp(value, 0f, 1); }
+        public float TargetQuality { get => _targetQuality; set => _targetQuality = (float)Math.Clamp(value, 0f, 1); }
 
         private static Settings _instance;
 

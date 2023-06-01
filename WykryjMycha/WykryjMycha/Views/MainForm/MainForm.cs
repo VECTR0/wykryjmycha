@@ -18,7 +18,7 @@
             _visualiserController = new VisualiserController(this, patternDatabase);
             _patternEditorController = new PatternEditorController(this, patternDatabase);
             _settingsController = new SettingsController(this, settings);
-            _settingsController.Initialize(numMetricDistanceWeight, numMetricAngleWeight, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist, numDrawingTimeout, numMetricAngleWeight, numMetricDistanceWeight);
+            _settingsController.Initialize(numMetricDistanceWeight, numMetricAngleWeight, maxMergeDistance, minDistance, angleLimitDegree, angleRefPointMinDist, numDrawingTimeout, numMetricAngleWeight, numMetricDistanceWeight, numMaxItertions, numPopulationSize, numSelectedSize, numMutationProbability, numTargetQuality);
             _testingController = new TestingController(this, strokeDatabase, _settingsController);
             _geneticController = new GeneticController(this);
         }

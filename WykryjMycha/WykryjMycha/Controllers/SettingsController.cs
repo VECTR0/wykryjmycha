@@ -3,7 +3,7 @@
     internal class SettingsController
     {
         internal MainForm settingsView;
-        private Settings _settings;
+        public Settings _settings;
 
         private NumericUpDown maxMergeDistance;
         private NumericUpDown minCharacteriticPointsDistance;
@@ -12,6 +12,12 @@
         private NumericUpDown numMetricAngleWeight;
         private NumericUpDown numMetricDistanceWeight;
 
+        private NumericUpDown numMaxItertions;
+        private NumericUpDown numPopulationSize;
+        private NumericUpDown numSelectedSize;
+        private NumericUpDown numMutationProbability;
+        private NumericUpDown numTargetQuality;
+
 
         internal SettingsController(MainForm instance, Settings settings)
         {
@@ -19,7 +25,9 @@
             this._settings = settings;
         }
 
-        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numMetricAngleWeight, NumericUpDown numMetricDistanceWeight)
+        internal void Initialize(NumericUpDown maxSearchDistance, NumericUpDown maxAllowedRotation, NumericUpDown maxMergeDistance, NumericUpDown minCharacteriticPointsDistance, NumericUpDown characteriticPointsAngleLimitDegrees, NumericUpDown referencePointMinDistance, NumericUpDown numDrawingTimeout, NumericUpDown numMetricAngleWeight, NumericUpDown numMetricDistanceWeight,
+            NumericUpDown numMaxItertions, NumericUpDown numPopulationSize, NumericUpDown numSelectedSize, NumericUpDown numMutationProbability, NumericUpDown numTargetQuality
+            )
         {
             maxMergeDistance.Value = (decimal)Settings.DefaultMaxMergeDistance;
             minCharacteriticPointsDistance.Value = (decimal)Settings.DefaultMinCharacteriticPointsDistance;
@@ -28,7 +36,11 @@
             numDrawingTimeout.Value = Settings.DefaultDrawingTimeout;
             numMetricAngleWeight.Value = (decimal)Settings.DefaultMetricAngleWeight;
             numMetricDistanceWeight.Value = (decimal)Settings.DefaultMetricDistanceWeight;
-            //numberOfParameters.Value = (decimal)Settings.DefaultNumberOfParameters;
+            numMaxItertions.Value = (decimal)Settings.DefaultMaxItertions;
+            numPopulationSize.Value = (decimal)Settings.DefaultPopulationSize;
+            numSelectedSize.Value = (decimal)Settings.DefaultSelectedSize;
+            numMutationProbability.Value = (decimal)Settings.DefaultMutationProbability;
+            numTargetQuality.Value = (decimal)Settings.DefaultTargetQuality;
 
             // parameters changeable by genetic optimiser
             this.maxMergeDistance = maxMergeDistance;
@@ -37,6 +49,12 @@
             this.referencePointMinDistance = referencePointMinDistance;
             this.numMetricAngleWeight = numMetricAngleWeight;
             this.numMetricDistanceWeight = numMetricDistanceWeight;
+
+            this.numMaxItertions = numMaxItertions;
+            this.numPopulationSize = numPopulationSize;
+            this.numSelectedSize = numSelectedSize;
+            this.numMutationProbability = numMutationProbability;
+            this.numTargetQuality = numTargetQuality;
         }
 
         internal void SetMaxMergeDistance(decimal value)
@@ -87,6 +105,31 @@
         internal void SetMetricDistanceWeight(int value)
         {
             _settings.MetricDistanceWeight = value;
+        }
+
+        internal void SetMaxIterations(int value)
+        {
+            _settings.MaxItertions = value;
+        }
+
+        internal void SetPopulationSize(int value)
+        {
+            _settings.PopulationSize = value;
+        }
+
+        internal void SetSelectedSize(int value)
+        {
+            _settings.SelectedSize = value;
+        }
+
+        internal void SetMutationProbability(float value)
+        {
+            _settings.MutationProbability = value;
+        }
+
+        internal void SetTargetQuality(float value)
+        {
+            _settings.TargetQuality = value;
         }
     }
 }

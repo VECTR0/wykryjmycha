@@ -537,10 +537,11 @@
             this.numTargetQuality.Size = new System.Drawing.Size(64, 23);
             this.numTargetQuality.TabIndex = 23;
             this.numTargetQuality.Value = new decimal(new int[] {
-            85,
+            84,
             0,
             0,
             131072});
+            this.numTargetQuality.ValueChanged += new System.EventHandler(this.numTargetQuality_ValueChanged);
             // 
             // label18
             // 
@@ -592,10 +593,11 @@
             this.numMutationProbability.Size = new System.Drawing.Size(64, 23);
             this.numMutationProbability.TabIndex = 21;
             this.numMutationProbability.Value = new decimal(new int[] {
-            2,
+            1,
             0,
             0,
             131072});
+            this.numMutationProbability.ValueChanged += new System.EventHandler(this.numMutationProbability_ValueChanged);
             // 
             // label15
             // 
@@ -609,6 +611,11 @@
             // numSelectedSize
             // 
             this.numSelectedSize.Location = new System.Drawing.Point(30, 93);
+            this.numSelectedSize.Maximum = new decimal(new int[] {
+            1000,
+            0,
+            0,
+            0});
             this.numSelectedSize.Minimum = new decimal(new int[] {
             1,
             0,
@@ -622,6 +629,7 @@
             0,
             0,
             0});
+            this.numSelectedSize.ValueChanged += new System.EventHandler(this.numSelectedSize_ValueChanged);
             // 
             // label14
             // 
@@ -649,19 +657,15 @@
             this.numPopulationSize.Size = new System.Drawing.Size(64, 23);
             this.numPopulationSize.TabIndex = 21;
             this.numPopulationSize.Value = new decimal(new int[] {
-            600,
+            500,
             0,
             0,
             0});
+            this.numPopulationSize.ValueChanged += new System.EventHandler(this.numPopulationSize_ValueChanged);
             // 
             // numMaxItertions
             // 
             this.numMaxItertions.Location = new System.Drawing.Point(29, 35);
-            this.numMaxItertions.Maximum = new decimal(new int[] {
-            5,
-            0,
-            0,
-            0});
             this.numMaxItertions.Minimum = new decimal(new int[] {
             1,
             0,
@@ -671,10 +675,11 @@
             this.numMaxItertions.Size = new System.Drawing.Size(64, 23);
             this.numMaxItertions.TabIndex = 21;
             this.numMaxItertions.Value = new decimal(new int[] {
-            4,
+            2,
             0,
             0,
             0});
+            this.numMaxItertions.ValueChanged += new System.EventHandler(this.numMaxItertions_ValueChanged);
             // 
             // lblGeneticAlgorithmSettings
             // 

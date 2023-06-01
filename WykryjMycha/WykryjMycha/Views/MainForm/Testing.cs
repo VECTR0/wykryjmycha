@@ -64,5 +64,32 @@
         {
             Task.Factory.StartNew(_testingController.OptimiseParameters);
         }
+
+
+
+        private void numMaxItertions_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsController.SetMaxIterations((int)numMaxItertions.Value);
+        }
+
+        private void numPopulationSize_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsController.SetPopulationSize((int)numPopulationSize.Value);
+        }
+
+        private void numSelectedSize_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsController.SetSelectedSize((int)numSelectedSize.Value);
+        }
+
+        private void numMutationProbability_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsController.SetMutationProbability((float)numMutationProbability.Value);
+        }
+
+        private void numTargetQuality_ValueChanged(object sender, EventArgs e)
+        {
+            _settingsController.SetTargetQuality((float)numTargetQuality.Value);
+        }
     }
 }
