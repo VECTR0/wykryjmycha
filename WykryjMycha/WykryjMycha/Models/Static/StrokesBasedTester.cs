@@ -24,8 +24,7 @@
             {
                 lock (stroke)
                 {
-                    var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
-                    var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
+                    var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(stroke.NormalizedPoints, settings);
                     var pattern = new Pattern() { name = stroke.name, points = characteristicPoints };
                     patternDatabase.AddPattern(pattern);
                 }
@@ -38,11 +37,10 @@
             {
                 lock (stroke)
                 {
-                    var normalizedPoints = MathUtils.NormalizePoints(stroke.points);
-                    var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(normalizedPoints!, settings);
+                    var characteristicPoints = CharacteristicPointsFinder.GetCharacteristicPoints(stroke.NormalizedPoints, settings);
                     var best = patternMatcher.MatchPattern(characteristicPoints, patternDatabase, settings).GetBest(metric);
 
-                    if (best != null && best.name.ToLower() == stroke.name.ToLower())
+                    if (best != null && string.Equals(best.nameLowercase, stroke.NameLowercase))
                         correct++;
                     else
                         incorrect++;

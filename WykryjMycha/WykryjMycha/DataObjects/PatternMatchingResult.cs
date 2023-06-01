@@ -3,6 +3,7 @@
     public class PatternMatchingResult
     {
         internal string name;
+        internal string nameLowercase;
         internal bool success;
         internal float maxTranslationDistance;
         internal float maxRotationAngle;
@@ -14,6 +15,7 @@
         internal PatternMatchingResult(string name)
         {
             this.name = name;
+            nameLowercase = name.ToLower();
         }
 
         internal PatternMatchingResult Succeed()
