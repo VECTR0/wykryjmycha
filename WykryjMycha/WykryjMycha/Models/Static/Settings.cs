@@ -8,16 +8,16 @@
         public int NumberOfParameters { get => _NumberOfParameters; set => _NumberOfParameters = (int)Math.Clamp(value, 1f, 6f); }
 
         // Pattern Matcher
-        internal const float DefaultMaxMergeDistance = 84.32f;
+        internal const float DefaultMaxMergeDistance = 39.30f;
 
         private float _maxMergeDistance;
 
         public float MaxMergeDistance { get => _maxMergeDistance; set => _maxMergeDistance = Math.Clamp(value, 0f, 100f); }
 
         // Characteristic Points Finder
-        internal const float DefaultMinCharacteriticPointsDistance = 43.96f;
-        internal const float DefaultCharacteriticPointsAngleLimitDegrees = 0.67f;
-        internal const float DefaultReferencePointMinDistance = 52.79f;
+        internal const float DefaultMinCharacteriticPointsDistance = 25.56f;
+        internal const float DefaultCharacteriticPointsAngleLimitDegrees = 82.56f;
+        internal const float DefaultReferencePointMinDistance = 21.31f;
 
         private float _minCharacteriticPointsDistance;
         private float _characteriticPointsAngleLimitDegrees;
@@ -28,8 +28,8 @@
         public float ReferencePointMinDistance { get => _referencePointMinDistance; set => _referencePointMinDistance = Math.Clamp(value, 0f, 100f); }
 
 
-        internal const float DefaultMetricAngleWeight = 20f;
-        internal const float DefaultMetricDistanceWeight = 8f;
+        internal const float DefaultMetricDistanceWeight = 1.63f;
+        internal const float DefaultMetricAngleWeight = 4.33f;
 
         private float _metricAngleWeight;
         private float _metricDistanceWeight;
@@ -50,7 +50,7 @@
 
 
         //genetic
-        internal const int DefaultMaxItertions = 5;
+        internal const int DefaultMaxItertions = 50;
         internal const int DefaultPopulationSize = 600;
         internal const int DefaultSelectedSize = 100;
         internal const float DefaultMutationProbability = 0.02f;

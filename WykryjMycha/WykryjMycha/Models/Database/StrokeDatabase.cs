@@ -1,5 +1,4 @@
 ﻿using System.Text.Json;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WykryjMycha
 {
@@ -7,9 +6,9 @@ namespace WykryjMycha
     {
         internal event EventHandler Changed;
         private readonly List<Stroke> _strokes;
-        internal IEnumerable<Stroke> TrainStrokes { get; private set; } = null;
-        internal IEnumerable<Stroke> TestStrokes { get; private set; } = null;
-        internal IEnumerable<Stroke> PatternStrokes { get; private set; } = null;
+        internal List<Stroke> TrainStrokes { get; private set; } = null;
+        internal List<Stroke> TestStrokes { get; private set; } = null;
+        internal List<Stroke> PatternStrokes { get; private set; } = null;
 
         public StrokeDatabase()
         {
@@ -98,12 +97,12 @@ namespace WykryjMycha
                 .Select(group => group.Take(Settings.DataGroupSize))
                 .Select(subgroup => subgroup.OrderBy(_ => random.Next()))
                 .Select(subgroup => (Train: subgroup.Take(trainSize), Test: subgroup.Skip(trainSize).Take(testSize)))
-                .Aggregate((Train: (IEnumerable<Stroke>)new List<Stroke>(), Test: (IEnumerable<Stroke>)new List<Stroke>()), (acc, val) => (Train: acc.Train.Concat(val.Train), Test: acc.Test.Concat(val.Test)));
+                .Aggregate((Train: (IEnumerable<Stroke>)new List<Stroke>(), Test: (IEnumerable<Stroke>)new List<Stroke>()), (acc, val) => (Train: acc.Train.Concat(val.Train), Test: acc.Test.Concat(val.Test)), x => (Train: x.Train.ToList(), Test: x.Test.ToList()));
         }
 
         internal void SetPattens()
         {
-            PatternStrokes = _strokes.Where(x => char.IsUpper(x.name[0]));
+            PatternStrokes = _strokes.Where(x => char.IsUpper(x.name[0])).ToList();
         }
     }
 }
