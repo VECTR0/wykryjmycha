@@ -11,18 +11,29 @@ namespace WykryjMycha
                 throw new NullReferenceException();
             }
 
-            List<float> coordList = new List<float>();
+            List<float> xList = new List<float>();
+            List<float> yList = new List<float>();
+            List<PointOrigin> pointOriginList = new List<PointOrigin>();
+            List<float> angleWeightList = new List<float>();
+            List<float> distanceWeightList = new List<float>();
 
             for (int i = 0; i < points.Count; i++)
             {
-                coordList.Add(points[i].X);
-                coordList.Add(points[i].Y);
+                xList.Add(points[i].X);
+                yList.Add(points[i].Y);
+                pointOriginList.Add(points[i].PointOrigin);
+                angleWeightList.Add(points[i].angleWeight);
+                distanceWeightList.Add(points[i].distanceWeight);
             }
 
             var jsonPattern = new JSONPattern
             {
                 name = patternName,
-                coords = coordList
+                xList = xList,
+                yList = yList,
+                pointOriginList = pointOriginList,
+                angleWeightList = angleWeightList,
+                distanceWeightList = distanceWeightList
             };
 
             string jsonString = JsonSerializer.Serialize(jsonPattern);

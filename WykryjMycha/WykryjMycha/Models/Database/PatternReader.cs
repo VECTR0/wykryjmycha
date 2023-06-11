@@ -6,8 +6,6 @@ namespace WykryjMycha
     {
         private string filename;
         private string jsonContent;
-        private List<float> coords;
-
         public List<Point> points { get; set; }
         public string patternName { get; set; }
 
@@ -20,20 +18,22 @@ namespace WykryjMycha
             var jpattern = JsonSerializer.Deserialize<JSONPattern>(jsonContent);
 
             this.patternName = jpattern.name;
-            this.coords = jpattern.coords;
-            this.points = ToPointList(jpattern.coords);
-        }
 
-        private List<Point> ToPointList(List<float> coords)
-        {
-            List<Point> points = new List<Point>();
 
-            for (int i = 0; i < coords.Count; i += 2)
+            this.points = new List<Point>();
+
+            for (int i = 0; i < jpattern.xList.Count; i++)
             {
-                points.Add(new Point(coords[i], coords[i + 1]));
+                this.points.Add(
+                    new Point
+                    {
+                        X = jpattern.xList[i],
+                        Y = jpattern.yList[i],
+                        PointOrigin = jpattern.pointOriginList[i],
+                        angleWeight = jpattern.angleWeightList[i],
+                        distanceWeight = jpattern.distanceWeightList[i]
+                    });
             }
-
-            return points;
         }
     }
 }
